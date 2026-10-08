@@ -1,0 +1,467 @@
+queries:
+  - query_id: q001
+    query: "AI QA engineer"
+    slice: "title"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4425889801
+      - linkedin_4425882879
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q002
+    query: "AI validation engineer"
+    slice: "title"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4460687111
+      - linkedin_4450608172
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4462548513
+      - linkedin_4468146103
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4470515018
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4425889801
+      - linkedin_4425882879
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4464196550
+      - linkedin_4434385256
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q003
+    query: "LLM evaluation engineer"
+    slice: "title"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4466161565
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4464196550
+      - linkedin_4237053772
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+
+  - query_id: q004
+    query: "GenAI quality engineer"
+    slice: "title"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4460958329
+      - linkedin_4425889801
+      - linkedin_4425882879
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q005
+    query: "AI test engineer"
+    slice: "title"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4460687111
+      - linkedin_4450608172
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q006
+    query: "AI safety evaluation engineer"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4470918342
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4237053772
+      - linkedin_4474348330
+
+  - query_id: q007
+    query: "RAG evaluation and testing"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4213901809
+      - linkedin_4444375786
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q008
+    query: "LLM testing and validation"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4395476402
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4474348330
+
+  - query_id: q009
+    query: "AI QA engineer with test automation"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4459235572
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4424367248
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q010
+    query: "AI evaluation engineer with Python"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4449692710
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4468146103
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4466161565
+      - linkedin_4473298932
+      - linkedin_4475020607
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4464196550
+      - linkedin_4434385256
+      - linkedin_4237053772
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+
+  - query_id: q011
+    query: "AI quality engineer with API testing"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4459812573
+      - linkedin_4459235572
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4460958329
+      - linkedin_4444375786
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q012
+    query: "AI evaluation engineer for agents"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4473298932
+      - linkedin_4475020607
+      - linkedin_4472265370
+      - linkedin_4464196550
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q013
+    query: "AI red teaming and safety testing"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4470918342
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4435178731
+      - linkedin_4474348330
+
+  - query_id: q014
+    query: "software quality engineer for AI systems"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4460687111
+      - linkedin_4450608172
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4425889801
+      - linkedin_4425882879
+      - linkedin_4424367248
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q015
+    query: "test automation engineer for machine learning systems"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4459812573
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4436348819
+      - linkedin_4462548513
+      - linkedin_4395476402
+      - linkedin_4470515018
+      - linkedin_4460958329
+      - linkedin_4473298932
+      - linkedin_4424367248
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q016
+    query: "SDET for AI or machine learning systems"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4459812573
+      - linkedin_4459235572
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4436348819
+      - linkedin_4395476402
+      - linkedin_4460958329
+      - linkedin_4424367248
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4434385256
+      - linkedin_4474348330
+
+  - query_id: q017
+    query: "model evaluation and quality"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4449692710
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4436348819
+      - linkedin_4468146103
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4466161565
+      - linkedin_4425889801
+      - linkedin_4425882879
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4462232653
+      - linkedin_4472265370
+      - linkedin_4444375786
+      - linkedin_4471784878
+      - linkedin_4464196550
+      - linkedin_4237053772
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q018
+    query: "evaluate LLM quality and hallucinations"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4474348330
+
+  - query_id: q019
+    query: "testing RAG retrieval quality and groundedness"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4444375786
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q020
+    query: "quality validation for AI agents and LLM applications"
+    slice: "semantic"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4473298932
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4472265370
+      - linkedin_4444375786
+      - linkedin_4464196550
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: q021
+    query: "AI validation engineer with PyTest"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4395476402
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4434385256
+
+  - query_id: q022
+    query: "LLM evaluation engineer with prompt engineering"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549

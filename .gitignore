@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Pytest
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# AI evaluation caches
+.deepeval/
+
+# IDE
+.vscode/
+
+# Generated FAISS index
+data/faiss_index/
+
+# Local dependency backup
+requirements.freeze.txt
+
+# Private candidate data
+data/candidate_profile.md

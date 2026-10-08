@@ -1,0 +1,30 @@
+{
+  "job_id": null,
+  "source": {
+    "name": null,
+    "source_job_id": null,
+    "url": null
+  },
+  "job": {
+    "title": null,
+    "company": null,
+    "location": null,
+    "workplace_type": null,
+    "employment_type": null
+  },
+  "posting": {
+    "description": null,
+    "posted_date": null,
+    "posted_date_text": null
+  },
+  "compensation": {
+    "min": null,
+    "max": null,
+    "currency": null,
+    "period": null
+  },
+  "collection": {
+    "collected_at": null,
+    "collection_method": null
+  }
+}
