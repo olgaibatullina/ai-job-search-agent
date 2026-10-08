@@ -16,6 +16,7 @@ from src.rag.loader import load_documents
 from src.rag.chunker import split_text
 from src.rag.vector_store import create_vector_store
 
+
 def retrieve_from_vector_store(
         vector_store: FAISS, 
         query: str, 
@@ -50,5 +51,4 @@ def main():
 
 
 if (__name__ == "__main__"):
-
     main()

@@ -1,7 +1,5 @@
-"""_summary_
-
-Yields:
-    _type_: _description_
+"""
+Shared fixtures for evaluation tests.
 """
 
 import pytest

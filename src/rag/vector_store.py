@@ -52,9 +52,7 @@ def create_vector_store(
     """
     return FAISS.from_documents(documents=chunks, embedding=embedding_model)
 
-
-if __name__ == "__main__":
-
+def main():
     documents = load_documents(
         Path("./data/raw_jobs/raw_jobs.json")
     )
@@ -64,3 +62,7 @@ if __name__ == "__main__":
 
     print(vector_store.index.ntotal)   # number of vectors
     print(vector_store.index.d)        # vector dimension
+
+
+if __name__ == "__main__":
+    main()
