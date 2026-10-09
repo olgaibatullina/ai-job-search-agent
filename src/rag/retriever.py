@@ -32,6 +32,7 @@ def retrieve_from_vector_store(
     Returns:
         A list of the most relevant Documents.
     """
+    
     return vector_store.similarity_search(query=query, k=k)
 
 def main():

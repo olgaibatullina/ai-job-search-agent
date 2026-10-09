@@ -30,6 +30,7 @@ def split_text(documents: list[Document]) -> list[Document]:
 
     return text_splitter.split_documents(documents)
 
+
 def main():
     documents = load_documents(
         Path("./data/raw_jobs/raw_jobs.json")

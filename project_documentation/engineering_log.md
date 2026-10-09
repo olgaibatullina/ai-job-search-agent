@@ -97,3 +97,47 @@ Explain how dependency migration was investigated instead of blindly
 following a suggested replacement: the proposed standalone package did not
 expose the required class, while the classic compatibility path was also
 deprecated.
+
+## EL-003 — Retrieval Evaluation Label Space
+
+### Date
+
+2026-10-08 17:14
+
+### Observation
+
+The initial retrieval evaluation built binary labels using different sets of jobs for different metrics:
+
+- Precision — based on retrieved jobs.
+- Recall — based on relevant jobs.
+
+This produced mathematically valid values, but the metrics were based on different evaluation spaces.
+
+### Problem
+
+The current approach does not provide a single, consistent label space for Precision, Recall, F1, and Accuracy. Jobs that were not retrieved are not represented in the Precision evaluation, while irrelevant jobs that were not retrieved are also excluded.
+
+### Current approach
+
+Keep `relevant_job_ids` as the golden annotation.
+
+The current implementation is retained temporarily as an initial retrieval evaluation and will be replaced after the evaluation design is corrected.
+
+### Planned improvement
+
+Use the complete evaluation corpus (`all_jobs`) as the common evaluation space.
+
+For every job:
+
+- `reference = 1` if the job is relevant according to the golden dataset, otherwise `0`.
+- `prediction = 1` if the retriever returned the job, otherwise `0`.
+
+This creates a consistent `TP / FP / FN / TN` representation and allows Precision, Recall, F1, and Accuracy to use the same labels.
+
+### Impact
+
+The initial implementation exposed a limitation in the evaluation design rather than a retrieval-quality problem. The current Precision and Recall results should therefore not be treated as the final retrieval baseline.
+
+### Validation takeaway
+
+Metric results depend on how the evaluation label space is defined. Using different subsets of the corpus for different metrics can produce numbers that are mathematically valid but misleading for the intended retrieval evaluation.

@@ -1,0 +1,23 @@
+query_id,query,k,precision,recall,f1,accuracy
+q001,AI QA engineer,5,1.0,0.1363636364,0.24,0.525
+q002,AI validation engineer,5,0.6666666667,0.0666666667,0.1212121212,0.275
+q003,LLM evaluation engineer,5,1.0,0.2380952381,0.3846153846,0.6
+q004,GenAI quality engineer,5,1.0,0.1666666667,0.2857142857,0.625
+q005,AI test engineer,5,0.8,0.1904761905,0.3076923077,0.55
+q006,AI safety evaluation engineer,5,1.0,0.3,0.4615384615,0.825
+q007,RAG evaluation and testing,5,0.0,0.0,0.0,0.675
+q008,LLM testing and validation,5,0.4,0.1538461538,0.2222222222,0.65
+q009,AI QA engineer with test automation,5,1.0,0.25,0.4,0.7
+q010,AI evaluation engineer with Python,5,1.0,0.16,0.275862069,0.475
+q011,AI quality engineer with API testing,5,0.75,0.2727272727,0.4,0.775
+q012,AI evaluation engineer for agents,5,1.0,0.3076923077,0.4705882353,0.775
+q013,AI red teaming and safety testing,5,0.8,0.5,0.6153846154,0.875
+q014,software quality engineer for AI systems,5,0.6666666667,0.0833333333,0.1481481481,0.425
+q015,test automation engineer for machine learning systems,5,1.0,0.2777777778,0.4347826087,0.675
+q016,SDET for AI or machine learning systems,5,0.5,0.1333333333,0.2105263158,0.625
+q017,model evaluation and quality,5,1.0,0.1,0.1818181818,0.325
+q018,evaluate LLM quality and hallucinations,5,0.25,0.1,0.1428571429,0.7
+q019,testing RAG retrieval quality and groundedness,5,0.25,0.1428571429,0.1818181818,0.775
+q020,quality validation for AI agents and LLM applications,5,1.0,0.2352941176,0.380952381,0.675
+q021,AI validation engineer with PyTest,5,0.25,0.1428571429,0.1818181818,0.775
+q022,LLM evaluation engineer with prompt engineering,5,0.75,0.25,0.375,0.75

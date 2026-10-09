@@ -1,12 +1,11 @@
-"""
-Shared fixtures for evaluation tests.
-"""
+"""Shared fixtures for evaluation tests."""
 
 import pytest
+import json
+from pathlib import Path
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-
 
 from config.paths import RAW_JOBS
 from config.paths import FAISS_INDEX
@@ -45,5 +44,22 @@ def job_index():
         documents = load_documents(RAW_JOBS)      
         job_index = create_vector_store(split_text(documents), embedding_model)
         job_index.save_local(FAISS_INDEX)
-        
+
     yield job_index
+
+
+@pytest.fixture(scope="session")
+def all_job_ids():
+    """Load all job IDs from the raw jobs dataset.
+
+    Yields:
+        list[str]: All job IDs from the raw jobs dataset.
+    """
+    all_job_ids = []
+    with RAW_JOBS.open("r", encoding="utf-8") as file:
+        jobs = json.load(file)
+    
+        for job in jobs:
+            all_job_ids.append(job["job_id"])
+
+    yield all_job_ids

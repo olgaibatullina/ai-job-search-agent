@@ -50,6 +50,7 @@ def create_vector_store(
     Returns:
         A FAISS vector store containing the document chunks and their embeddings.
     """
+    
     return FAISS.from_documents(documents=chunks, embedding=embedding_model)
 
 def main():

@@ -165,3 +165,28 @@ Embedding model benchmarking may be added later as a separate validation experim
 ### Why
 
 The model is suitable for English text retrieval, can run locally, and keeps the initial implementation simple while allowing the project to focus on RAG and AI validation rather than embedding model selection.
+
+
+## D-007 — Separate Raw and Public Evaluation Datasets
+
+**Date:** 2026-10-08  
+**Status:** Accepted
+
+### Context
+
+The project needs original job API responses for local development and retrieval evaluation, while the public GitHub repository needs a reproducible evaluation dataset that does not publish full original job descriptions.
+
+### Decision
+
+Maintain two distinct datasets:
+
+- **Raw dataset:** Preserve `raw_jobs.json` with original API response text, unchanged, for local development and retrieval evaluation. Exclude it from the public Git repository.
+- **Public evaluation dataset:** Prepare a smaller, separately identified dataset suitable for publication on GitHub and for reproducible public CI checks, without full original job descriptions.
+
+Keep evaluation results, dataset identifiers, and ground-truth annotations separate. Never silently substitute the public dataset for the raw dataset or present metrics from one as results for the other.
+
+Before publishing the repository, verify that the raw dataset is excluded from Git and remove any previously committed copies from repository history.
+
+### Why
+
+This preserves original test evidence while enabling public reproducibility without exposing full third-party job descriptions. Explicit dataset provenance prevents misleading evaluation comparisons and CI results.
