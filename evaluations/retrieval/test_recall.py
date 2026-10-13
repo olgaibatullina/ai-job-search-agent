@@ -8,10 +8,10 @@ from evaluations import helper
 from src.rag.retriever import retrieve_from_vector_store
 
 
-retrival_cases = helper.load_retrival_dataset(RETRIEVAL_EVAL)
+retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)
 recall_metric = evaluate.load("recall")
 
-@pytest.mark.parametrize("case", retrival_cases)
+@pytest.mark.parametrize("case", retrieval_cases)
 def test_recall_retrieval(job_index, all_job_ids, case):
     results = retrieve_from_vector_store(job_index, case["query"], k=5) 
     retrieved_job_ids = list({result.metadata["job_id"] for result in results}) 

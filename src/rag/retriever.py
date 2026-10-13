@@ -35,6 +35,48 @@ def retrieve_from_vector_store(
     
     return vector_store.similarity_search(query=query, k=k)
 
+def retrieve_relevant_jobs(
+        vector_store: FAISS, 
+        query: str, 
+        k: int
+        ) -> list[Document]:
+    """Retrieve the most relevant k unique jobs for a query.
+
+    Args:
+        vector_store (FAISS): The FAISS vector store used for similarity search.
+        query (str): The search query.
+        k (int): The number of unique jobs to retrieve.
+
+    Returns:
+        list[Document]: A list of documents representing unique jobs.
+    """
+
+    unique_jobs = []            
+    unique_job_ids = []
+    multiplier = 3
+    total_vectors = vector_store.index.ntotal
+
+    while (len(unique_jobs) < k ):
+        # Run similarity search with the current candidate limit.
+        search_k = min(k*multiplier, total_vectors)
+        
+        retrieved_jobs = retrieve_from_vector_store(vector_store=vector_store, query=query, k=search_k)
+
+        # Iterate and deduplicate jobs.
+        for job in retrieved_jobs:
+            job_id = job.metadata.get("job_id")
+            if job_id not in unique_job_ids:
+                unique_job_ids.append(job_id)
+                unique_jobs.append(job)
+        
+        # Stop if all vectors have been searched.
+        if (search_k == total_vectors):
+            return unique_jobs[:k]
+  
+        multiplier *= 2 
+
+    return unique_jobs[:k]
+
 def main():
     documents = load_documents(
             Path("./data/raw_jobs/raw_jobs.json")

@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 
 
-def load_retrival_dataset(dataset: Path) -> list[dict]:
+def load_retrieval_dataset(dataset: Path) -> list[dict]:
     """Load retrieval evaluation queries from a YAML dataset.
 
     Args:
