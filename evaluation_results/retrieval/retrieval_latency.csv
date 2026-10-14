@@ -1,0 +1,221 @@
+query_id,query,simple_latency_ms,simple_unique_jobs,dedup_latency_ms,dedup_unique_jobs
+q001,AI QA engineer,92.34,3,7.29,5
+q001,AI QA engineer,6.08,3,6.6,5
+q001,AI QA engineer,6.74,3,6.05,5
+q001,AI QA engineer,6.5,3,6.18,5
+q001,AI QA engineer,6.49,3,6.19,5
+q001,AI QA engineer,6.21,3,6.81,5
+q001,AI QA engineer,6.28,3,5.94,5
+q001,AI QA engineer,6.41,3,6.0,5
+q001,AI QA engineer,6.7,3,6.1,5
+q001,AI QA engineer,6.06,3,7.29,5
+q002,AI validation engineer,29.61,3,6.41,5
+q002,AI validation engineer,6.18,3,6.32,5
+q002,AI validation engineer,6.19,3,6.28,5
+q002,AI validation engineer,6.62,3,5.87,5
+q002,AI validation engineer,8.95,3,7.98,5
+q002,AI validation engineer,8.84,3,7.25,5
+q002,AI validation engineer,6.99,3,6.76,5
+q002,AI validation engineer,6.13,3,7.08,5
+q002,AI validation engineer,5.99,3,6.31,5
+q002,AI validation engineer,6.5,3,6.03,5
+q003,LLM evaluation engineer,6.89,5,6.18,5
+q003,LLM evaluation engineer,6.52,5,6.32,5
+q003,LLM evaluation engineer,5.96,5,6.42,5
+q003,LLM evaluation engineer,6.54,5,6.03,5
+q003,LLM evaluation engineer,6.55,5,6.15,5
+q003,LLM evaluation engineer,6.12,5,6.42,5
+q003,LLM evaluation engineer,5.97,5,6.89,5
+q003,LLM evaluation engineer,6.51,5,6.01,5
+q003,LLM evaluation engineer,6.38,5,6.0,5
+q003,LLM evaluation engineer,6.26,5,6.26,5
+q004,GenAI quality engineer,6.0,3,6.55,5
+q004,GenAI quality engineer,6.31,3,6.35,5
+q004,GenAI quality engineer,6.57,3,6.12,5
+q004,GenAI quality engineer,6.56,3,6.18,5
+q004,GenAI quality engineer,5.98,3,6.71,5
+q004,GenAI quality engineer,6.07,3,6.3,5
+q004,GenAI quality engineer,6.07,3,6.21,5
+q004,GenAI quality engineer,6.49,3,6.2,5
+q004,GenAI quality engineer,6.01,3,6.4,5
+q004,GenAI quality engineer,6.04,3,6.4,5
+q005,AI test engineer,6.79,5,5.94,5
+q005,AI test engineer,6.2,5,6.29,5
+q005,AI test engineer,6.15,5,6.98,5
+q005,AI test engineer,6.88,5,7.27,5
+q005,AI test engineer,6.54,5,6.28,5
+q005,AI test engineer,6.38,5,5.91,5
+q005,AI test engineer,6.37,5,6.21,5
+q005,AI test engineer,5.96,5,6.48,5
+q005,AI test engineer,6.43,5,6.56,5
+q005,AI test engineer,6.37,5,6.3,5
+q006,AI safety evaluation engineer,7.04,3,6.25,5
+q006,AI safety evaluation engineer,6.11,3,6.64,5
+q006,AI safety evaluation engineer,6.01,3,7.03,5
+q006,AI safety evaluation engineer,6.15,3,6.02,5
+q006,AI safety evaluation engineer,6.37,3,5.93,5
+q006,AI safety evaluation engineer,6.25,3,6.18,5
+q006,AI safety evaluation engineer,5.89,3,6.52,5
+q006,AI safety evaluation engineer,6.12,3,6.05,5
+q006,AI safety evaluation engineer,6.5,3,6.08,5
+q006,AI safety evaluation engineer,5.95,3,6.42,5
+q007,RAG evaluation and testing,6.46,4,6.51,5
+q007,RAG evaluation and testing,6.16,4,5.97,5
+q007,RAG evaluation and testing,6.27,4,6.02,5
+q007,RAG evaluation and testing,6.08,4,6.29,5
+q007,RAG evaluation and testing,5.97,4,6.71,5
+q007,RAG evaluation and testing,5.96,4,6.17,5
+q007,RAG evaluation and testing,6.47,4,6.02,5
+q007,RAG evaluation and testing,5.94,4,6.34,5
+q007,RAG evaluation and testing,6.06,4,6.37,5
+q007,RAG evaluation and testing,6.11,4,5.95,5
+q008,LLM testing and validation,26.45,5,6.26,5
+q008,LLM testing and validation,6.09,5,6.16,5
+q008,LLM testing and validation,6.07,5,6.1,5
+q008,LLM testing and validation,6.04,5,6.1,5
+q008,LLM testing and validation,6.08,5,6.01,5
+q008,LLM testing and validation,6.53,5,6.09,5
+q008,LLM testing and validation,6.0,5,6.34,5
+q008,LLM testing and validation,6.04,5,6.14,5
+q008,LLM testing and validation,6.23,5,5.94,5
+q008,LLM testing and validation,6.42,5,6.1,5
+q009,AI QA engineer with test automation,27.08,4,6.33,5
+q009,AI QA engineer with test automation,6.25,4,6.42,5
+q009,AI QA engineer with test automation,6.07,4,6.24,5
+q009,AI QA engineer with test automation,5.93,4,6.08,5
+q009,AI QA engineer with test automation,6.41,4,5.96,5
+q009,AI QA engineer with test automation,5.91,4,6.94,5
+q009,AI QA engineer with test automation,6.28,4,6.43,5
+q009,AI QA engineer with test automation,6.82,4,5.97,5
+q009,AI QA engineer with test automation,6.54,4,6.18,5
+q009,AI QA engineer with test automation,6.11,4,6.49,5
+q010,AI evaluation engineer with Python,6.39,4,6.41,5
+q010,AI evaluation engineer with Python,6.17,4,5.83,5
+q010,AI evaluation engineer with Python,6.37,4,6.43,5
+q010,AI evaluation engineer with Python,6.07,4,6.67,5
+q010,AI evaluation engineer with Python,6.03,4,6.47,5
+q010,AI evaluation engineer with Python,6.25,4,5.95,5
+q010,AI evaluation engineer with Python,6.28,4,6.11,5
+q010,AI evaluation engineer with Python,5.98,4,6.41,5
+q010,AI evaluation engineer with Python,5.97,4,6.5,5
+q010,AI evaluation engineer with Python,6.01,4,5.99,5
+q011,AI quality engineer with API testing,27.55,4,6.04,5
+q011,AI quality engineer with API testing,5.98,4,5.73,5
+q011,AI quality engineer with API testing,5.48,4,5.97,5
+q011,AI quality engineer with API testing,5.57,4,5.42,5
+q011,AI quality engineer with API testing,6.21,4,5.57,5
+q011,AI quality engineer with API testing,5.91,4,5.89,5
+q011,AI quality engineer with API testing,5.45,4,5.8,5
+q011,AI quality engineer with API testing,6.2,4,5.78,5
+q011,AI quality engineer with API testing,6.04,4,5.52,5
+q011,AI quality engineer with API testing,5.36,4,5.93,5
+q012,AI evaluation engineer for agents,6.44,4,6.05,5
+q012,AI evaluation engineer for agents,5.98,4,6.03,5
+q012,AI evaluation engineer for agents,5.92,4,6.8,5
+q012,AI evaluation engineer for agents,6.19,4,6.74,5
+q012,AI evaluation engineer for agents,6.13,4,6.06,5
+q012,AI evaluation engineer for agents,6.53,4,6.01,5
+q012,AI evaluation engineer for agents,5.99,4,6.1,5
+q012,AI evaluation engineer for agents,5.78,4,6.05,5
+q012,AI evaluation engineer for agents,5.97,4,5.86,5
+q012,AI evaluation engineer for agents,6.38,4,6.26,5
+q013,AI red teaming and safety testing,7.17,5,6.45,5
+q013,AI red teaming and safety testing,6.11,5,6.76,5
+q013,AI red teaming and safety testing,5.89,5,5.92,5
+q013,AI red teaming and safety testing,6.03,5,5.89,5
+q013,AI red teaming and safety testing,5.99,5,5.99,5
+q013,AI red teaming and safety testing,5.48,5,5.72,5
+q013,AI red teaming and safety testing,5.72,5,5.45,5
+q013,AI red teaming and safety testing,5.9,5,5.91,5
+q013,AI red teaming and safety testing,5.56,5,6.18,5
+q013,AI red teaming and safety testing,5.77,5,5.78,5
+q014,software quality engineer for AI systems,6.59,3,5.86,5
+q014,software quality engineer for AI systems,5.77,3,6.3,5
+q014,software quality engineer for AI systems,5.83,3,6.14,5
+q014,software quality engineer for AI systems,6.1,3,5.58,5
+q014,software quality engineer for AI systems,5.85,3,5.81,5
+q014,software quality engineer for AI systems,5.43,3,6.18,5
+q014,software quality engineer for AI systems,5.63,3,5.62,5
+q014,software quality engineer for AI systems,5.82,3,5.71,5
+q014,software quality engineer for AI systems,5.49,3,6.13,5
+q014,software quality engineer for AI systems,5.55,3,5.53,5
+q015,test automation engineer for machine learning systems,6.06,5,5.93,5
+q015,test automation engineer for machine learning systems,5.68,5,6.57,5
+q015,test automation engineer for machine learning systems,5.81,5,5.92,5
+q015,test automation engineer for machine learning systems,5.96,5,5.62,5
+q015,test automation engineer for machine learning systems,6.24,5,5.88,5
+q015,test automation engineer for machine learning systems,5.9,5,6.16,5
+q015,test automation engineer for machine learning systems,5.95,5,5.97,5
+q015,test automation engineer for machine learning systems,6.25,5,6.06,5
+q015,test automation engineer for machine learning systems,6.26,5,6.02,5
+q015,test automation engineer for machine learning systems,5.89,5,6.06,5
+q016,SDET for AI or machine learning systems,27.58,4,6.55,5
+q016,SDET for AI or machine learning systems,5.94,4,6.01,5
+q016,SDET for AI or machine learning systems,6.26,4,6.13,5
+q016,SDET for AI or machine learning systems,6.13,4,5.98,5
+q016,SDET for AI or machine learning systems,5.86,4,6.39,5
+q016,SDET for AI or machine learning systems,5.86,4,5.98,5
+q016,SDET for AI or machine learning systems,6.38,4,6.17,5
+q016,SDET for AI or machine learning systems,5.82,4,6.22,5
+q016,SDET for AI or machine learning systems,5.85,4,6.31,5
+q016,SDET for AI or machine learning systems,5.96,4,5.87,5
+q017,model evaluation and quality,7.17,3,6.46,5
+q017,model evaluation and quality,6.09,3,6.65,5
+q017,model evaluation and quality,6.05,3,6.65,5
+q017,model evaluation and quality,6.26,3,6.09,5
+q017,model evaluation and quality,6.47,3,6.23,5
+q017,model evaluation and quality,6.1,3,6.24,5
+q017,model evaluation and quality,6.28,3,6.48,5
+q017,model evaluation and quality,6.1,3,6.14,5
+q017,model evaluation and quality,6.48,3,5.95,5
+q017,model evaluation and quality,6.22,3,6.3,5
+q018,evaluate LLM quality and hallucinations,6.36,4,6.31,5
+q018,evaluate LLM quality and hallucinations,6.45,4,5.94,5
+q018,evaluate LLM quality and hallucinations,6.32,4,5.83,5
+q018,evaluate LLM quality and hallucinations,5.85,4,6.16,5
+q018,evaluate LLM quality and hallucinations,5.97,4,6.32,5
+q018,evaluate LLM quality and hallucinations,5.9,4,5.77,5
+q018,evaluate LLM quality and hallucinations,6.25,4,5.93,5
+q018,evaluate LLM quality and hallucinations,5.69,4,6.03,5
+q018,evaluate LLM quality and hallucinations,5.79,4,6.39,5
+q018,evaluate LLM quality and hallucinations,6.05,4,5.96,5
+q019,testing RAG retrieval quality and groundedness,7.24,4,6.25,5
+q019,testing RAG retrieval quality and groundedness,6.02,4,6.2,5
+q019,testing RAG retrieval quality and groundedness,5.89,4,6.23,5
+q019,testing RAG retrieval quality and groundedness,6.48,4,5.93,5
+q019,testing RAG retrieval quality and groundedness,6.51,4,5.91,5
+q019,testing RAG retrieval quality and groundedness,5.8,4,6.08,5
+q019,testing RAG retrieval quality and groundedness,6.21,4,5.91,5
+q019,testing RAG retrieval quality and groundedness,6.44,4,5.91,5
+q019,testing RAG retrieval quality and groundedness,6.11,4,5.97,5
+q019,testing RAG retrieval quality and groundedness,5.78,4,6.41,5
+q020,quality validation for AI agents and LLM applications,27.93,4,6.41,5
+q020,quality validation for AI agents and LLM applications,6.22,4,6.21,5
+q020,quality validation for AI agents and LLM applications,6.4,4,6.04,5
+q020,quality validation for AI agents and LLM applications,6.23,4,5.93,5
+q020,quality validation for AI agents and LLM applications,5.68,4,6.22,5
+q020,quality validation for AI agents and LLM applications,5.9,4,5.76,5
+q020,quality validation for AI agents and LLM applications,6.24,4,5.99,5
+q020,quality validation for AI agents and LLM applications,5.89,4,6.29,5
+q020,quality validation for AI agents and LLM applications,5.85,4,6.46,5
+q020,quality validation for AI agents and LLM applications,5.89,4,5.94,5
+q021,AI validation engineer with PyTest,6.61,4,5.93,5
+q021,AI validation engineer with PyTest,5.81,4,8.32,5
+q021,AI validation engineer with PyTest,8.2,4,7.77,5
+q021,AI validation engineer with PyTest,6.66,4,6.47,5
+q021,AI validation engineer with PyTest,6.17,4,6.18,5
+q021,AI validation engineer with PyTest,6.75,4,5.88,5
+q021,AI validation engineer with PyTest,6.59,4,6.22,5
+q021,AI validation engineer with PyTest,5.95,4,6.27,5
+q021,AI validation engineer with PyTest,5.96,4,5.94,5
+q021,AI validation engineer with PyTest,6.08,4,5.88,5
+q022,LLM evaluation engineer with prompt engineering,6.86,4,6.04,5
+q022,LLM evaluation engineer with prompt engineering,5.89,4,6.24,5
+q022,LLM evaluation engineer with prompt engineering,6.03,4,6.02,5
+q022,LLM evaluation engineer with prompt engineering,6.17,4,5.97,5
+q022,LLM evaluation engineer with prompt engineering,5.89,4,6.26,5
+q022,LLM evaluation engineer with prompt engineering,5.8,4,6.32,5
+q022,LLM evaluation engineer with prompt engineering,5.99,4,5.92,5
+q022,LLM evaluation engineer with prompt engineering,6.34,4,5.97,5
+q022,LLM evaluation engineer with prompt engineering,5.9,4,6.25,5
+q022,LLM evaluation engineer with prompt engineering,5.86,4,5.89,5

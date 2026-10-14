@@ -35,6 +35,7 @@ def retrieve_from_vector_store(
     
     return vector_store.similarity_search(query=query, k=k)
 
+
 def retrieve_relevant_jobs(
         vector_store: FAISS, 
         query: str, 
@@ -58,7 +59,7 @@ def retrieve_relevant_jobs(
 
     while (len(unique_jobs) < k ):
         # Run similarity search with the current candidate limit.
-        search_k = min(k*multiplier, total_vectors)
+        search_k = min(k * multiplier, total_vectors)
         
         retrieved_jobs = retrieve_from_vector_store(vector_store=vector_store, query=query, k=search_k)
 
@@ -76,6 +77,7 @@ def retrieve_relevant_jobs(
         multiplier *= 2 
 
     return unique_jobs[:k]
+
 
 def main():
     documents = load_documents(

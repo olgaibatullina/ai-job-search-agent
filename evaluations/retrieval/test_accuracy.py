@@ -5,7 +5,7 @@ import evaluate
 
 from config.paths import RETRIEVAL_EVAL
 from evaluations import helper
-from src.rag.retriever import retrieve_from_vector_store
+from src.rag.retriever import retrieve_relevant_jobs
 
 
 retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)
@@ -13,7 +13,7 @@ accuracy_metric = evaluate.load("accuracy")
 
 @pytest.mark.parametrize("case", retrieval_cases)
 def test_accuracy_retrieval(job_index, all_job_ids, case):
-    results = retrieve_from_vector_store(job_index, case["query"], k=5)
+    results = retrieve_relevant_jobs(job_index, case["query"], k=5)
     retrieved_job_ids = list({result.metadata["job_id"] for result in results})
 
     predictions, references = helper.build_retrieval_labels(

@@ -43,6 +43,7 @@ def job_to_document(job: dict) -> Document:
         },
     )
 
+
 def load_documents(path: Path) -> list[Document]:
     """Load job postings from a JSON file and convert them to Documents.
 

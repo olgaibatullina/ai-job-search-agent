@@ -37,11 +37,12 @@ def build_retrieval_labels(
     predictions = []
     references =[]
 
-    relevant_jobs = set(relevant_jobs)  # Convert to set for faster lookups
-    retrieved_jobs = set(retrieved_jobs)  # Convert to set to remove duplicates. Ref.: project_documentation/engineering_log.md EL-001
+    # Convert jobs to sets for faster lookups.    
+    relevant_jobs = set(relevant_jobs)
+    retrieved_jobs = set(retrieved_jobs)
 
     for job_id in all_job_ids:
-        references.append(1) if job_id in relevant_jobs else references.append(0)
-        predictions.append(1) if job_id in retrieved_jobs else predictions.append(0)    
+        references.append(1 if job_id in relevant_jobs else 0)
+        predictions.append(1 if job_id in retrieved_jobs else 0)    
     
     return predictions, references

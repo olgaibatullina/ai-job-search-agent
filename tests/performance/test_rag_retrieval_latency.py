@@ -29,9 +29,9 @@ def test_rag_retrieval_latency(job_index, case):
         dedup_retrieval_latency = time.perf_counter() - dedup_retrieval_start
 
         # Compare latency and the number of unique jobs returned.
-        print(f"{i}: {case['query_id']}: "
+        print(f"{i+1}: {case['query_id']}, {case['query']}: \n"
             f"Simple retrieval : {simple_retrieval_latency * 1000:.2f} ms, "
-            f"unique_jobs= {len({document.metadata["job_id"] for document in simple_retrieval})}. "
+            f"unique_jobs= {len({document.metadata["job_id"] for document in simple_retrieval})} \n"
             f"Dedup retrieval : {dedup_retrieval_latency * 1000:.2f} ms, "
             f"unique_jobs= {len({document.metadata["job_id"] for document in dedup_retrieval})}")
 
