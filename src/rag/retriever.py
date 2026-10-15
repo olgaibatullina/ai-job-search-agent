@@ -18,10 +18,10 @@ from src.rag.vector_store import create_vector_store
 
 
 def retrieve_from_vector_store(
-        vector_store: FAISS, 
-        query: str, 
-        k: int
-        ) -> list[Document]:
+    vector_store: FAISS, 
+    query: str, 
+    k: int
+) -> list[Document]:
     """Retrieve the most relevant documents for a query.
 
     Args:
@@ -37,10 +37,10 @@ def retrieve_from_vector_store(
 
 
 def retrieve_relevant_jobs(
-        vector_store: FAISS, 
-        query: str, 
-        k: int
-        ) -> list[Document]:
+    vector_store: FAISS, 
+    query: str, 
+    k: int
+) -> list[Document]:
     """Retrieve the most relevant k unique jobs for a query.
 
     Args:

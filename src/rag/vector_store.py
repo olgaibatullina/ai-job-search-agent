@@ -2,11 +2,11 @@
 Vector store builder for RAG pipeline.
 
 This module is part of the AI Job Search Agent RAG pipeline.
-It creates a FAISS vector store from document chunks and their
-embeddings for similarity search and retrieval.
+It creates a FAISS vector store from document chunks using
+a Hugging Face Sentence Transformers embedding model.
 
-V1: Uses a Hugging Face Sentence Transformers model through LangChain
-to convert text chunks into numerical vector representations.
+V1: Uses LangChain's FAISS integration to embed document chunks
+and store their vector representations for similarity search.
 """
 
 from pathlib import Path
@@ -19,27 +19,9 @@ from src.rag.loader import load_documents
 from src.rag.chunker import split_text
 
 
-embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-
-def embed_documents(
-        documents: list[Document], 
-        embedding_model: HuggingFaceEmbeddings
-        ) -> list[list[float]]:
-    """Generate embeddings for document chunks.
-
-    Args:
-        documents: A list of document chunks.
-        embedding_model: The LangChain embedding model used to generate vectors,
-currently backed by Hugging Face Sentence Transformers.
-    Returns:
-        A list of embedding vectors.
-    """
-
-    return embedding_model.embed_documents([chunk.page_content for chunk in split_text(documents)])
-
 def create_vector_store(
-        chunks: list[Document],
-        embedding_model: HuggingFaceEmbeddings,
+    chunks: list[Document],
+    embedding_model: HuggingFaceEmbeddings,
 ) -> FAISS:
     """Create a FAISS vector store from document chunks.
 
@@ -53,11 +35,12 @@ def create_vector_store(
     
     return FAISS.from_documents(documents=chunks, embedding=embedding_model)
 
+
 def main():
+    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
     documents = load_documents(
         Path("./data/raw_jobs/raw_jobs.json")
     )
-    vectors =  embed_documents(documents, embedding_model)
 
     vector_store = create_vector_store(split_text(documents), embedding_model)
 

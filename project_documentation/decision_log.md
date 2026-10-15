@@ -190,3 +190,51 @@ Before publishing the repository, verify that the raw dataset is excluded from G
 ### Why
 
 This preserves original test evidence while enabling public reproducibility without exposing full third-party job descriptions. Explicit dataset provenance prevents misleading evaluation comparisons and CI results.
+
+## D-008 — Initial Generative LLM for V1
+
+**Date:** 2026-10-14  
+**Status:** Accepted
+
+### Context
+
+The Job Search Agent needs a locally runnable generative LLM for grounded RAG answers, job-to-candidate comparisons, and explanations.
+
+The initial goal is to complete the end-to-end pipeline, not to establish which model is best before an evaluation framework exists.
+
+Development runs on an M4 Max Mac with 36 GB unified memory.
+
+### Decision
+
+Use **Qwen3 8B** through **Ollama** as the initial V1 generation model and baseline.
+
+This is a pragmatic starting choice, **not** a benchmark-validated claim that Qwen3 outperforms Llama, DeepSeek, or other alternatives.
+
+After the full pipeline and evaluation framework are operational, compare suitable generation models using the same inputs, retrieved context, prompts, and evaluation criteria.
+
+Evaluate:
+- Groundedness and unsupported candidate claims
+- Instruction adherence and answer quality
+- Latency and resource usage
+
+Record the exact model tag/version, quantization, generation settings, and runtime configuration for reproducibility.
+
+Plan a **standalone comparative LLM evaluation case study** within the AI Validation Framework after the end-to-end pipeline is ready.
+
+The case study will:
+- Use a dedicated benchmark dataset.
+- Compare Qwen3 8B with selected alternatives, potentially Llama and DeepSeek.
+- Evaluate groundedness, hallucination rates, instruction adherence, and structured-output validity.
+- Measure latency and resource consumption.
+- Include repeated runs, statistical analysis, and error analysis.
+- Publish methodology, results, and conclusions in a separate portfolio report.
+
+Keep benchmark results separate from routine regression testing. Do not replace the V1 baseline without an explicit follow-up decision.
+
+### Why
+
+Qwen3 8B offers a practical balance of local resource requirements and expected instruction-following and text-analysis capabilities. Ollama simplifies local integration.
+
+Deferring comparative benchmarking avoids delaying implementation while preserving a clear path to evidence-based model selection.
+
+The standalone case study will also demonstrate systematic LLM evaluation, statistical analysis, and model comparison as part of the AI/ML Validation Portfolio.
