@@ -1,0 +1,156 @@
+queries:
+  # Out-of-domain jobs
+  - query_id: neg001
+    query: "Find accounting jobs"
+    slice: "out_of_domain_job"
+    relevant_job_ids: []
+
+  - query_id: neg002
+    query: "Find nursing jobs"
+    slice: "out_of_domain_job"
+    relevant_job_ids: []
+
+  - query_id: neg003
+    query: "Find marketing manager jobs"
+    slice: "out_of_domain_job"
+    relevant_job_ids: []
+
+  - query_id: neg004
+    query: "Find HW validation jobs"
+    slice: "out_of_domain_job"
+    relevant_job_ids: []
+
+  - query_id: neg005
+    query: "Find elementary school teacher jobs"
+    slice: "out_of_domain_job"
+    relevant_job_ids: []
+
+  # Related domain, but wrong job scope
+  - query_id: neg006
+    query: "Find QA jobs"
+    slice: "out_of_scope_job"
+    relevant_job_ids: []
+
+  - query_id: neg007
+    query: "Find UI automation jobs"
+    slice: "out_of_scope_job"
+    relevant_job_ids: []
+
+  - query_id: neg008
+    query: "Find Mobile QA jobs"
+    slice: "out_of_scope_job"
+    relevant_job_ids: []
+
+  - query_id: neg009
+    query: "Find product quality engineer jobs"
+    slice: "out_of_scope_job"
+    relevant_job_ids: []
+
+  # AI/ML and evaluation terminology, but not job search
+  - query_id: neg010
+    query: "What does AI/ML mean?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg011
+    query: "When was machine learning invented?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg012
+    query: "How does a machine learn to code?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg013
+    query: "Where can I learn AI and machine learning?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg014
+    query: "What metrics can be used to evaluate an AI model?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg015
+    query: "What is the difference between LLM validation and evaluation?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg016
+    query: "What is evaluation framework?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  - query_id: neg017
+    query: "How do you evaluate a model?"
+    slice: "non_job_ai_query"
+    relevant_job_ids: []
+
+  # Lexical overlap with job corpus, but wrong intent
+  - query_id: neg018
+    query: "What is San Francisco Bay Area famous for?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg019
+    query: "What cities are in the Bay Area?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg020
+    query: "What companies are based in San Jose?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg021
+    query: "What does quality mean in manufacturing?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg022
+    query: "What is a validation test for a product?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg023
+    query: "How do you evaluate the quality of a product?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg024
+    query: "What companies are hiring remotely?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  - query_id: neg025
+    query: "What is the highest paying job in IT today?"
+    slice: "lexical_overlap"
+    relevant_job_ids: []
+
+  # Completely unrelated
+  - query_id: neg026
+    query: "How does photosynthesis work?"
+    slice: "non_job_query"
+    relevant_job_ids: []
+
+  - query_id: neg027
+    query: "Who wrote The Hundred-Page Machine Learning Book?"
+    slice: "non_job_query"
+    relevant_job_ids: []
+
+  - query_id: neg028
+    query: "What is the weather in San Francisco today?"
+    slice: "non_job_query"
+    relevant_job_ids: []
+  
+  - query_id: neg029
+    query: "What is the capital of France?"
+    slice: "non_job_query"
+    relevant_job_ids: []
+
+  - query_id: neg030
+    query: "Who is the President of the US?"
+    slice: "non_job_query"
+    relevant_job_ids: []
+

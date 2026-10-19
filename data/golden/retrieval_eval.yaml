@@ -465,3 +465,64 @@ queries:
       - linkedin_4448261372
       - linkedin_4474348330
       - linkedin_4465185549
+
+  - query_id: q023
+    query: "Jobs evaluating AI model accuracy and safety"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4470918342
+      - linkedin_4436348819
+      - linkedin_4460676973
+
+  - query_id: q024
+    query: "LLM QA engineer with PromptFoo"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: q025
+    query: "LLM evaluation engineer with LangChain"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: q026
+    query: "RAG pipeline engineer with Python"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4271110229
+
+  - query_id: q027
+    query: "QA jobs for LLM-powered applications"
+    slice: "domain"
+    relevant_job_ids:
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4459812573
+      - linkedin_4474348330
+
+  - query_id: q028
+    query: "RAG evaluation engineer"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4450608172
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4474348330
+
+  - query_id: q029
+    query: "LLM test engineer with prompt engineering"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4470918342
+      - linkedin_4213901809
+
+  - query_id: q030
+    query: "AI jobs requiring Python and PyTest"
+    slice: "skills"
+    relevant_job_ids:
+      - linkedin_4213901809

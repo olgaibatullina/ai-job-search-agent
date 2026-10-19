@@ -1,0 +1,186 @@
+queries:
+  - query_id: typo001
+    query: "LLM evalution engineer"
+    source_query_id: q003
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4466161565
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4464196550
+      - linkedin_4237053772
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+
+  - query_id: typo002
+    query: "LLM evaluation enginer"
+    source_query_id: q003
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4470014922
+      - linkedin_4459812573
+      - linkedin_4450608172
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4460676973
+      - linkedin_4454312631
+      - linkedin_4395476402
+      - linkedin_4438866789
+      - linkedin_4466161565
+      - linkedin_4435178731
+      - linkedin_4475020607
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4464196550
+      - linkedin_4237053772
+      - linkedin_4469973686
+      - linkedin_4448261372
+      - linkedin_4474348330
+
+  - query_id: typo003
+    query: "LLM evaluation engneer with promt engineering"
+    source_query_id: q022
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: typo004
+    query: "LLM evaluation engineer with prompt enginering"
+    source_query_id: q022
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4421236367
+      - linkedin_4459812573
+      - linkedin_4271110229
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4454312631
+      - linkedin_4466161565
+      - linkedin_4462232653
+      - linkedin_4444375786
+      - linkedin_4448261372
+      - linkedin_4474348330
+      - linkedin_4465185549
+
+  - query_id: typo005
+    query: "LLM QA engineer with Promtfoo"
+    source_query_id: q024
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: typo006
+    query: "LLM QA engineer with PromptFo"
+    source_query_id: q024
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: typo007
+    query: "LLM evaluation engineer with LangChian"
+    source_query_id: q025
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: typo008
+    query: "LLM evalution engineer with LangChain"
+    source_query_id: q025
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4454312631
+
+  - query_id: typo009
+    query: "RAG pipline engineer with Python"
+    source_query_id: q026
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4271110229
+
+  - query_id: typo010
+    query: "RAG pipeline enginer with Python"
+    source_query_id: q026
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4271110229
+
+  - query_id: typo011
+    query: "AI jobs requiring Python and Pytest"
+    source_query_id: q030
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4213901809
+
+  - query_id: typo012
+    query: "AI jobs requiring Python and PyTset"
+    source_query_id: q030
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4213901809
+
+  - query_id: typo013
+    query: "Jobs evaluating AI model acuracy and safety"
+    source_query_id: q023
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4470918342
+      - linkedin_4436348819
+      - linkedin_4460676973
+
+  - query_id: typo014
+    query: "QA jobs for LLM-powered aplications"
+    source_query_id: q027
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4470918342
+      - linkedin_4213901809
+      - linkedin_4459812573
+      - linkedin_4474348330
+
+  - query_id: typo015
+    query: "AI validation enginer with PyTest"
+    source_query_id: q021
+    slice: "typo"
+    relevant_job_ids:
+      - linkedin_4412049294
+      - linkedin_4459812573
+      - linkedin_4213901809
+      - linkedin_4395476402
+      - linkedin_4435178731
+      - linkedin_4444375786
+      - linkedin_4434385256
