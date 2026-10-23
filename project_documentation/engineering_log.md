@@ -133,3 +133,32 @@ The Precision decrease is an expected trade-off: deduplication retrieves
 additional unique jobs, some of which may be irrelevant. The trade-off is
 acceptable because job-level retrieval is the intended behavior, and the
 overall Recall and F1 improved.
+
+## EL-006 — Retrieval returns results for irrelevant queries
+
+### Date
+
+2026-10-21 13:53
+
+### Context / Findings
+
+Exploratory testing revealed that the retriever returns job results for queries that are not related to job search, including queries such as `"Who is the President of the US?"`.
+
+This indicates that the retriever can return semantically unrelated jobs instead of recognizing that the query has no relevant results.
+
+### Decision / Approach
+
+Add RAGAS-based evaluation tests to systematically detect this retrieval behavior.
+
+Use the existing evaluation dataset, including negative queries, to evaluate retrieval quality and identify cases where irrelevant queries produce retrieved contexts.
+
+
+### Validation / Results
+
+RAGAS tests are being added to provide automated validation of retrieval behavior.
+
+Retriever improvements will be addressed as the next step after establishing the RAGAS evaluation baseline.
+
+### Impact / Takeaway
+
+The issue is now captured as an explicit retrieval quality problem and will be tracked through automated evaluation rather than exploratory testing alone.

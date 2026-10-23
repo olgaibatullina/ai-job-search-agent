@@ -25,6 +25,7 @@ queries:
       - linkedin_4469973686
       - linkedin_4448261372
       - linkedin_4474348330
+    reference: "LLM evaluation engineer roles focused on evaluating and testing large language models."
 
   - query_id: typo002
     query: "LLM evaluation enginer"
@@ -52,6 +53,7 @@ queries:
       - linkedin_4469973686
       - linkedin_4448261372
       - linkedin_4474348330
+    reference: "LLM evaluation engineer roles focused on evaluating and testing large language models."
 
   - query_id: typo003
     query: "LLM evaluation engneer with promt engineering"
@@ -70,6 +72,7 @@ queries:
       - linkedin_4448261372
       - linkedin_4474348330
       - linkedin_4465185549
+    reference: "LLM evaluation roles requiring prompt engineering experience."
 
   - query_id: typo004
     query: "LLM evaluation engineer with prompt enginering"
@@ -88,6 +91,7 @@ queries:
       - linkedin_4448261372
       - linkedin_4474348330
       - linkedin_4465185549
+    reference: "LLM evaluation roles requiring prompt engineering experience."
 
   - query_id: typo005
     query: "LLM QA engineer with Promtfoo"
@@ -97,6 +101,7 @@ queries:
       - linkedin_4459812573
       - linkedin_4213901809
       - linkedin_4454312631
+    reference: "LLM QA roles requiring experience with PromptFoo."
 
   - query_id: typo006
     query: "LLM QA engineer with PromptFo"
@@ -106,6 +111,7 @@ queries:
       - linkedin_4459812573
       - linkedin_4213901809
       - linkedin_4454312631
+    reference: "LLM QA roles requiring experience with PromptFoo."
 
   - query_id: typo007
     query: "LLM evaluation engineer with LangChian"
@@ -115,6 +121,7 @@ queries:
       - linkedin_4459812573
       - linkedin_4213901809
       - linkedin_4454312631
+    reference: "LLM evaluation roles requiring experience with LangChain."
 
   - query_id: typo008
     query: "LLM evalution engineer with LangChain"
@@ -124,6 +131,7 @@ queries:
       - linkedin_4459812573
       - linkedin_4213901809
       - linkedin_4454312631
+    reference: "LLM evaluation roles requiring experience with LangChain."
 
   - query_id: typo009
     query: "RAG pipline engineer with Python"
@@ -131,6 +139,7 @@ queries:
     slice: "typo"
     relevant_job_ids:
       - linkedin_4271110229
+    reference: "RAG pipeline engineering roles requiring Python experience."
 
   - query_id: typo010
     query: "RAG pipeline enginer with Python"
@@ -138,6 +147,7 @@ queries:
     slice: "typo"
     relevant_job_ids:
       - linkedin_4271110229
+    reference: "RAG pipeline engineering roles requiring Python experience."
 
   - query_id: typo011
     query: "AI jobs requiring Python and Pytest"
@@ -145,6 +155,7 @@ queries:
     slice: "typo"
     relevant_job_ids:
       - linkedin_4213901809
+    reference: "AI roles requiring both Python and PyTest experience."
 
   - query_id: typo012
     query: "AI jobs requiring Python and PyTset"
@@ -152,6 +163,7 @@ queries:
     slice: "typo"
     relevant_job_ids:
       - linkedin_4213901809
+    reference: "AI roles requiring both Python and PyTest experience."
 
   - query_id: typo013
     query: "Jobs evaluating AI model acuracy and safety"
@@ -161,6 +173,7 @@ queries:
       - linkedin_4470918342
       - linkedin_4436348819
       - linkedin_4460676973
+    reference: "Jobs involving evaluation of AI model accuracy, safety, or both."
 
   - query_id: typo014
     query: "QA jobs for LLM-powered aplications"
@@ -171,6 +184,7 @@ queries:
       - linkedin_4213901809
       - linkedin_4459812573
       - linkedin_4474348330
+    reference: "QA roles focused on testing LLM-powered applications."
 
   - query_id: typo015
     query: "AI validation enginer with PyTest"
@@ -184,3 +198,4 @@ queries:
       - linkedin_4435178731
       - linkedin_4444375786
       - linkedin_4434385256
+    reference: "AI validation engineering roles requiring PyTest experience."

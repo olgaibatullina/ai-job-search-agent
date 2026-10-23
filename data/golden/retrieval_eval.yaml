@@ -2,6 +2,7 @@ queries:
   - query_id: q001
     query: "AI QA engineer"
     slice: "title"
+    reference: "AI QA engineer roles focused on quality assurance and testing of AI systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -29,6 +30,7 @@ queries:
   - query_id: q002
     query: "AI validation engineer"
     slice: "title"
+    reference: "AI validation engineer roles focused on validating AI or machine learning systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -64,6 +66,7 @@ queries:
   - query_id: q003
     query: "LLM evaluation engineer"
     slice: "title"
+    reference: "LLM evaluation engineer roles focused on evaluating and testing large language models."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4470014922
@@ -90,6 +93,7 @@ queries:
   - query_id: q004
     query: "GenAI quality engineer"
     slice: "title"
+    reference: "GenAI quality engineer roles focused on quality assurance and testing of generative AI systems."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4470014922
@@ -113,6 +117,7 @@ queries:
   - query_id: q005
     query: "AI test engineer"
     slice: "title"
+    reference: "AI test engineer roles focused on testing and quality assurance of AI systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -139,6 +144,7 @@ queries:
   - query_id: q006
     query: "AI safety evaluation engineer"
     slice: "domain"
+    reference: "Roles focused on AI safety evaluation, model and agent validation, hallucination, bias, guardrail, or prompt-injection testing."
     relevant_job_ids:
       - linkedin_4470014922
       - linkedin_4459812573
@@ -154,6 +160,7 @@ queries:
   - query_id: q007
     query: "RAG evaluation and testing"
     slice: "domain"
+    reference: "Roles involving evaluation and testing of RAG systems, retrieval quality, or RAG pipeline behavior."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4459812573
@@ -168,6 +175,7 @@ queries:
   - query_id: q008
     query: "LLM testing and validation"
     slice: "domain"
+    reference: "Roles involving testing and validation of large language models or LLM-powered systems."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4470014922
@@ -186,6 +194,7 @@ queries:
   - query_id: q009
     query: "AI QA engineer with test automation"
     slice: "skills"
+    reference: "AI QA roles requiring test automation experience for AI systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -207,6 +216,7 @@ queries:
   - query_id: q010
     query: "AI evaluation engineer with Python"
     slice: "skills"
+    reference: "AI evaluation roles requiring Python programming skills."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -237,6 +247,7 @@ queries:
   - query_id: q011
     query: "AI quality engineer with API testing"
     slice: "skills"
+    reference: "AI quality engineering roles requiring API testing experience."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4459812573
@@ -253,6 +264,7 @@ queries:
   - query_id: q012
     query: "AI evaluation engineer for agents"
     slice: "domain"
+    reference: "AI evaluation roles involving testing or evaluating AI agents and agentic systems."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4459812573
@@ -271,6 +283,7 @@ queries:
   - query_id: q013
     query: "AI red teaming and safety testing"
     slice: "domain"
+    reference: "Roles involving AI red teaming, safety evaluation, security testing, or adversarial testing of AI systems."
     relevant_job_ids:
       - linkedin_4470014922
       - linkedin_4459812573
@@ -284,6 +297,7 @@ queries:
   - query_id: q014
     query: "software quality engineer for AI systems"
     slice: "semantic"
+    reference: "Software quality engineering roles focused on testing and validating AI systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -313,6 +327,7 @@ queries:
   - query_id: q015
     query: "test automation engineer for machine learning systems"
     slice: "semantic"
+    reference: "Test automation engineering roles involving machine learning or AI systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4459812573
@@ -336,6 +351,7 @@ queries:
   - query_id: q016
     query: "SDET for AI or machine learning systems"
     slice: "semantic"
+    reference: "SDET roles involving testing AI or machine learning systems."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4459812573
@@ -356,6 +372,7 @@ queries:
   - query_id: q017
     query: "model evaluation and quality"
     slice: "semantic"
+    reference: "Roles involving evaluation, testing, validation, or quality assurance of AI or machine learning models."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4421236367
@@ -391,6 +408,7 @@ queries:
   - query_id: q018
     query: "evaluate LLM quality and hallucinations"
     slice: "semantic"
+    reference: "Roles involving LLM quality evaluation, hallucination detection, or validation of LLM outputs."
     relevant_job_ids:
       - linkedin_4470014922
       - linkedin_4459812573
@@ -406,6 +424,7 @@ queries:
   - query_id: q019
     query: "testing RAG retrieval quality and groundedness"
     slice: "semantic"
+    reference: "Roles involving RAG retrieval testing, retrieval quality evaluation, or groundedness validation."
     relevant_job_ids:
       - linkedin_4459812573
       - linkedin_4450608172
@@ -418,6 +437,7 @@ queries:
   - query_id: q020
     query: "quality validation for AI agents and LLM applications"
     slice: "semantic"
+    reference: "Roles involving quality validation and testing of AI agents or LLM-powered applications."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4459812573
@@ -440,6 +460,7 @@ queries:
   - query_id: q021
     query: "AI validation engineer with PyTest"
     slice: "skills"
+    reference: "AI validation engineering roles requiring PyTest experience."
     relevant_job_ids:
       - linkedin_4412049294
       - linkedin_4459812573
@@ -452,6 +473,7 @@ queries:
   - query_id: q022
     query: "LLM evaluation engineer with prompt engineering"
     slice: "skills"
+    reference: "LLM evaluation roles requiring prompt engineering experience."
     relevant_job_ids:
       - linkedin_4421236367
       - linkedin_4459812573
@@ -469,6 +491,7 @@ queries:
   - query_id: q023
     query: "Jobs evaluating AI model accuracy and safety"
     slice: "domain"
+    reference: "Jobs involving evaluation of AI model accuracy, safety, or both."
     relevant_job_ids:
       - linkedin_4470918342
       - linkedin_4436348819
@@ -477,6 +500,7 @@ queries:
   - query_id: q024
     query: "LLM QA engineer with PromptFoo"
     slice: "skills"
+    reference: "LLM QA roles requiring experience with PromptFoo."
     relevant_job_ids:
       - linkedin_4459812573
       - linkedin_4213901809
@@ -485,6 +509,7 @@ queries:
   - query_id: q025
     query: "LLM evaluation engineer with LangChain"
     slice: "skills"
+    reference: "LLM evaluation roles requiring experience with LangChain."
     relevant_job_ids:
       - linkedin_4459812573
       - linkedin_4213901809
@@ -493,12 +518,14 @@ queries:
   - query_id: q026
     query: "RAG pipeline engineer with Python"
     slice: "skills"
+    reference: "RAG pipeline engineering roles requiring Python experience."
     relevant_job_ids:
       - linkedin_4271110229
 
   - query_id: q027
     query: "QA jobs for LLM-powered applications"
     slice: "domain"
+    reference: "QA roles focused on testing LLM-powered applications."
     relevant_job_ids:
       - linkedin_4470918342
       - linkedin_4213901809
@@ -508,6 +535,7 @@ queries:
   - query_id: q028
     query: "RAG evaluation engineer"
     slice: "skills"
+    reference: "RAG evaluation engineering roles involving evaluation or testing of RAG systems."
     relevant_job_ids:
       - linkedin_4450608172
       - linkedin_4459812573
@@ -517,6 +545,7 @@ queries:
   - query_id: q029
     query: "LLM test engineer with prompt engineering"
     slice: "skills"
+    reference: "LLM testing roles requiring prompt engineering experience."
     relevant_job_ids:
       - linkedin_4470918342
       - linkedin_4213901809
@@ -524,5 +553,6 @@ queries:
   - query_id: q030
     query: "AI jobs requiring Python and PyTest"
     slice: "skills"
+    reference: "AI roles requiring both Python and PyTest experience."
     relevant_job_ids:
       - linkedin_4213901809

@@ -1,0 +1,19 @@
+generator:
+  model: "qwen3:8b"
+  temperature: 0
+
+  system_prompt: |
+    You are a job search assistant.
+    Answer the user's question using only the provided job descriptions.
+    Do not invent or assume information that is not present in the context.
+    If the context does not contain enough information to answer the question, say so.
+
+  user_prompt: |
+    Question: {query}
+    Job descriptions: {context}
+
+
+judge:
+  model: "qwen3:8b"
+  base_url: "http://localhost:11434/v1"
+  temperature: 0

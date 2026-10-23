@@ -12,9 +12,27 @@ retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)
 recall_metric = evaluate.load("recall")
 
 @pytest.mark.parametrize("case", retrieval_cases)
-def test_recall_retrieval(job_index, all_job_ids, case):
+def test_recall_retrieval(job_index, all_jobs, case):
+    """Evaluate retrieval recall against the golden dataset.
+
+    Args:
+        job_index: FAISS index used by the retriever to find relevant jobs.
+        all_jobs: All jobs from the raw jobs dataset, used to build the complete
+            set of job IDs for binary retrieval labels.
+        case: Evaluation case containing the query and expected relevant job IDs.
+
+    Steps:
+        1. Retrieve the top 5 jobs for the test query.
+        2. Extract unique job IDs from the retrieved results.
+        3. Extract all job IDs from the raw jobs dataset.
+        4. Convert retrieved and relevant job IDs into binary labels.
+        5. Calculate retrieval recall using the golden labels.
+    """
+    
     results = retrieve_relevant_jobs(job_index, case["query"], k=5) 
     retrieved_job_ids = list({result.metadata["job_id"] for result in results}) 
+
+    all_job_ids = [job["job_id"] for job in all_jobs]
 
     predictions, references = helper.build_retrieval_labels(
         all_job_ids, 

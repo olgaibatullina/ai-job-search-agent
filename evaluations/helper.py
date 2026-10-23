@@ -1,7 +1,14 @@
-"""Helper functions for retrieval evaluation and label generation."""
+"""Shared helper functions for evaluation and metric calculation."""
 
 import yaml
+
 from pathlib import Path
+from datasets import Dataset
+
+from openai import AsyncOpenAI
+
+from ragas import SingleTurnSample
+from ragas.llms import llm_factory
 
 
 def load_retrieval_dataset(dataset: Path) -> list[dict]:
@@ -13,17 +20,17 @@ def load_retrieval_dataset(dataset: Path) -> list[dict]:
     Returns:
         A list of query dictionaries.
     """
-    with open(dataset, "r") as file:
+    with dataset.open("r", encoding="utf-8") as file:
         data = yaml.safe_load(file)
 
     return data["queries"]
 
 
 def build_retrieval_labels(
-        all_job_ids: list[str], 
-        retrieved_jobs: list[str], 
-        relevant_jobs: list[str]
-        ) -> tuple[list[int], list[int]]:
+    all_job_ids: list[str], 
+    retrieved_jobs: list[str], 
+    relevant_jobs: list[str]
+    ) -> tuple[list[int], list[int]]:
     """Build prediction and reference labels for retrieval metrics.
 
     Args:
@@ -46,3 +53,58 @@ def build_retrieval_labels(
         predictions.append(1 if job_id in retrieved_jobs else 0)    
     
     return predictions, references
+
+
+def calculate_ragas_legacy_metric(
+        metric, 
+        query: str, 
+        retrieved_contexts: list[str], 
+        reference_contexts: list[str]
+    ):
+    """Calculate a RAGAS metric using the legacy evaluate API.
+
+    This helper is used to compare legacy RAGAS metrics with their
+    modern Collections API counterparts.    
+
+    Args:
+        metric: RAGAS metric to evaluate.
+        query: User query.
+        retrieved_contexts: Contexts retrieved by the system.
+        reference_contexts: Reference contexts expected for the query.
+
+    Returns:
+        Evaluation result returned by RAGAS.
+    """
+    sample = SingleTurnSample(
+        user_input=query,
+        retrieved_contexts=retrieved_contexts,
+        reference_contexts=reference_contexts,
+    )
+
+    return metric.single_turn_score(sample)
+
+
+async def calculate_ragas_metric_llm_judge(metric, query: str, retrieved_contexts: list[str], reference: str, llm_config_path: Path):
+    with llm_config_path.open("r", encoding="utf-8") as file:
+        llm_config = yaml.safe_load(file)
+
+    # Ollama exposes OpenAI-compatible API
+    client = AsyncOpenAI(
+        api_key = "ollama",
+        base_url = llm_config["judge"]["base_url"]
+    )
+    llm = llm_factory(
+        llm_config["judge"]["model"], 
+        provider = "openai", 
+        client = client            
+    )
+
+    # Create metric
+    scorer = metric(llm=llm)
+
+    # Evaluate
+    return await scorer.ascore(       
+        user_input = query, 
+        reference = reference,
+        retrieved_contexts = retrieved_contexts
+    )

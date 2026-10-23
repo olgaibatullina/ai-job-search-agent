@@ -10,7 +10,7 @@ Prerequisites:
   ollama pull qwen3:8b
 """
 
-import json
+import yaml
 
 from langchain_ollama import ChatOllama
 from langchain_core.documents import Document
@@ -21,7 +21,9 @@ from src.rag.loader import load_documents
 from src.rag.chunker import split_text
 from src.rag.vector_store import create_vector_store
 from src.rag.retriever import retrieve_relevant_jobs
+from src.jobs import loader
 from config.paths import RAW_JOBS
+from config.paths import LLM_CONFIG
 
 
 def prepare_context(retrieved_chunks: list[Document]) -> list[Document]:
@@ -33,13 +35,7 @@ def prepare_context(retrieved_chunks: list[Document]) -> list[Document]:
     Returns:
         Full job documents corresponding to the retrieved job IDs.
     """
-    retrieved_job_ids = [
-        doc.metadata["job_id"] 
-        for doc in retrieved_chunks
-        ]
-
-    with open(RAW_JOBS, "r") as file:
-        jobs = json.load(file)
+    jobs = loader.get_jobs_from_chunks(retrieved_chunks=retrieved_chunks)
 
     return [Document(
         page_content=job["posting"]["description"],
@@ -49,8 +45,7 @@ def prepare_context(retrieved_chunks: list[Document]) -> list[Document]:
             "company": job["job"]["company"],
         },
     ) 
-    for job in jobs 
-    if job["job_id"] in retrieved_job_ids]
+    for job in jobs ]
    
 
 def generate_answer(
@@ -79,35 +74,37 @@ def generate_answer(
 
 
 def main():
+    # Prepare vector store from RAW_JOBS.
     documents = load_documents(RAW_JOBS)
     
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
     vector_store = create_vector_store(split_text(documents), embedding_model)
 
+    # Load LLM configuration and prepare LLM and prompts.
+    with LLM_CONFIG.open("r", encoding="utf-8") as file:
+        llm_config = yaml.safe_load(file)
+    
     llm = ChatOllama(
-        model="qwen3:8b",
-        temperature=0,
+        model=llm_config["generator"]["model"],
+        temperature=llm_config["generator"]["temperature"],
     )
 
     query = "Find AI eval jobs"
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
-            """You are a job search assistant.
-            Answer the user's question using only the provided job descriptions.
-            Do not invent or assume information that is not present in the context.
-            If the context does not contain enough information to answer the question, say so."""
+            llm_config["generator"]["system_prompt"]
         ),
         (
             "user",
-            """Question:{query}\nJob descriptions: {context}"""
+            llm_config["generator"]["user_prompt"]
         )
     ])
 
-    # RETRIEVE
+    # Retrieve relevant context.
     context = prepare_context(retrieve_relevant_jobs(vector_store, query, k=3))
 
-    # AUGMENT + GENERATE
+    # Augument prompt and generate LLM asnwer.
     llm_response = generate_answer(
         query=query, 
         context=context, 

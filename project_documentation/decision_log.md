@@ -238,3 +238,62 @@ Qwen3 8B offers a practical balance of local resource requirements and expected 
 Deferring comparative benchmarking avoids delaying implementation while preserving a clear path to evidence-based model selection.
 
 The standalone case study will also demonstrate systematic LLM evaluation, statistical analysis, and model comparison as part of the AI/ML Validation Portfolio.
+
+## D-009 — Initial LLM-as-a-Judge Model for V1
+
+**Date:** 2026-10-22  
+**Status:** Accepted
+
+### Context
+
+The AI Validation Framework requires an LLM-as-a-Judge to evaluate generated RAG answers, particularly their faithfulness and groundedness in retrieved context.
+
+The V1 generation model is Qwen3 8B running locally through Ollama.
+
+Using a separate judge model would introduce additional infrastructure and model management before the initial evaluation pipeline is complete.
+
+However, using the same model for generation and evaluation introduces self-evaluation bias. The judge may share systematic errors with the generator and fail to detect unsupported or incorrect claims.
+
+### Decision
+
+Use **Qwen3 8B through Ollama** as the initial LLM-as-a-Judge for V1.
+
+The same model will serve two separate roles:
+- **Generator:** Produces RAG answers using retrieved context.
+- **Judge:** Evaluates generated answers against the provided context using explicit evaluation criteria.
+
+Initially, focus on:
+- Faithfulness to retrieved context.
+- Groundedness and unsupported claims.
+- Hallucination detection.
+
+Treat LLM-as-a-Judge scores as **evaluation estimates, not ground truth**.
+
+For reproducibility:
+- Record the judge model version, quantization, generation settings, and evaluation prompts.
+- Keep judge configuration consistent across regression runs.
+- Separate generator and judge configurations, even when they use the same underlying model.
+- Use deterministic checks and human-reviewed reference examples where appropriate.
+
+After the initial evaluation framework is operational, conduct a separate **Judge Model Validation** experiment.
+
+Compare Qwen3 8B with at least one independent judge model using the same evaluation dataset and scoring rubrics.
+
+Evaluate:
+- Agreement with human-reviewed labels.
+- Agreement between judge models.
+- False positives and false negatives in hallucination detection.
+- Score consistency across repeated runs.
+- Evaluation latency and resource requirements.
+
+Document the results and limitations before considering a different judge model for routine regression testing.
+
+### Why
+
+Using Qwen3 8B for both generation and evaluation keeps the initial implementation local, simple, and inexpensive.
+
+Although self-evaluation introduces potential bias, it provides a practical starting point for building and testing the LLM evaluation infrastructure.
+
+Explicitly documenting these limitations prevents judge scores from being interpreted as independently validated measurements.
+
+Future judge-model validation will provide evidence about evaluator reliability and demonstrate an additional AI Validation Framework capability without delaying the V1 implementation.

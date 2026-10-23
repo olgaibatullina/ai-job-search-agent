@@ -32,7 +32,9 @@ def create_vector_store(
     Returns:
         A FAISS vector store containing the document chunks and their embeddings.
     """
-    
+
+    # FAISS.from_documents() embeds each chunk using the provided
+    # embedding model and stores the resulting vectors with the documents.
     return FAISS.from_documents(documents=chunks, embedding=embedding_model)
 
 
@@ -42,10 +44,12 @@ def main():
         Path("./data/raw_jobs/raw_jobs.json")
     )
 
+    # Split full job descriptions into chunks before embedding and indexing.
     vector_store = create_vector_store(split_text(documents), embedding_model)
 
-    print(vector_store.index.ntotal)   # number of vectors
-    print(vector_store.index.d)        # vector dimension
+    # Number of vectors stored in the FAISS index and dimension of each embedding vector.
+    print(vector_store.index.ntotal)
+    print(vector_store.index.d)
 
 
 if __name__ == "__main__":

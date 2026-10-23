@@ -48,17 +48,12 @@ def job_index():
 
 
 @pytest.fixture(scope="session")
-def all_job_ids():
-    """Load all job IDs from the raw jobs dataset.
+def all_jobs():
+    """Load all jobs from the raw jobs dataset.
 
     Yields:
-        list[str]: All job IDs from the raw jobs dataset.
+        list[str]: All jobs from the raw jobs dataset.
     """
-    all_job_ids = []
-    with RAW_JOBS.open("r", encoding="utf-8") as file:
-        jobs = json.load(file)
-    
-        for job in jobs:
-            all_job_ids.append(job["job_id"])
 
-    yield all_job_ids
+    with RAW_JOBS.open("r", encoding="utf-8") as file:
+        yield json.load(file)
