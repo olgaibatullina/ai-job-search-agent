@@ -10,7 +10,7 @@ from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
-from src.rag.loader import load_documents
+from src.rag import loader
 
 
 def split_text(documents: list[Document]) -> list[Document]:
@@ -32,7 +32,7 @@ def split_text(documents: list[Document]) -> list[Document]:
 
 
 def main():
-    documents = load_documents(
+    documents = loader.load_documents(
         Path("./data/raw_jobs/raw_jobs.json")
     )
     

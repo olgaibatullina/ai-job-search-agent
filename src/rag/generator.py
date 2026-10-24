@@ -1,5 +1,4 @@
-"""
-Generator for the RAG pipeline.
+"""Generator for the RAG pipeline.
 
 This module prepares the retrieved job context and generates answers
 using an LLM via Ollama.
@@ -17,10 +16,7 @@ from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from src.rag.loader import load_documents
-from src.rag.chunker import split_text
-from src.rag.vector_store import create_vector_store
-from src.rag.retriever import retrieve_relevant_jobs
+from src.rag import loader, chunker, retriever, vector_index
 from src.jobs import loader
 from config.paths import RAW_JOBS
 from config.paths import LLM_CONFIG
@@ -75,10 +71,10 @@ def generate_answer(
 
 def main():
     # Prepare vector store from RAW_JOBS.
-    documents = load_documents(RAW_JOBS)
+    documents = loader.load_documents(RAW_JOBS)
     
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-    vector_store = create_vector_store(split_text(documents), embedding_model)
+    vector = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
 
     # Load LLM configuration and prepare LLM and prompts.
     with LLM_CONFIG.open("r", encoding="utf-8") as file:
@@ -102,7 +98,7 @@ def main():
     ])
 
     # Retrieve relevant context.
-    context = prepare_context(retrieve_relevant_jobs(vector_store, query, k=3))
+    context = prepare_context(retriever.retrieve_relevant_jobs(vector, query, k=3))
 
     # Augument prompt and generate LLM asnwer.
     llm_response = generate_answer(

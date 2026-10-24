@@ -8,9 +8,7 @@ from langchain_community.vectorstores import FAISS
 
 from config.paths import RAW_JOBS
 from config.paths import FAISS_INDEX
-from src.rag.loader import load_documents
-from src.rag.chunker import split_text
-from src.rag.vector_store import create_vector_store
+from src.rag import loader, chunker, vector_index
 
 
 @pytest.fixture(scope="session")
@@ -40,8 +38,8 @@ def job_index():
         job_index = FAISS.load_local(FAISS_INDEX, embedding_model, allow_dangerous_deserialization=True)
         
     else:       
-        documents = load_documents(RAW_JOBS)      
-        job_index = create_vector_store(split_text(documents), embedding_model)
+        documents = loader.load_documents(RAW_JOBS)      
+        job_index = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
         job_index.save_local(FAISS_INDEX)
 
     yield job_index

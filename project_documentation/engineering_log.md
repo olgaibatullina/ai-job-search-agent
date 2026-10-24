@@ -162,3 +162,42 @@ Retriever improvements will be addressed as the next step after establishing the
 ### Impact / Takeaway
 
 The issue is now captured as an explicit retrieval quality problem and will be tracked through automated evaluation rather than exploratory testing alone.
+
+
+## EL-007 — Faithfulness judge fails on large retrieved context
+
+### Date
+
+2026-10-23 14:18
+
+### Context / Findings
+
+While adding RAGAS LLM-based generation evaluation, `Faithfulness` failed with:
+
+```
+IncompleteOutputException:
+The output is incomplete due to a max_tokens length limit.
+```
+
+The failure initially occurred during _create_statements(), where the judge LLM generates structured statements from the model response. After increasing the judge max_tokens, this stage completed, but the evaluation subsequently failed during _create_verdicts() when generating NLIStatementOutput.
+
+The judge configuration was:
+```
+model: qwen3:8b
+temperature: 0.01
+max_tokens: 1024 → 2048 → 4096
+```
+
+The generated application response was approximately 3,407 characters. The Faithfulness judge receives the generated response together with the retrieved contexts. With k=5, the resulting evaluation prompt was large (approximately 7,885 cached prompt tokens were reported by the API).
+
+### Validation / Results
+
+Reducing the retrieved context from k=5 to k=1 allowed the Faithfulness evaluation to complete successfully.
+
+### Impact / Takeaway
+
+The failure is caused by the combination of a large retrieved context and the local judge model's structured-output generation constraints, rather than by the Faithfulness metric itself.
+
+The retrieval k should not automatically be reduced in the RAG pipeline solely to make the evaluator pass, because that would change the system behavior being evaluated. The evaluation strategy should instead define how much retrieved context can be reliably processed by the selected judge model.
+
+This raises an evaluation-design question: how much retrieved context can the judge reliably process without degradation or evaluation errors?

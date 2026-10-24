@@ -1,5 +1,4 @@
-"""
-Vector store builder for RAG pipeline.
+"""Vector store builder for RAG pipeline.
 
 This module is part of the AI Job Search Agent RAG pipeline.
 It creates a FAISS vector store from document chunks using
@@ -15,8 +14,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
 
-from src.rag.loader import load_documents
-from src.rag.chunker import split_text
+from src.rag import loader, chunker
 
 
 def create_vector_store(
@@ -40,12 +38,12 @@ def create_vector_store(
 
 def main():
     embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
-    documents = load_documents(
+    documents = loader.load_documents(
         Path("./data/raw_jobs/raw_jobs.json")
     )
 
     # Split full job descriptions into chunks before embedding and indexing.
-    vector_store = create_vector_store(split_text(documents), embedding_model)
+    vector_store = create_vector_store(chunker.split_text(documents), embedding_model)
 
     # Number of vectors stored in the FAISS index and dimension of each embedding vector.
     print(vector_store.index.ntotal)

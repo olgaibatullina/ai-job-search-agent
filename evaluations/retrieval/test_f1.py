@@ -5,10 +5,10 @@ import evaluate
 
 from config.paths import RETRIEVAL_EVAL
 from evaluations import helper
-from src.rag.retriever import retrieve_relevant_jobs
+from src.rag import retriever
 
 
-retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)
+retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)["queries"]
 f1_metric = evaluate.load("f1")
 
 @pytest.mark.parametrize("case", retrieval_cases)
@@ -27,9 +27,8 @@ def test_f1_retrieval(job_index, all_jobs, case):
         3. Extract all job IDs from the raw jobs dataset.
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval F1 score using the golden labels.
-    """
-    
-    results = retrieve_relevant_jobs(job_index, case["query"], k=5)
+    """  
+    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k=5)
     retrieved_job_ids = list({result.metadata["job_id"] for result in results})
 
     all_job_ids = [job["job_id"] for job in all_jobs]

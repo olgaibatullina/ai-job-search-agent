@@ -5,9 +5,10 @@ import time
 
 from config.paths import RETRIEVAL_EVAL
 from evaluations import helper
-from src.rag.retriever import retrieve_from_vector_store, retrieve_relevant_jobs
+from src.rag import retriever
 
-retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)
+
+retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)["queries"]
 
 @pytest.mark.parametrize("case", retrieval_cases)
 def test_rag_retrieval_latency(job_index, case):
@@ -20,12 +21,12 @@ def test_rag_retrieval_latency(job_index, case):
     for i in range(10):
         # Measure simple retrieval latency.
         simple_retrieval_start = time.perf_counter()   
-        simple_retrieval = retrieve_from_vector_store(job_index, case["query"], k=5)
+        simple_retrieval = retriever.retrieve_from_vector_store(job_index, case["query"], k=5)
         simple_retrieval_latency = time.perf_counter() - simple_retrieval_start
 
         # Measure deduplicated retrieval latency.
         dedup_retrieval_start = time.perf_counter()    
-        dedup_retrieval = retrieve_relevant_jobs(job_index, case["query"], k=5)
+        dedup_retrieval = retriever.retrieve_relevant_jobs(job_index, case["query"], k=5)
         dedup_retrieval_latency = time.perf_counter() - dedup_retrieval_start
 
         # Compare latency and the number of unique jobs returned.
