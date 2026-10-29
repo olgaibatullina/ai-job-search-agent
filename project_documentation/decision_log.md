@@ -297,3 +297,56 @@ Although self-evaluation introduces potential bias, it provides a practical star
 Explicitly documenting these limitations prevents judge scores from being interpreted as independently validated measurements.
 
 Future judge-model validation will provide evidence about evaluator reliability and demonstrate an additional AI Validation Framework capability without delaying the V1 implementation.
+
+
+```md
+## D-010 — Freeze V1 Scope and Defer Production Infrastructure
+
+**Date:** 2026-10-26  
+**Status:** Accepted
+
+### Context
+
+The primary goal of the project is to demonstrate AI/ML validation capabilities rather than build a fully productionized Job Search Agent.
+
+Adding a live Jobs API, AWS deployment, staging infrastructure, and production deployment would significantly increase implementation scope without materially improving the core AI validation portfolio.
+
+At the same time, the project should retain enough conventional backend and data-layer functionality to demonstrate API testing, SQL validation, and CI integration.
+
+### Decision
+
+Freeze the V1 scope.
+
+The following components are included in V1:
+
+- Classic RAG pipeline using the existing job corpus.
+- AI Validation Framework.
+- Retrieval evaluation.
+- Candidate-job matching and matching evaluation.
+- LLM and RAG evaluation.
+- Groundedness, faithfulness, and hallucination testing.
+- Negative and abstention test cases.
+- Safety and adversarial testing.
+- Minimal FastAPI backend.
+- SQLite database for evaluation results and related test data.
+- API/backend testing with `pytest`.
+- SQL validation and result analysis.
+- GitHub Actions CI for automated fast validation checks.
+
+The following components are deferred to future work:
+
+- Live Jobs API integration.
+- Continuous ingestion of production job postings.
+- AWS deployment.
+- Staging environment.
+- Production deployment.
+- Production-scale database infrastructure.
+
+### Why
+
+This keeps the application under test intentionally manageable while preserving the project's main purpose: demonstrating production-like AI validation practices.
+
+A minimal FastAPI and SQLite layer provides sufficient coverage for backend, API, SQL, and CI testing without turning infrastructure development into the main project.
+
+Live job search and cloud deployment can be added later if the project is extended into a fully operational Job Search Agent.
+```

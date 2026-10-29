@@ -3,15 +3,28 @@
 import pytest
 import evaluate
 
-from config.paths import RETRIEVAL_EVAL
+from itertools import chain
+
+from config import paths
 from evaluations import helper
 from src.rag import retriever
 
 
-retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_negative_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
+retrieval_typo_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_TYPO_EVAL)["queries"]
+
+retrieval_eval_cases = list(
+    chain(
+        retrieval_cases,
+        retrieval_typo_cases,
+        retrieval_negative_cases,
+    )
+)
+
 recall_metric = evaluate.load("recall")
 
-@pytest.mark.parametrize("case", retrieval_cases)
+@pytest.mark.parametrize("case", retrieval_eval_cases)
 def test_recall_retrieval(job_index, all_jobs, case):
     """Evaluate retrieval recall against the golden dataset.
 

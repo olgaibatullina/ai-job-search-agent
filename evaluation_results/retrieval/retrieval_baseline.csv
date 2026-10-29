@@ -1,0 +1,76 @@
+query_id,query,dataset,precision,recall,f1,accuracy
+q001,AI QA engineer,positive,1.0,0.2272727272727272,0.3703703703703703,0.575
+q002,AI validation engineer,positive,0.8,0.1333333333333333,0.2285714285714285,0.325
+q003,LLM evaluation engineer,positive,1.0,0.238095238095238,0.3846153846153846,0.6
+q004,GenAI quality engineer,positive,0.8,0.2222222222222222,0.3478260869565217,0.625
+q005,AI test engineer,positive,0.8,0.1904761904761904,0.3076923076923077,0.55
+q006,AI safety evaluation engineer,positive,0.8,0.4,0.5333333333333333,0.825
+q007,RAG evaluation and testing,positive,0.0,0.0,0.0,0.65
+q008,LLM testing and validation,positive,0.4,0.1538461538461538,0.2222222222222222,0.65
+q009,AI QA engineer with test automation,positive,1.0,0.3125,0.4761904761904761,0.725
+q010,AI evaluation engineer with Python,positive,1.0,0.2,0.3333333333333333,0.5
+q011,AI quality engineer with API testing,positive,0.8,0.3636363636363636,0.5,0.8
+q012,AI evaluation engineer for agents,positive,1.0,0.3846153846153846,0.5555555555555556,0.8
+q013,AI red teaming and safety testing,positive,0.8,0.5,0.6153846153846154,0.875
+q014,software quality engineer for AI systems,positive,0.8,0.1666666666666666,0.2758620689655172,0.475
+q015,test automation engineer for machine learning systems,positive,1.0,0.2777777777777778,0.4347826086956521,0.675
+q016,SDET for AI or machine learning systems,positive,0.4,0.1333333333333333,0.2,0.6
+q017,model evaluation and quality,positive,1.0,0.1666666666666666,0.2857142857142857,0.375
+q018,evaluate LLM quality and hallucinations,positive,0.4,0.2,0.2666666666666666,0.725
+q019,testing RAG retrieval quality and groundedness,positive,0.2,0.1428571428571428,0.1666666666666666,0.75
+q020,quality validation for AI agents and LLM applications,positive,1.0,0.2941176470588235,0.4545454545454545,0.7
+q021,AI validation engineer with PyTest,positive,0.2,0.1428571428571428,0.1666666666666666,0.75
+q022,LLM evaluation engineer with prompt engineering,positive,0.6,0.25,0.3529411764705882,0.725
+q023,Jobs evaluating AI model accuracy and safety,positive,0.2,0.3333333333333333,0.25,0.85
+q024,LLM QA engineer with PromptFoo,positive,0.4,0.6666666666666666,0.5,0.9
+q025,LLM evaluation engineer with LangChain,positive,0.0,0.0,0.0,0.8
+q026,RAG pipeline engineer with Python,positive,0.2,1.0,0.3333333333333333,0.9
+q027,QA jobs for LLM-powered applications,positive,0.4,0.5,0.4444444444444444,0.875
+q028,RAG evaluation engineer,positive,0.2,0.25,0.2222222222222222,0.825
+q029,LLM test engineer with prompt engineering,positive,0.4,1.0,0.5714285714285714,0.925
+q030,AI jobs requiring Python and PyTest,positive,0.0,0.0,0.0,0.85
+typo001,LLM evalution engineer,typo,1.0,0.238095238095238,0.3846153846153846,0.6
+typo002,LLM evaluation enginer,typo,1.0,0.238095238095238,0.3846153846153846,0.6
+typo003,LLM evaluation engneer with promt engineering,typo,0.6,0.25,0.3529411764705882,0.725
+typo004,LLM evaluation engineer with prompt enginering,typo,0.6,0.25,0.3529411764705882,0.725
+typo005,LLM QA engineer with Promtfoo,typo,0.2,0.3333333333333333,0.25,0.85
+typo006,LLM QA engineer with PromptFo,typo,0.4,0.6666666666666666,0.5,0.9
+typo007,LLM evaluation engineer with LangChian,typo,0.2,0.3333333333333333,0.25,0.85
+typo008,LLM evalution engineer with LangChain,typo,0.2,0.3333333333333333,0.25,0.85
+typo009,RAG pipline engineer with Python,typo,0.0,0.0,0.0,0.85
+typo010,RAG pipeline enginer with Python,typo,0.0,0.0,0.0,0.85
+typo011,AI jobs requiring Python and Pytest,typo,0.0,0.0,0.0,0.85
+typo012,AI jobs requiring Python and PyTset,typo,0.0,0.0,0.0,0.85
+typo013,Jobs evaluating AI model acuracy and safety,typo,0.2,0.3333333333333333,0.25,0.85
+typo014,QA jobs for LLM-powered aplications,typo,0.6,0.75,0.6666666666666666,0.925
+typo015,AI validation enginer with PyTest,typo,0.4,0.2857142857142857,0.3333333333333333,0.8
+neg001,Find accounting jobs,negative,0.0,0.0,0.0,0.875
+neg002,Find nursing jobs,negative,0.0,0.0,0.0,0.875
+neg003,Find marketing manager jobs,negative,0.0,0.0,0.0,0.875
+neg004,Find HW validation jobs,negative,0.0,0.0,0.0,0.875
+neg005,Find elementary school teacher jobs,negative,0.0,0.0,0.0,0.875
+neg006,Find QA jobs,negative,0.0,0.0,0.0,0.875
+neg007,Find UI automation jobs,negative,0.0,0.0,0.0,0.875
+neg008,Find Mobile QA jobs,negative,0.0,0.0,0.0,0.875
+neg009,Find product quality engineer jobs,negative,0.0,0.0,0.0,0.875
+neg010,What does AI/ML mean?,negative,0.0,0.0,0.0,0.875
+neg011,When was machine learning invented?,negative,0.0,0.0,0.0,0.875
+neg012,How does a machine learn to code?,negative,0.0,0.0,0.0,0.875
+neg013,Where can I learn AI and machine learning?,negative,0.0,0.0,0.0,0.875
+neg014,What metrics can be used to evaluate an AI model?,negative,0.0,0.0,0.0,0.875
+neg015,What is the difference between LLM validation and evaluation?,negative,0.0,0.0,0.0,0.875
+neg016,What is evaluation framework?,negative,0.0,0.0,0.0,0.875
+neg017,How do you evaluate a model?,negative,0.0,0.0,0.0,0.875
+neg018,What is San Francisco Bay Area famous for?,negative,0.0,0.0,0.0,0.875
+neg019,What cities are in the Bay Area?,negative,0.0,0.0,0.0,0.875
+neg020,What companies are based in San Jose?,negative,0.0,0.0,0.0,0.875
+neg021,What does quality mean in manufacturing?,negative,0.0,0.0,0.0,0.875
+neg022,What is a validation test for a product?,negative,0.0,0.0,0.0,0.875
+neg023,How do you evaluate the quality of a product?,negative,0.0,0.0,0.0,0.875
+neg024,What companies are hiring remotely?,negative,0.0,0.0,0.0,0.875
+neg025,What is the highest paying job in IT today?,negative,0.0,0.0,0.0,0.875
+neg026,How does photosynthesis work?,negative,0.0,0.0,0.0,0.875
+neg027,Who wrote The Hundred-Page Machine Learning Book?,negative,0.0,0.0,0.0,0.875
+neg028,What is the weather in San Francisco today?,negative,0.0,0.0,0.0,0.875
+neg029,What is the capital of France?,negative,0.0,0.0,0.0,0.875
+neg030,Who is the President of the US?,negative,0.0,0.0,0.0,0.875

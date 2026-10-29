@@ -133,6 +133,11 @@ def calculate_retrieval_metric_non_llm(
     Returns:
         float: Calculated RAGAS metric score.
     """
+    
+    # No reference contexts means the reference-based metric is undefined for this case.
+    if not reference_contexts:
+        return None
+    
     metric_instance = metric()
     sample = SingleTurnSample(
         user_input=query,

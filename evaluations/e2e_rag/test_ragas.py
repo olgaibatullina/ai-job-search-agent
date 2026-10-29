@@ -2,23 +2,34 @@
 
 import pytest
 
+from itertools import chain
+
 from ragas.metrics import NonLLMContextPrecisionWithReference, NonLLMContextRecall
 from ragas.metrics.collections import ContextPrecision, ContextRecall, Faithfulness, ResponseGroundedness
 
-from config.paths import RETRIEVAL_EVAL
-from config.paths import LLM_CONFIG
+from config import paths
 from evaluations import helper
 from src.jobs import loader
 from src.rag import retriever, generator
 
 
-retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_negative_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
+retrieval_typo_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_TYPO_EVAL)["queries"]
+
+eval_cases = list(
+    chain(
+        retrieval_cases,
+        retrieval_typo_cases,
+        retrieval_negative_cases,
+    )
+)
 
 retrieval_metrics_non_llm = [NonLLMContextPrecisionWithReference, NonLLMContextRecall]
 retrieval_metrics_llm = [ContextPrecision, ContextRecall]
 generation_metrics_llm = [Faithfulness, ResponseGroundedness]
 
-@pytest.mark.parametrize("case", retrieval_cases)
+@pytest.mark.parametrize("case", eval_cases)
 @pytest.mark.parametrize("metric", retrieval_metrics_non_llm)
 def test_ragas_retrieval_metric_non_llm(job_index, all_jobs, case, metric):
     """Evaluate RAG retrieval quality using non-LLM RAGAS metrics.
@@ -70,8 +81,13 @@ def test_ragas_retrieval_metric_non_llm(job_index, all_jobs, case, metric):
     print(f"Metric retrieval/non-llm: {metric_name}: {retrieval_metric_non_llm}\n")
 
 
+# LLM evaluation is parameterized across 75 evaluation cases × 2 metrics
+# (ContextPrecision, ContextRecall), resulting in 150 evaluations.
+# A full run takes approximately 4 hours locally.
+# To run a single dataset/slice independently, comment out other
+# parametrized datasets in eval_cases.
 @pytest.mark.asyncio
-@pytest.mark.parametrize("case", retrieval_cases)
+@pytest.mark.parametrize("case", eval_cases)
 @pytest.mark.parametrize("metric", retrieval_metrics_llm)
 async def test_ragas_retrieval_metric_llm(job_index, case, metric):
     """Evaluate RAG retrieval quality using RAGAS LLM-as-a-Judge metrics.
@@ -97,12 +113,16 @@ async def test_ragas_retrieval_metric_llm(job_index, case, metric):
         for job in retrieved_jobs
     ]
 
+    # Debug: uncomment to inspect retrieved contexts for a single evaluation case.
+    # for i, job in enumerate(retrieved_contexts):
+    #     print(f"---------------------\n{i+1}\n---------------------\n{job[:500]}\n\n")
+
     retrieval_metric_llm = await helper.calculate_retrieval_metric_llm(
         metric=metric, 
         query=case["query"], 
         retrieved_contexts=retrieved_contexts, 
         reference=case["reference"],
-        llm_config_path=LLM_CONFIG
+        llm_config_path=paths.LLM_CONFIG
         )
 
     # Console output
@@ -116,8 +136,13 @@ async def test_ragas_retrieval_metric_llm(job_index, case, metric):
     print(f"Metric retrieval/llm: {metric_name}: {retrieval_metric_llm.value}\n")
 
 
+# LLM evaluation is parameterized across 75 evaluation cases × 2 metrics
+# (Faithfulness, ResponseGroundedness), resulting in 150 evaluations.
+# A full run takes approximately 4 hours locally.
+# To run a single dataset/slice independently, comment out the other
+# parametrized datasets in eval_cases.
 @pytest.mark.asyncio
-@pytest.mark.parametrize("case", retrieval_cases)
+@pytest.mark.parametrize("case", eval_cases)
 @pytest.mark.parametrize("metric", generation_metrics_llm)
 async def test_ragas_generation_metric_llm(job_index, case, metric):
     """Evaluate RAG generation quality using RAGAS LLM-as-a-Judge metrics.
@@ -148,7 +173,7 @@ async def test_ragas_generation_metric_llm(job_index, case, metric):
     # Prepare generator LLM and prompt using configured generator settings.
     # Build the context from retrieved results and generate an LLM response
     # for the evaluation query.
-    llm, prompt = helper.prepare_ragas_generator(LLM_CONFIG)
+    llm, prompt = helper.prepare_ragas_generator(paths.LLM_CONFIG)
     context = generator.prepare_context(retrieved_chunks)
 
     llm_response = generator.generate_answer(
@@ -165,7 +190,7 @@ async def test_ragas_generation_metric_llm(job_index, case, metric):
         "metric": metric,
         "response": llm_response,
         "retrieved_contexts": retrieved_contexts,
-        "llm_config_path": LLM_CONFIG,
+        "llm_config_path": paths.LLM_CONFIG,
     }
 
     if metric is Faithfulness:
