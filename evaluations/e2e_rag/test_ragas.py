@@ -5,7 +5,8 @@ import pytest
 from itertools import chain
 
 from ragas.metrics import NonLLMContextPrecisionWithReference, NonLLMContextRecall
-from ragas.metrics.collections import ContextPrecision, ContextRecall, Faithfulness, ResponseGroundedness
+from ragas.metrics.collections import ContextPrecision, ContextRecall
+from ragas.metrics.collections import AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness
 
 from config import paths
 from evaluations import helper
@@ -27,7 +28,7 @@ eval_cases = list(
 
 retrieval_metrics_non_llm = [NonLLMContextPrecisionWithReference, NonLLMContextRecall]
 retrieval_metrics_llm = [ContextPrecision, ContextRecall]
-generation_metrics_llm = [Faithfulness, ResponseGroundedness]
+generation_metrics_llm = [AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness]
 
 @pytest.mark.parametrize("case", eval_cases)
 @pytest.mark.parametrize("metric", retrieval_metrics_non_llm)
@@ -136,9 +137,10 @@ async def test_ragas_retrieval_metric_llm(job_index, case, metric):
     print(f"Metric retrieval/llm: {metric_name}: {retrieval_metric_llm.value}\n")
 
 
-# LLM evaluation is parameterized across 75 evaluation cases × 2 metrics
-# (Faithfulness, ResponseGroundedness), resulting in 150 evaluations.
-# A full run takes approximately 4 hours locally.
+# LLM evaluation is parameterized across 75 evaluation cases × 4 metrics
+# (AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness), 
+# resulting in 300 evaluations.
+# A full run takes approximately 8 hours locally.
 # To run a single dataset/slice independently, comment out the other
 # parametrized datasets in eval_cases.
 @pytest.mark.asyncio
@@ -183,18 +185,30 @@ async def test_ragas_generation_metric_llm(job_index, case, metric):
         llm=llm,
     )
 
-    # Prepare metric arguments dynamically because different RAGAS generation
-    # metrics require different inputs. User input is added only for metrics
-    # that require it, such as Faithfulness.
+    # Prepare metric arguments dynamically as different RAGAS generation
+    # metrics require additional inputs: Faithfulness requires user_input,
+    # AnswerAccuracy requires user_input and reference, and AnswerRelevancy
+    # requires embeddings.
     kwargs = {
         "metric": metric,
         "response": llm_response,
-        "retrieved_contexts": retrieved_contexts,
         "llm_config_path": paths.LLM_CONFIG,
     }
 
+    if metric is AnswerAccuracy:
+        kwargs["user_input"] = case["query"]
+        kwargs["reference"] = case["reference"]
+
+    if metric is AnswerRelevancy:
+        kwargs["user_input"] = case["query"]
+        kwargs["embedding"] = True
+
     if metric is Faithfulness:
         kwargs["user_input"] = case["query"]
+        kwargs["retrieved_contexts"] = retrieved_contexts
+
+    if metric is ResponseGroundedness:
+        kwargs["retrieved_contexts"] = retrieved_contexts
 
     retrieval_metric_llm = await helper.calculate_generation_metric_llm(**kwargs)
     
