@@ -17,3 +17,7 @@ RETRIEVAL_TYPO_EVAL = DATA_DIR / "golden/retrieval_typo_eval.yaml"
 
 #LLM Configurations
 LLM_CONFIG = CONFIG_ROOT / "llm_config.yaml"
+
+#Evaluation results
+EVALUATION_RESULTS = PROJECT_ROOT / "evaluation_results"
+E1_RESULTS = EVALUATION_RESULTS / "experiments/E1_judge_context_size"

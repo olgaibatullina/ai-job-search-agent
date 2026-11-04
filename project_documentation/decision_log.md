@@ -299,7 +299,6 @@ Explicitly documenting these limitations prevents judge scores from being interp
 Future judge-model validation will provide evidence about evaluator reliability and demonstrate an additional AI Validation Framework capability without delaying the V1 implementation.
 
 
-```md
 ## D-010 — Freeze V1 Scope and Defer Production Infrastructure
 
 **Date:** 2026-10-26  
@@ -349,4 +348,43 @@ This keeps the application under test intentionally manageable while preserving 
 A minimal FastAPI and SQLite layer provides sufficient coverage for backend, API, SQL, and CI testing without turning infrastructure development into the main project.
 
 Live job search and cloud deployment can be added later if the project is extended into a fully operational Job Search Agent.
-```
+
+
+## D-011 — Optimize Judge Context Before Modifying RAG Generation
+
+**Date:** 2026-10-30  
+**Status:** Accepted
+
+### Context
+
+LangSmith tracing revealed that RAGAS Faithfulness evaluations can reach the configured judge output token limit (`max_tokens=4096`), resulting in `IncompleteOutputException`.
+
+The evaluation pipeline currently passes full job descriptions as `retrieved_contexts`, potentially increasing token consumption and evaluation complexity.
+
+### Decision
+
+Optimize the context provided to the LLM-as-a-Judge before modifying the RAG generator.
+
+- Replace full job descriptions with shorter relevant retrieved chunks.
+- Keep the generator configuration and generated responses unchanged during the initial comparison.
+- Evaluate the same test cases before and after context reduction.
+- Measure judge input/output tokens, latency, failure rate, and evaluation scores.
+- Verify that reduced contexts retain sufficient evidence to evaluate generated claims.
+
+### Rationale
+
+Separating judge context optimization from generator changes allows us to isolate the effect of context size on evaluation reliability.
+
+This approach helps determine whether token consumption and evaluation failures can be reduced without compromising Faithfulness assessment quality.
+
+### Next Steps
+
+1. Establish baseline results using the current full-description contexts.
+2. Implement reduced-context evaluation.
+3. Compare token usage, latency, failure rates, and evaluation scores.
+4. Determine whether context optimization improves judge reliability.
+5. Consider generator context optimization as a separate experiment.
+
+### Status
+
+Decision accepted. Context optimization experiment not yet completed.

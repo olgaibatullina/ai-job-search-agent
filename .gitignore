@@ -37,3 +37,6 @@ requirements.freeze.txt
 
 # Private candidate data
 data/candidate_profile.md
+
+# Run time logs
+evaluation_results/logs

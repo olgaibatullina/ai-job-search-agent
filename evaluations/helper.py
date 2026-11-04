@@ -1,11 +1,14 @@
 """Shared helper functions for evaluation and metric calculation."""
 
 import yaml
-
+import csv
+from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
 from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
+from langsmith.wrappers import wrap_openai
 from openai import AsyncOpenAI
 
 from ragas import SingleTurnSample
@@ -75,7 +78,7 @@ def prepare_ragas_generator(llm_config_path: Path) -> tuple[ChatOllama, ChatProm
     )
 
     prompt = ChatPromptTemplate.from_messages([
-        ("system", llm_config["generator"]["system_prompt"]),
+        ("system", llm_config["generator"]["system_prompt_v1"]),
         ("user", llm_config["generator"]["user_prompt"]),
     ])
     
@@ -98,13 +101,19 @@ def prepare_ragas_llm_scorer(
     Returns:
         BaseMetric: Instantiated RAGAS metric configured with the LLM judge.
     """
+    load_dotenv()
+
     llm_config = load_retrieval_dataset(llm_config_path)
     
     # Ollama exposes an OpenAI-compatible API.
     # Create an async OpenAI client to communicate with the Ollama model server.
-    client = AsyncOpenAI(
-        api_key = "ollama",
-        base_url = llm_config["judge"]["base_url"]
+    # wrap_openai() enables LangSmith tracing for LLM calls, using settings from environment variables:
+    # LANGSMITH_TRACING=tru/false in .env.
+    client = wrap_openai(
+        AsyncOpenAI(
+            api_key="ollama",
+            base_url=llm_config["judge"]["base_url"],
+        )
     )
     
     # Create a RAGAS-compatible LLM wrapper using the configured judge model.
@@ -113,7 +122,8 @@ def prepare_ragas_llm_scorer(
         model = llm_config["judge"]["model"], 
         provider = "openai", 
         client = client,
-        max_tokens = llm_config["judge"]["max_tokens"]
+        max_tokens = llm_config["judge"]["max_tokens"],
+        reasoning_effort="none", # Disable thinking mode
     )
 
     kwargs = {
@@ -248,3 +258,40 @@ async def calculate_generation_metric_llm(
 
     # Evaluate metric using the prepared arguments.
     return await scorer.ascore(**kwargs)
+
+
+def save_evaluation_result(row: dict):
+    """Append an evaluation result to CSV, creating the file if needed."""
+
+    csv_path = (
+        Path("evaluation_results/experiments/E1_judge_context_size")
+        / f"faithfulness_{datetime.now():%Y-%m-%d}.csv"
+    )
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+    fieldnames = [
+        "query_id",
+        "query",
+        "k",
+        "latency_s",
+        "metric",
+        "score",
+        "status",
+        "error_type",
+        "judge_max_tokens",
+        "judge_input_tokens",
+        "judge_output_tokens",
+        "judge_total_tokens",
+        "trace_id"
+    ]
+
+    file_exists = csv_path.exists() and csv_path.stat().st_size > 0
+
+    with csv_path.open("a", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerow(row)

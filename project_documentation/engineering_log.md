@@ -201,3 +201,163 @@ The failure is caused by the combination of a large retrieved context and the lo
 The retrieval k should not automatically be reduced in the RAG pipeline solely to make the evaluator pass, because that would change the system behavior being evaluated. The evaluation strategy should instead define how much retrieved context can be reliably processed by the selected judge model.
 
 This raises an evaluation-design question: how much retrieved context can the judge reliably process without degradation or evaluation errors?
+
+## EL-008 — LangSmith integration for LLM judge tracing
+
+### Date
+
+2026-10-30 11:30
+
+### Context / Findings
+
+RAGAS evaluation failures required deeper visibility into judge LLM calls, token usage, and execution behavior.
+
+### Decision / Approach
+
+Integrated LangSmith tracing using wrap_openai() with the existing Ollama/OpenAI-compatible client.
+
+Added parent traces for individual evaluation cases and linked them to CSV results using trace_id.
+
+### Validation / Results
+
+Successfully captured nested LLM calls, token usage, latency, and execution status.
+
+Implemented CSV enrichment to retrieve judge token usage from LangSmith.
+
+### Impact / Takeaway
+
+LLM evaluation failures can now be investigated at the individual model-call level.
+
+
+## EL-009 — Judge output token limit confirmed through tracing
+
+### Date
+
+2026-10-30 16:30
+
+### Context / Findings
+
+LangSmith tracing revealed that a failed Faithfulness evaluation contained an LLM call with:
+
+- Input tokens: 3,117
+- Output tokens: 4,096
+- Finish reason: length
+
+The call reached the configured output token limit of 4,096, producing incomplete output and causing IncompleteOutputException.
+
+### Validation / Results
+
+Confirmed that max_tokens limits generated output per LLM call, not total tokens across the evaluation trace.
+
+### Impact / Takeaway
+
+The observed failure is directly associated with judge output truncation. Reducing input context may help, but its effect on output token consumption still requires validation.
+
+## EL-010 — Planned context optimization experiment
+
+### Date
+
+2026-10-30 17:50
+
+### Context / Findings
+
+Current RAGAS evaluation passes full job descriptions as retrieved_contexts, potentially increasing judge input size and structured-output generation complexity.
+
+### Decision / Approach
+
+Investigate replacing full job descriptions with shorter relevant retrieved chunks.
+
+Compare the same evaluation cases before and after context reduction, controlling for changes in generated responses.
+
+### Validation / Results
+
+Status: Planned — optimization results not yet available.
+
+Measure:
+
+- Judge input, output, and total tokens
+- Evaluation failure rate
+- Faithfulness scores
+- Evaluation latency
+
+### Impact / Takeaway
+
+Determine whether reducing evaluation context improves judge reliability and efficiency without compromising evaluation quality.
+
+
+## EL-011 — Judge reasoning loop causes output token exhaustion
+
+### Date
+2026-10-30 19:50
+
+### Context / Findings
+
+During E1 Faithfulness evaluation, query `neg020` failed with
+`IncompleteOutputException` despite receiving a very short
+generator response: "No relevant jobs found."
+
+LangSmith tracing revealed:
+
+- Evaluation stage: Statement Generation
+- Input tokens: 504
+- Output tokens: 4096
+- Finish reason: `length`
+- Generated content: empty
+- Reasoning: repetitive analysis of the same simple statement
+
+The judge repeatedly reconsidered how to rephrase
+"No relevant jobs found" without producing the required JSON.
+
+### Root Cause Analysis
+
+The trace confirmed a reasoning loop in Qwen3 8B.
+
+The model exhausted its output token budget on repetitive
+reasoning rather than producing the expected structured output.
+
+This demonstrates that Faithfulness failures are not necessarily
+caused by large retrieved contexts or long generator responses.
+
+### Impact / Takeaway
+
+Identified a distinct LLM-as-a-Judge failure mode:
+
+**Reasoning loop → Output token exhaustion → IncompleteOutputException**
+
+Reducing retrieved context alone cannot address this failure mode.
+
+### Next Steps
+
+- Test disabling Qwen3 thinking mode for the judge.
+- Compare token consumption, structured-output validity,
+  failure rates, and evaluation scores.
+- Verify that disabling reasoning does not degrade judge accuracy.
+
+
+## EL-012 — Repetition Loop with Thinking Disabled
+
+### Date
+2026-11-03 17:39
+
+### Context / Findings
+- During H6 evaluation, `q010` failed with Thinking OFF.
+- All 10 repeated executions failed (10/10).
+- Failure occurred during Faithfulness Verdict Generation with 13 statements and a long retrieved context.
+- Statement Generation completed successfully.
+- The failed LLM call returned no output or token usage in LangSmith.
+
+### Root Cause Analysis
+- Ollama returned HTTP 500:
+  `prediction aborted, token repeat limit reached`.
+- Instructor exhausted its retry attempts and raised `InstructorRetryException`.
+- The underlying trigger of repetitive generation remains unknown.
+
+### Impact
+- Disabling thinking does not eliminate all repetition loops.
+- Repetition failures can occur independently of explicit reasoning.
+- Such failures prevent Faithfulness evaluation from completing.
+
+### Next Steps
+- Include `q010` in H7 regression cases.
+- Investigate sampling parameters and repetition penalties.
+- Verify mitigation across the complete evaluation dataset.

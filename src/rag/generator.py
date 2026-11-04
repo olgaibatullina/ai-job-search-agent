@@ -89,7 +89,7 @@ def main():
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
-            llm_config["generator"]["system_prompt"]
+            llm_config["generator"]["system_prompt_v1"]
         ),
         (
             "user",
