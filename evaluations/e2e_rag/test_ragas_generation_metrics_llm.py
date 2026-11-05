@@ -21,6 +21,7 @@ retrieval_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_EVAL)["queries"]
 retrieval_negative_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
 retrieval_typo_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_TYPO_EVAL)["queries"]
 
+run_name = "relevancy_baseline"
 
 faithfulness_failed_cases = ["q003", "q028", "neg006", "neg019", "neg020", "neg024", "neg028"]
 relevancy_failed_cases = ["neg009", "neg029"]
@@ -32,8 +33,8 @@ eval_cases = [
         retrieval_typo_cases,
         retrieval_negative_cases,
     )
-    if case["query_id"] in faithfulness_failed_cases
-] * 10
+    if case["query_id"] in relevancy_failed_cases
+] * 1
 
 all_cases = list(
     chain(
@@ -48,10 +49,11 @@ retrieval_metrics_llm = [ContextPrecision, ContextRecall]
 generation_metrics_llm = [AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness]
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("case", eval_cases)
-async def test_ragas_faithfulness(job_index, case):
+@pytest.mark.parametrize("case", all_cases)
+async def test_ragas_metric_eval(job_index, case):
     """Evaluate RAG generation faithfulness using RAGAS LLM-as-a-Judge."""
     k = 1
+    metric = AnswerRelevancy
 
     # Retrieve jobs and prepare evaluation contexts.
     retrieved_chunks = retriever.retrieve_relevant_jobs(
@@ -82,10 +84,31 @@ async def test_ragas_faithfulness(job_index, case):
     trace_id = None
     error_type = ""
 
+    kwargs = {
+            "metric": metric,
+            "response": llm_response,
+            "llm_config_path": paths.LLM_CONFIG,
+        }
+    
+    if metric is AnswerAccuracy:
+        kwargs["user_input"] = case["query"]
+        kwargs["reference"] = case["reference"]
+
+    if metric is AnswerRelevancy:
+        kwargs["user_input"] = case["query"]
+        kwargs["embedding"] = True
+
+    if metric is Faithfulness:
+        kwargs["user_input"] = case["query"]
+        kwargs["retrieved_contexts"] = retrieved_contexts
+
+    if metric is ResponseGroundedness:
+        kwargs["retrieved_contexts"] = retrieved_contexts
+
     try:
         # Group all LLM calls for one Faithfulness evaluation under a parent trace.
         with trace(
-            name="Faithfulness Evaluation",
+            name=f"{metric.__name__} Evaluation",
             run_type="chain",
             metadata={
                 "query_id": case["query_id"],
@@ -97,13 +120,7 @@ async def test_ragas_faithfulness(job_index, case):
             trace_id = str(parent_run.id)
 
             # Calculate Faithfulness using the configured LLM judge.
-            result = await helper.calculate_generation_metric_llm(
-                metric=Faithfulness,
-                user_input=case["query"],
-                response=llm_response,
-                retrieved_contexts=retrieved_contexts,
-                llm_config_path=paths.LLM_CONFIG,
-            )
+            result = await helper.calculate_generation_metric_llm(**kwargs)
         score = result.value
 
     except Exception as e:
@@ -121,7 +138,7 @@ async def test_ragas_faithfulness(job_index, case):
             "query": case["query"],
             "k": k,
             "latency_s": round(latency, 3),
-            "metric": "Faithfulness",
+            "metric": metric,
             "score": score,
             "status": status,
             "error_type": error_type,
@@ -131,13 +148,23 @@ async def test_ragas_faithfulness(job_index, case):
             "judge_input_tokens": None,
             "judge_output_tokens": None,
             "judge_total_tokens": None,
+            "judge_call_count": None,
+            "judge_avg_output_tokens_per_call": None,
+            "judge_max_output_tokens_per_call": None,
             "trace_id": trace_id
-        })
+        },
+        run_name)
     
     # Console output.
+    metric_name = (
+        type(metric).__name__
+        if not isinstance(metric, type)
+        else metric.__name__
+    )
+
     print(f"\nQuery: {case['query_id']} - {case['query']}")
     print(f"K: {k}")
-    print(f"Faithfulness: {score}")
+    print(f"{metric_name}: {score}")
     print(f"Status: {status}")
 
     if status == "ERROR":

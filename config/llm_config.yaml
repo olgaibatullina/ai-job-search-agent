@@ -40,6 +40,7 @@ generator:
 
 judge:
   model: "qwen3:8b"
+  model_e1_h7: "qwen3-h7"
   base_url: "http://localhost:11434/v1"
   temperature: 0
   max_tokens: 4096

@@ -38,5 +38,9 @@ requirements.freeze.txt
 # Private candidate data
 data/candidate_profile.md
 
-# Run time logs
-evaluation_results/logs
+# Run time logs and data
+evaluation_results/logs/
+evaluation_results/experiments/E1_judge_context_size/working_data
+
+# Local tools
+local_tools/

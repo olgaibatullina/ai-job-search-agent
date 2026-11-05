@@ -18,6 +18,8 @@ from ragas.metrics.collections import BaseMetric
 from ragas.metrics.result import MetricResult
 from ragas.embeddings.base import embedding_factory
 
+from config.paths import E1_RESULTS
+
 
 def load_retrieval_dataset(dataset: Path) -> list[dict]:
     """Load retrieval evaluation queries from a YAML dataset.
@@ -123,7 +125,7 @@ def prepare_ragas_llm_scorer(
         provider = "openai", 
         client = client,
         max_tokens = llm_config["judge"]["max_tokens"],
-        reasoning_effort="none", # Disable thinking mode
+        # reasoning_effort="none", # Disable thinking mode
     )
 
     kwargs = {
@@ -260,13 +262,9 @@ async def calculate_generation_metric_llm(
     return await scorer.ascore(**kwargs)
 
 
-def save_evaluation_result(row: dict):
+def save_evaluation_result(row: dict, run_name: str):
     """Append an evaluation result to CSV, creating the file if needed."""
-
-    csv_path = (
-        Path("evaluation_results/experiments/E1_judge_context_size")
-        / f"faithfulness_{datetime.now():%Y-%m-%d}.csv"
-    )
+    csv_path = (E1_RESULTS / f"{run_name}_{datetime.now():%Y-%m-%d}.csv")
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -283,6 +281,9 @@ def save_evaluation_result(row: dict):
         "judge_input_tokens",
         "judge_output_tokens",
         "judge_total_tokens",
+        "judge_call_count",
+        "judge_avg_output_tokens_per_call",
+        "judge_max_output_tokens_per_call",
         "trace_id"
     ]
 

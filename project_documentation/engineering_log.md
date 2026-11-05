@@ -361,3 +361,42 @@ Reducing retrieved context alone cannot address this failure mode.
 - Include `q010` in H7 regression cases.
 - Investigate sampling parameters and repetition penalties.
 - Verify mitigation across the complete evaluation dataset.
+
+## EL-013 — H7: Judge Reliability Improvement Through Sampling Parameters and Repetition Penalty
+
+### Date
+2026-11-04 17:20
+
+### Context / Findings
+- Completed H7 evaluation of Qwen3 judge sampling parameters with Thinking ON.
+- Final configuration: `temperature=0.6`, `top_p=0.95`, `repeat_penalty=1.1`.
+- Full regression run completed on all 75 evaluation cases.
+- Comparison against the original baseline:
+  - Successful evaluations: **68/75 → 75/75**.
+  - Failure rate: **9.3% → 0%**.
+  - Average output tokens: **2,693 → 2,492** (−7.5%).
+  - Average latency: **56.34s → 54.01s**.
+- On the 68 commonly successful cases, mean Faithfulness changed from **0.8696 to 0.8645**.
+- Manual inspection revealed inconsistent verdict behavior:
+  - `typo005`: Faithfulness decreased from 1.0 to 0.4. H7 rejected unsupported relationships accepted by baseline.
+  - `q013`: Faithfulness increased from 0.625 to 1.0. H7 accepted several claims not fully supported by the retrieved context.
+
+### Root Cause Analysis
+- Sampling parameter adjustments and repetition penalty may reduce repetitive generation and token exhaustion.
+- The final configuration eliminated observed evaluation failures in the full regression run.
+- Statement Generation remained broadly similar in the inspected cases, while Verdict Generation produced different judgments.
+- Sampling parameters may influence how strictly the judge evaluates contextual support.
+- The individual contribution of each parameter was not isolated.
+- Judge accuracy has not been systematically validated against human-labeled ground truth.
+
+### Impact
+- Execution reliability improved significantly, and average token consumption decreased.
+- No systematic improvement in Faithfulness scores was demonstrated.
+- Higher execution reliability does not guarantee higher judge accuracy.
+- Inconsistent verdicts and composite statements remain potential sources of evaluation instability.
+
+### Next Steps
+- Evaluate Answer Relevancy using baseline and final H7 configurations.
+- Compare failure rates, token consumption, latency, and evaluation scores.
+- Document overall E1 findings and remaining limitations.
+- Defer judge accuracy validation to a separate investigation using human-labeled ground truth.

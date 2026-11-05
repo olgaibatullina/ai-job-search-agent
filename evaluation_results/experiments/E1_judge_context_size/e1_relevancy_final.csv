@@ -1,0 +1,76 @@
+query_id,query,k,latency_s,metric,score,status,error_type,judge_max_tokens,judge_input_tokens,judge_output_tokens,judge_total_tokens,trace_id
+q001,AI QA engineer,1,22.278,AnswerRelevancy,0.70610295295474,SUCCESS,,4096,4197,936,5133,01a1a96d-f95d-7651-81f2-704358e69d0b
+q002,AI validation engineer,1,23.141,AnswerRelevancy,0.5217287528187291,SUCCESS,,4096,2970,1068,4038,01a1a96e-7d6c-7322-823d-8a1978b4c5ff
+q003,LLM evaluation engineer,1,24.311,AnswerRelevancy,0.7407650312155697,SUCCESS,,4096,4815,1054,5869,01a1a96f-2c44-72e1-a366-ea3d01ac15d4
+q004,GenAI quality engineer,1,38.221,AnswerRelevancy,0.5024262417733307,SUCCESS,,4096,3393,1428,4821,01a1a96f-b99f-7d91-a2a4-72d84ec02c1e
+q005,AI test engineer,1,27.85,AnswerRelevancy,0.6050462224433674,SUCCESS,,4096,3522,1167,4689,01a1a970-9a51-7072-abe2-d84a25166048
+q006,AI safety evaluation engineer,1,25.683,AnswerRelevancy,0.7116248595404712,SUCCESS,,4096,2874,1119,3993,01a1a971-35db-7f51-85e4-d4569bde57c8
+q007,RAG evaluation and testing,1,24.393,AnswerRelevancy,0.5071593599657321,SUCCESS,,4096,2571,1074,3645,01a1a971-de4a-7ce0-9d15-54631e765a11
+q008,LLM testing and validation,1,24.592,AnswerRelevancy,0.6084746519821861,SUCCESS,,4096,2826,1077,3903,01a1a972-746c-7c81-859c-0ceb075ecb53
+q009,AI QA engineer with test automation,1,23.561,AnswerRelevancy,0.589821581374669,SUCCESS,,4096,3024,1023,4047,01a1a973-0b7b-7af2-9cdc-31fece9c960a
+q010,AI evaluation engineer with Python,1,41.903,AnswerRelevancy,0.46229063315710683,SUCCESS,,4096,2940,2001,4941,01a1a973-a10d-7752-8bf6-826800e23af3
+q011,AI quality engineer with API testing,1,27.146,AnswerRelevancy,0.5829061761231864,SUCCESS,,4096,2298,1233,3531,01a1a974-72fa-78d1-aadd-9b227f2caf1c
+q012,AI evaluation engineer for agents,1,26.404,AnswerRelevancy,0.7303453753035378,SUCCESS,,4096,2721,1164,3885,01a1a975-05b1-7070-adcd-81f4a3bbc96f
+q013,AI red teaming and safety testing,1,22.551,AnswerRelevancy,0.5700102137894627,SUCCESS,,4096,3192,957,4149,01a1a975-abdb-7f42-97eb-f5f047aedd9a
+q014,software quality engineer for AI systems,1,23.124,AnswerRelevancy,0.45141012778727135,SUCCESS,,4096,3210,990,4200,01a1a976-3ead-7861-a637-e301bae15a3b
+q015,test automation engineer for machine learning systems,1,25.867,AnswerRelevancy,0.7013624333953703,SUCCESS,,4096,3213,1122,4335,01a1a976-e0d0-7433-8d95-11fbb2f9bbc7
+q016,SDET for AI or machine learning systems,1,26.365,AnswerRelevancy,0.36205154089537733,SUCCESS,,4096,2394,1131,3525,01a1a977-733a-7fd2-8185-4e8510cf293a
+q017,model evaluation and quality,1,22.676,AnswerRelevancy,0.2720064303445655,SUCCESS,,4096,2637,963,3600,01a1a978-0481-7561-b88c-6336af0703eb
+q018,evaluate LLM quality and hallucinations,1,30.47,AnswerRelevancy,0.736321930493499,SUCCESS,,4096,2388,1374,3762,01a1a978-87f7-7b22-847f-3df812a6d58c
+q019,testing RAG retrieval quality and groundedness,1,59.959,AnswerRelevancy,0.0,SUCCESS,,4096,2445,2814,5259,01a1a979-3829-74d2-9f29-a9b83ceeca74
+q020,quality validation for AI agents and LLM applications,1,30.811,AnswerRelevancy,0.35642721975538133,SUCCESS,,4096,3399,1347,4746,01a1a97a-5f74-7373-b17a-e32f6150f1ff
+q021,AI validation engineer with PyTest,1,25.529,AnswerRelevancy,0.5662007067155007,SUCCESS,,4096,2262,1125,3387,01a1a97a-fbf7-7590-b004-896d08ba55b1
+q022,LLM evaluation engineer with prompt engineering,1,35.42,AnswerRelevancy,0.49326828593793864,SUCCESS,,4096,3384,1587,4971,01a1a97b-a2cc-7fd3-abd8-10e543363bf8
+q023,Jobs evaluating AI model accuracy and safety,1,25.487,AnswerRelevancy,0.5581318618193242,SUCCESS,,4096,2499,1113,3612,01a1a97c-510a-7790-952e-6ecf9dadd100
+q024,LLM QA engineer with PromptFoo,1,27.871,AnswerRelevancy,0.6217174936485527,SUCCESS,,4096,2067,1254,3321,01a1a97c-d30e-7890-bb8e-bc5856d3cdf9
+q025,LLM evaluation engineer with LangChain,1,25.425,AnswerRelevancy,0.5851089421139963,SUCCESS,,4096,2466,1101,3567,01a1a97d-69aa-7962-bda8-3c3455b90f24
+q026,RAG pipeline engineer with Python,1,24.881,AnswerRelevancy,0.5155436588378306,SUCCESS,,4096,2205,1077,3282,01a1a97d-eeb6-7fa0-a941-d0040be4c3a2
+q027,QA jobs for LLM-powered applications,1,25.416,AnswerRelevancy,0.5487789458951753,SUCCESS,,4096,2649,1101,3750,01a1a97e-79b1-77d2-adac-99b18e395eb9
+q028,RAG evaluation engineer,1,27.263,AnswerRelevancy,0.6427297396592422,SUCCESS,,4096,2496,1200,3696,01a1a97f-005f-7d11-8cc1-c85493005267
+q029,LLM test engineer with prompt engineering,1,19.935,AnswerRelevancy,0.6358192925646208,SUCCESS,,4096,2871,816,3687,01a1a97f-9b1d-7883-bc45-d27f325576d3
+q030,AI jobs requiring Python and PyTest,1,27.291,AnswerRelevancy,0.48724530766528734,SUCCESS,,4096,2139,1221,3360,01a1a980-0a1b-71e1-99a8-4a8cf3bbd236
+typo001,LLM evalution engineer,1,30.648,AnswerRelevancy,0.32146515169257533,SUCCESS,,4096,2718,1347,4065,01a1a980-9eb7-7742-8118-022afe1588f4
+typo002,LLM evaluation enginer,1,20.598,AnswerRelevancy,0.3337153545878491,SUCCESS,,4096,3237,825,4062,01a1a981-5521-7260-a479-9b6fd8a28448
+typo003,LLM evaluation engneer with promt engineering,1,25.183,AnswerRelevancy,0.5773078493098635,SUCCESS,,4096,3099,1062,4161,01a1a981-e1e6-7ff3-999c-af9bccc1a15b
+typo004,LLM evaluation engineer with prompt enginering,1,25.684,AnswerRelevancy,0.7269705135760377,SUCCESS,,4096,3243,1074,4317,01a1a982-8f01-7862-893e-91d6f53ede42
+typo005,LLM QA engineer with Promtfoo,1,21.157,AnswerRelevancy,0.5727170364613525,SUCCESS,,4096,2478,894,3372,01a1a983-1be4-7801-a7fc-092dc2e8bb43
+typo006,LLM QA engineer with PromptFo,1,28.156,AnswerRelevancy,0.44848532743256003,SUCCESS,,4096,2928,1232,4160,01a1a983-a0f9-7701-8423-173edfb7403b
+typo007,LLM evaluation engineer with LangChian,1,27.435,AnswerRelevancy,0.6680588623348039,SUCCESS,,4096,2775,1212,3987,01a1a984-43e3-7a20-974a-f4dd2d7598a2
+typo008,LLM evalution engineer with LangChain,1,25.063,AnswerRelevancy,0.5803457473098809,SUCCESS,,4096,2466,1101,3567,01a1a984-da8d-73e0-8d51-c3da1c89de7d
+typo009,RAG pipline engineer with Python,1,24.448,AnswerRelevancy,0.42779864437965376,SUCCESS,,4096,2217,1071,3288,01a1a985-5d3a-7520-a54a-ad992d9ec5fa
+typo010,RAG pipeline enginer with Python,1,47.522,AnswerRelevancy,0.43838986051816003,SUCCESS,,4096,2199,2199,4398,01a1a985-df10-7af2-a787-a76327618c99
+typo011,AI jobs requiring Python and Pytest,1,25.445,AnswerRelevancy,0.5188345495397689,SUCCESS,,4096,2139,1133,3272,01a1a986-bad3-7573-849e-ed789bbe8d10
+typo012,AI jobs requiring Python and PyTset,1,36.821,AnswerRelevancy,0.4956528288503088,SUCCESS,,4096,2205,1716,3921,01a1a987-3efe-7bf0-b5c7-c4352158789b
+typo013,Jobs evaluating AI model acuracy and safety,1,39.892,AnswerRelevancy,0.5593302247475176,SUCCESS,,4096,2382,1851,4233,01a1a987-f037-7b40-a066-4e493a56c391
+typo014,QA jobs for LLM-powered aplications,1,25.765,AnswerRelevancy,0.5174519564897754,SUCCESS,,4096,3576,1107,4683,01a1a988-cf34-7062-af1e-30d2cef37431
+typo015,AI validation enginer with PyTest,1,24.042,AnswerRelevancy,0.0,SUCCESS,,4096,2244,1059,3303,01a1a989-53d3-7050-9bf5-dfa985ca5c69
+neg001,Find accounting jobs,1,23.021,AnswerRelevancy,0.6517159852764085,SUCCESS,,4096,2043,1047,3090,01a1a989-c97c-70d2-8358-c1ce16f107d1
+neg002,Find nursing jobs,1,24.003,AnswerRelevancy,0.7486682834308421,SUCCESS,,4096,2064,1089,3153,01a1a98a-385f-7710-915d-53c4986a320f
+neg003,Find marketing manager jobs,1,25.643,AnswerRelevancy,0.8243704501031418,SUCCESS,,4096,2136,1170,3306,01a1a98a-afa0-7b10-aac7-7ac99698c1ce
+neg004,Find HW validation jobs,1,89.387,AnswerRelevancy,0.43491729222521985,SUCCESS,,4096,2649,4359,7008,01a1a98b-404f-7782-bdcd-344aabba9158
+neg005,Find elementary school teacher jobs,1,23.541,AnswerRelevancy,0.7688271926512583,SUCCESS,,4096,2214,1044,3258,01a1a98c-c168-7b63-9842-eacd025ce555
+neg006,Find QA jobs,1,31.191,AnswerRelevancy,0.5249175850402283,SUCCESS,,4096,2955,1422,4377,01a1a98d-4c4f-7c72-b865-545f7a6ff00e
+neg007,Find UI automation jobs,1,21.337,AnswerRelevancy,0.42801423264424826,SUCCESS,,4096,2274,954,3228,01a1a98d-e686-7502-860c-6433b5f64064
+neg008,Find Mobile QA jobs,1,26.776,AnswerRelevancy,0.7172350174895846,SUCCESS,,4096,2832,1218,4050,01a1a98e-657c-70c1-919c-8c1ddc3621d2
+neg009,Find product quality engineer jobs,1,25.179,AnswerRelevancy,0.12955631883430604,SUCCESS,,4096,2769,1122,3891,01a1a98e-f810-7e92-878b-3c619973d614
+neg010,What does AI/ML mean?,1,49.46,AnswerRelevancy,0.8600738221076728,SUCCESS,,4096,2289,2379,4668,01a1a98f-83ac-7802-bd76-c216357f99da
+neg011,When was machine learning invented?,1,37.02,AnswerRelevancy,0.5635286794702953,SUCCESS,,4096,2040,1768,3808,01a1a990-5d9c-7d61-81df-80a97f0d76fa
+neg012,How does a machine learn to code?,1,21.625,AnswerRelevancy,0.7297322830439802,SUCCESS,,4096,2010,954,2964,01a1a991-0172-7c92-a63e-1816ccb6d828
+neg013,Where can I learn AI and machine learning?,1,45.773,AnswerRelevancy,0.6332320961853508,SUCCESS,,4096,2199,2226,4425,01a1a991-85e8-7540-8e14-aa6c974b6943
+neg014,What metrics can be used to evaluate an AI model?,1,27.863,AnswerRelevancy,0.5869827614929437,SUCCESS,,4096,2616,1233,3849,01a1a992-7277-7851-a515-c55a692938b7
+neg015,What is the difference between LLM validation and evaluation?,1,34.746,AnswerRelevancy,0.5662294882610112,SUCCESS,,4096,2502,1589,4091,01a1a993-0969-7dd3-94d0-0caa55ae188e
+neg016,What is evaluation framework?,1,36.981,AnswerRelevancy,0.7918173669554079,SUCCESS,,4096,2574,1755,4329,01a1a993-b889-7f50-bec7-e3292b737d69
+neg017,How do you evaluate a model?,1,25.686,AnswerRelevancy,0.7196369310753429,SUCCESS,,4096,3042,1107,4149,01a1a994-7df1-7e80-aed2-305137a7f500
+neg018,What is San Francisco Bay Area famous for?,1,94.503,AnswerRelevancy,0.0,SUCCESS,,4096,2016,4689,6705,01a1a994-f333-7863-a0f5-2dc6b81c1216
+neg019,What cities are in the Bay Area?,1,25.61,AnswerRelevancy,0.4102300388534464,SUCCESS,,4096,2124,1185,3309,01a1a996-8338-7e31-9e36-6a99a7ffd883
+neg020,What companies are based in San Jose?,1,34.53,AnswerRelevancy,0.8306970970562731,SUCCESS,,4096,2058,1587,3645,01a1a997-00a3-7200-ab9e-92d15ec6bf9c
+neg021,What does quality mean in manufacturing?,1,53.902,AnswerRelevancy,0.2335613983098002,SUCCESS,,4096,2184,2592,4776,01a1a997-afb1-7661-a900-68e3a3b302a8
+neg022,What is a validation test for a product?,1,21.826,AnswerRelevancy,0.836752808906159,SUCCESS,,4096,2559,930,3489,01a1a998-b0fd-7f72-9dc2-dbd0adfeab97
+neg023,How do you evaluate the quality of a product?,1,30.025,AnswerRelevancy,0.33696031764567097,SUCCESS,,4096,3132,1281,4413,01a1a999-43b9-70f2-92b2-9adbbfc7eb63
+neg024,What companies are hiring remotely?,1,25.569,AnswerRelevancy,0.5609989833058799,SUCCESS,,4096,2151,1011,3162,01a1a999-dc6f-7ab3-97ed-06a2a9e025f2
+neg025,What is the highest paying job in IT today?,1,113.378,AnswerRelevancy,0.6781110542756439,SUCCESS,,4096,2172,4097,6269,01a1a99a-695f-77a0-8311-4b7a44117880
+neg026,How does photosynthesis work?,1,53.423,AnswerRelevancy,0.0,SUCCESS,,4096,1995,2007,4002,01a1a99c-3c6b-7de0-b343-f8f12481e9ad
+neg027,Who wrote The Hundred-Page Machine Learning Book?,1,26.035,AnswerRelevancy,0.741993672965903,SUCCESS,,4096,2055,1110,3165,01a1a99d-29c0-7270-866c-33083dba3d38
+neg028,What is the weather in San Francisco today?,1,30.426,AnswerRelevancy,0.6524994516917341,SUCCESS,,4096,1926,1293,3219,01a1a99d-9f33-7532-aa35-1eab21047e6e
+neg029,What is the capital of France?,1,66.383,AnswerRelevancy,0.678550918909154,SUCCESS,,4096,1917,3039,4956,01a1a99e-3e12-72e0-ac26-76b6aeaf9241
+neg030,Who is the President of the US?,1,104.034,AnswerRelevancy,0.3922540649524883,SUCCESS,,4096,2073,4719,6792,01a1a99f-5f1d-73c0-87cb-aa5fe0c73716

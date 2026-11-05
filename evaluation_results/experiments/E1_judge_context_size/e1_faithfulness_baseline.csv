@@ -1,0 +1,76 @@
+query_id,query,k,latency_s,metric,score,status,error_type,judge_max_tokens,judge_input_tokens,judge_output_tokens,judge_total_tokens,trace_id
+q001,AI QA engineer,1,85.658,Faithfulness,1.0,SUCCESS,,4096,4016,4391,8407,01a18f4b-6979-70c0-bc16-3a409c8b2447
+q002,AI validation engineer,1,51.691,Faithfulness,0.8125,SUCCESS,,4096,2622,2497,5119,01a18f4c-e84e-75f2-924a-87a786721a6b
+q003,LLM evaluation engineer,1,157.907,Faithfulness,,ERROR,IncompleteOutputException,4096,4593,6824,11417,01a18f4e-215a-7ad0-84ac-ca0b1dd0c07f
+q004,GenAI quality engineer,1,68.985,Faithfulness,1.0,SUCCESS,,4096,2823,3344,6167,01a18f50-c067-7592-8cb5-4170e05e41b0
+q005,AI test engineer,1,57.519,Faithfulness,0.7857142857142857,SUCCESS,,4096,4085,2678,6763,01a18f52-2035-7ee1-ac11-3b8d58f26cdd
+q006,AI safety evaluation engineer,1,83.713,Faithfulness,1.0,SUCCESS,,4096,2518,3901,6419,01a18f53-2b41-79a2-8f00-768f775a454b
+q007,RAG evaluation and testing,1,42.749,Faithfulness,0.9090909090909091,SUCCESS,,4096,3269,2025,5294,01a18f54-b55c-7940-a6f3-d695383432d2
+q008,LLM testing and validation,1,98.453,Faithfulness,0.9,SUCCESS,,4096,2584,4621,7205,01a18f55-983e-79a2-8a75-6ec7e9d81dd2
+q009,AI QA engineer with test automation,1,57.507,Faithfulness,1.0,SUCCESS,,4096,2623,2698,5321,01a18f57-5193-7fb2-8452-1b1166b0f5cf
+q010,AI evaluation engineer with Python,1,52.073,Faithfulness,1.0,SUCCESS,,4096,3649,2299,5948,01a18f58-6f13-73b1-a98f-bad3c94fa16b
+q011,AI quality engineer with API testing,1,53.22,Faithfulness,1.0,SUCCESS,,4096,3527,2582,6109,01a18f59-6a9d-7942-a831-29ce15b5239d
+q012,AI evaluation engineer for agents,1,93.393,Faithfulness,0.9333333333333333,SUCCESS,,4096,2560,4479,7039,01a18f5a-652c-7102-adb9-b2fe65c1b76d
+q013,AI red teaming and safety testing,1,51.369,Faithfulness,0.625,SUCCESS,,4096,3505,2477,5982,01a18f5c-0ebf-7882-beb7-b3e848089725
+q014,software quality engineer for AI systems,1,71.869,Faithfulness,0.9615384615384616,SUCCESS,,4096,4054,3496,7550,01a18f5d-12a7-7fb1-8655-81ae2e163c44
+q015,test automation engineer for machine learning systems,1,61.9,Faithfulness,1.0,SUCCESS,,4096,4018,2989,7007,01a18f5e-7476-7430-8f6a-bfc1ee62efdc
+q016,SDET for AI or machine learning systems,1,32.694,Faithfulness,0.8,SUCCESS,,4096,3008,1436,4444,01a18f5f-9546-7093-9c3a-d57c81c84520
+q017,model evaluation and quality,1,48.333,Faithfulness,1.0,SUCCESS,,4096,2683,2345,5028,01a18f60-40d5-7f60-9b79-b9a4d16fe435
+q018,evaluate LLM quality and hallucinations,1,48.984,Faithfulness,0.7142857142857143,SUCCESS,,4096,2364,2335,4699,01a18f61-29ed-7bf3-8bf5-b7339883560c
+q019,testing RAG retrieval quality and groundedness,1,38.411,Faithfulness,1.0,SUCCESS,,4096,4020,1698,5718,01a18f62-22d4-7272-91d8-6c267731857c
+q020,quality validation for AI agents and LLM applications,1,63.413,Faithfulness,1.0,SUCCESS,,4096,3564,2946,6510,01a18f62-f4db-7e90-ab56-b9e1198173e3
+q021,AI validation engineer with PyTest,1,32.9,Faithfulness,0.625,SUCCESS,,4096,2235,1490,3725,01a18f64-1239-7df2-9907-f4893bb235f0
+q022,LLM evaluation engineer with prompt engineering,1,53.777,Faithfulness,1.0,SUCCESS,,4096,3651,2611,6262,01a18f64-d596-7ed0-b53e-2c67b5762820
+q023,Jobs evaluating AI model accuracy and safety,1,47.816,Faithfulness,0.8888888888888888,SUCCESS,,4096,2356,2322,4678,01a18f65-cd7f-7ab3-bd23-104c298d3f9a
+q024,LLM QA engineer with PromptFoo,1,68.873,Faithfulness,0.75,SUCCESS,,4096,2966,3522,6488,01a18f66-a694-7eb3-994a-c191c7af01c3
+q025,LLM evaluation engineer with LangChain,1,38.509,Faithfulness,0.3333333333333333,SUCCESS,,4096,3177,1889,5066,01a18f67-dcae-74d1-b83d-2791fd541961
+q026,RAG pipeline engineer with Python,1,25.841,Faithfulness,1.0,SUCCESS,,4096,2721,1185,3906,01a18f68-9507-7640-a50d-85471159ee65
+q027,QA jobs for LLM-powered applications,1,44.616,Faithfulness,1.0,SUCCESS,,4096,3157,2226,5383,01a18f69-2316-72f2-bc7c-78d82f402109
+q028,RAG evaluation engineer,1,83.253,Faithfulness,,ERROR,IncompleteOutputException,4096,703,4096,4799,01a18f69-f454-73f0-8d76-df1d88c63beb
+q029,LLM test engineer with prompt engineering,1,82.108,Faithfulness,0.8,SUCCESS,,4096,3215,4009,7224,01a18f6b-69ed-7883-a658-45e15b052317
+q030,AI jobs requiring Python and PyTest,1,38.962,Faithfulness,1.0,SUCCESS,,4096,2681,1923,4604,01a18f6c-cb6e-74e3-9053-a1cf41f359a5
+typo001,LLM evalution engineer,1,44.553,Faithfulness,1.0,SUCCESS,,4096,2519,2043,4562,01a18f6d-8f82-7393-87ea-631222d2a0b7
+typo002,LLM evaluation enginer,1,86.198,Faithfulness,1.0,SUCCESS,,4096,3577,4000,7577,01a18f6e-7a29-7ec2-9a55-9d43657c17ad
+typo003,LLM evaluation engneer with promt engineering,1,62.864,Faithfulness,0.2222222222222222,SUCCESS,,4096,2717,3068,5785,01a18f70-09f0-7992-8074-bbee0926cb04
+typo004,LLM evaluation engineer with prompt enginering,1,66.509,Faithfulness,1.0,SUCCESS,,4096,3681,3123,6804,01a18f71-4517-74e2-b6de-810cdb93b9c6
+typo005,LLM QA engineer with Promtfoo,1,34.077,Faithfulness,1.0,SUCCESS,,4096,3029,1645,4674,01a18f72-6fe0-7bb0-9e16-bb5ad373a0cd
+typo006,LLM QA engineer with PromptFo,1,63.022,Faithfulness,1.0,SUCCESS,,4096,3494,3026,6520,01a18f73-275c-7761-9a9d-7dfc1bfca040
+typo007,LLM evaluation engineer with LangChian,1,49.275,Faithfulness,0.9090909090909091,SUCCESS,,4096,3357,2369,5726,01a18f74-52aa-7c01-b290-30e1df6ab699
+typo008,LLM evalution engineer with LangChain,1,38.063,Faithfulness,0.3333333333333333,SUCCESS,,4096,3178,1889,5067,01a18f75-3ec8-7822-9daa-acbcfb79d6de
+typo009,RAG pipline engineer with Python,1,49.457,Faithfulness,1.0,SUCCESS,,4096,2728,2456,5184,01a18f75-f5c3-7890-8419-69b6a2fdefc6
+typo010,RAG pipeline enginer with Python,1,48.737,Faithfulness,1.0,SUCCESS,,4096,2695,2392,5087,01a18f76-d96a-7be2-9364-a9f54f9fb63d
+typo011,AI jobs requiring Python and Pytest,1,36.486,Faithfulness,1.0,SUCCESS,,4096,2681,1863,4544,01a18f77-b89b-73e0-a83f-1288b77d224b
+typo012,AI jobs requiring Python and PyTset,1,31.551,Faithfulness,1.0,SUCCESS,,4096,2548,1486,4034,01a18f78-67a3-78c3-a46f-9624de55d635
+typo013,Jobs evaluating AI model acuracy and safety,1,58.368,Faithfulness,0.8,SUCCESS,,4096,2294,2989,5283,01a18f79-0617-7e33-83ee-7f7a76514d54
+typo014,QA jobs for LLM-powered aplications,1,88.898,Faithfulness,1.0,SUCCESS,,4096,3681,4120,7801,01a18f7a-2d30-7bc3-8b6b-bc3f852cfa67
+typo015,AI validation enginer with PyTest,1,34.206,Faithfulness,1.0,SUCCESS,,4096,2212,1590,3802,01a18f7b-a9d7-7093-9dbb-348c29dacb41
+neg001,Find accounting jobs,1,25.977,Faithfulness,0.75,SUCCESS,,4096,3184,1184,4368,01a18f7c-4842-7661-8669-c71947e46178
+neg002,Find nursing jobs,1,79.774,Faithfulness,0.6,SUCCESS,,4096,2694,3911,6605,01a18f7c-c35c-7052-b6fb-5c5aa3142983
+neg003,Find marketing manager jobs,1,48.943,Faithfulness,0.25,SUCCESS,,4096,2538,2399,4937,01a18f7e-16b1-7d52-a25b-8e064bf8e169
+neg004,Find HW validation jobs,1,50.15,Faithfulness,1.0,SUCCESS,,4096,3352,2231,5583,01a18f7f-04c7-7030-9733-c8290725dede
+neg005,Find elementary school teacher jobs,1,75.063,Faithfulness,0.75,SUCCESS,,4096,3375,3433,6808,01a18f7f-eca5-75f1-b827-29fcb06355c1
+neg006,Find QA jobs,1,84.811,Faithfulness,,ERROR,IncompleteOutputException,4096,855,4096,4951,01a18f81-4366-7293-8a4d-e5a65818dfbe
+neg007,Find UI automation jobs,1,27.118,Faithfulness,1.0,SUCCESS,,4096,2987,1221,4208,01a18f82-b04e-7bc2-aa01-0d85230ae2d2
+neg008,Find Mobile QA jobs,1,67.044,Faithfulness,0.8947368421052632,SUCCESS,,4096,2975,3373,6348,01a18f83-46d0-71c0-b3f9-13ca16b18d0e
+neg009,Find product quality engineer jobs,1,50.508,Faithfulness,1.0,SUCCESS,,4096,2907,2417,5324,01a18f84-769b-7772-89be-58894ab92240
+neg010,What does AI/ML mean?,1,28.046,Faithfulness,0.4,SUCCESS,,4096,2906,1343,4249,01a18f85-665c-7b60-8476-a8f0a00af8a1
+neg011,When was machine learning invented?,1,23.404,Faithfulness,1.0,SUCCESS,,4096,2941,1052,3993,01a18f85-edbd-7d60-9339-94b2568af5b1
+neg012,How does a machine learn to code?,1,18.94,Faithfulness,1.0,SUCCESS,,4096,1935,964,2899,01a18f86-5c0a-72b1-abe0-dcd0ce7fb288
+neg013,Where can I learn AI and machine learning?,1,32.568,Faithfulness,0.7142857142857143,SUCCESS,,4096,3933,1441,5374,01a18f86-d64c-7d50-aa9a-e8709f2d928e
+neg014,What metrics can be used to evaluate an AI model?,1,76.532,Faithfulness,0.8571428571428571,SUCCESS,,4096,3644,3688,7332,01a18f87-8fb4-7552-a36e-1ad5179cb373
+neg015,What is the difference between LLM validation and evaluation?,1,54.789,Faithfulness,1.0,SUCCESS,,4096,2997,2571,5568,01a18f88-e47a-7883-8e38-e6b8cbbd9a33
+neg016,What is evaluation framework?,1,48.604,Faithfulness,1.0,SUCCESS,,4096,2656,2375,5031,01a18f89-e286-76e3-91be-68df3a4c26af
+neg017,How do you evaluate a model?,1,47.067,Faithfulness,1.0,SUCCESS,,4096,2940,2374,5314,01a18f8a-d41c-7ca3-bb5c-77cf7ab7926b
+neg018,What is San Francisco Bay Area famous for?,1,39.308,Faithfulness,1.0,SUCCESS,,4096,2000,2046,4046,01a18f8b-9da5-7712-8e44-89ee8dc4c289
+neg019,What cities are in the Bay Area?,1,80.819,Faithfulness,,ERROR,IncompleteOutputException,4096,582,4096,4678,01a18f8c-5599-7e32-9517-f1d7cde28031
+neg020,What companies are based in San Jose?,1,81.355,Faithfulness,,ERROR,IncompleteOutputException,4096,560,4096,4656,01a18f8d-ac04-76c3-919f-2322dd11757f
+neg021,What does quality mean in manufacturing?,1,66.279,Faithfulness,0.75,SUCCESS,,4096,3446,3026,6472,01a18f8f-1377-7263-a502-243ba46b567b
+neg022,What is a validation test for a product?,1,39.407,Faithfulness,1.0,SUCCESS,,4096,3257,1804,5061,01a18f90-4443-7442-9189-0a1003bea4db
+neg023,How do you evaluate the quality of a product?,1,46.603,Faithfulness,1.0,SUCCESS,,4096,3741,2270,6011,01a18f91-1a21-7a00-b20a-11daca071920
+neg024,What companies are hiring remotely?,1,86.509,Faithfulness,,ERROR,IncompleteOutputException,4096,589,4096,4685,01a18f91-f3d6-7b41-9354-04246e321dfe
+neg025,What is the highest paying job in IT today?,1,103.045,Faithfulness,0.6,SUCCESS,,4096,3179,4843,8022,01a18f93-6a51-7a10-817c-826c343ab9d6
+neg026,How does photosynthesis work?,1,27.605,Faithfulness,0.6666666666666666,SUCCESS,,4096,2962,1212,4174,01a18f95-1479-7560-9f61-19ecdd508b7a
+neg027,Who wrote The Hundred-Page Machine Learning Book?,1,52.549,Faithfulness,1.0,SUCCESS,,4096,3157,2533,5690,01a18f95-9b44-7362-9454-8e82f17f3d81
+neg028,What is the weather in San Francisco today?,1,82.527,Faithfulness,,ERROR,IncompleteOutputException,4096,517,4096,4613,01a18f96-7857-7ca0-adc9-5458dc6fdd5b
+neg029,What is the capital of France?,1,27.724,Faithfulness,1.0,SUCCESS,,4096,3198,1269,4467,01a18f97-e01f-7dc3-95bf-6d9ff1230faf
+neg030,Who is the President of the US?,1,23.982,Faithfulness,0.8,SUCCESS,,4096,2981,1114,4095,01a18f98-684d-7843-9da1-6d735cc783b4
