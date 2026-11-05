@@ -35,10 +35,11 @@ data/faiss_index/
 # Local dependency backup
 requirements.freeze.txt
 
-# Private candidate data
+# Private candidate data and datasets
 data/candidate_profile.md
+data/raw_jobs/raw_jobs.json
 
-# Run time logs and data
+# Runtime logs and data
 evaluation_results/logs/
 evaluation_results/experiments/E1_judge_context_size/working_data
 
