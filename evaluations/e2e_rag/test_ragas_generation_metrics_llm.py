@@ -17,14 +17,13 @@ from src.jobs import loader
 from src.rag import retriever, generator
 
 
-retrieval_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_EVAL)["queries"]
-retrieval_negative_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
-retrieval_typo_cases = helper.load_retrieval_dataset(paths.RETRIEVAL_TYPO_EVAL)["queries"]
-
-run_name = "relevancy_baseline"
+retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_negative_cases = helper.load_yaml(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
+retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL)["queries"]
 
 faithfulness_failed_cases = ["q003", "q028", "neg006", "neg019", "neg020", "neg024", "neg028"]
 relevancy_failed_cases = ["neg009", "neg029"]
+groundedness_failed_cases = ["q002", "q008", "neg009", "typo015"]
 
 eval_cases = [
     case
@@ -33,7 +32,7 @@ eval_cases = [
         retrieval_typo_cases,
         retrieval_negative_cases,
     )
-    if case["query_id"] in relevancy_failed_cases
+    if case["query_id"] in groundedness_failed_cases
 ] * 1
 
 all_cases = list(
@@ -48,12 +47,20 @@ retrieval_metrics_non_llm = [NonLLMContextPrecisionWithReference, NonLLMContextR
 retrieval_metrics_llm = [ContextPrecision, ContextRecall]
 generation_metrics_llm = [AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness]
 
+
 @pytest.mark.asyncio
-@pytest.mark.parametrize("case", all_cases)
+@pytest.mark.parametrize("case", eval_cases)
 async def test_ragas_metric_eval(job_index, case):
     """Evaluate RAG generation faithfulness using RAGAS LLM-as-a-Judge."""
     k = 1
-    metric = AnswerRelevancy
+    metric = ResponseGroundedness
+    run_name = "groundedness_e2h9"
+
+    metric_name = (
+        type(metric).__name__
+        if not isinstance(metric, type)
+        else metric.__name__
+    )
 
     # Retrieve jobs and prepare evaluation contexts.
     retrieved_chunks = retriever.retrieve_relevant_jobs(
@@ -108,7 +115,7 @@ async def test_ragas_metric_eval(job_index, case):
     try:
         # Group all LLM calls for one Faithfulness evaluation under a parent trace.
         with trace(
-            name=f"{metric.__name__} Evaluation",
+            name=f"{metric_name} Evaluation",
             run_type="chain",
             metadata={
                 "query_id": case["query_id"],
@@ -138,11 +145,11 @@ async def test_ragas_metric_eval(job_index, case):
             "query": case["query"],
             "k": k,
             "latency_s": round(latency, 3),
-            "metric": metric,
+            "metric": metric_name,
             "score": score,
             "status": status,
             "error_type": error_type,
-            "judge_max_tokens": helper.load_retrieval_dataset(paths.LLM_CONFIG)["judge"]["max_tokens"],
+            "judge_max_tokens": helper.load_yaml(paths.LLM_CONFIG)["judge"]["max_tokens"],
 
             # Token usage is populated later from LangSmith traces.
             "judge_input_tokens": None,
@@ -156,12 +163,6 @@ async def test_ragas_metric_eval(job_index, case):
         run_name)
     
     # Console output.
-    metric_name = (
-        type(metric).__name__
-        if not isinstance(metric, type)
-        else metric.__name__
-    )
-
     print(f"\nQuery: {case['query_id']} - {case['query']}")
     print(f"K: {k}")
     print(f"{metric_name}: {score}")

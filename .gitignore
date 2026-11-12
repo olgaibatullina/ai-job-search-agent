@@ -41,7 +41,7 @@ data/raw_jobs/raw_jobs.json
 
 # Runtime logs and data
 evaluation_results/logs/
-evaluation_results/experiments/E1_judge_context_size/working_data
+evaluation_results/experiments/working_data
 
 # Local tools
 local_tools/

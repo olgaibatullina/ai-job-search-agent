@@ -15,9 +15,14 @@ RETRIEVAL_EVAL = DATA_DIR / "golden/retrieval_eval.yaml"
 RETRIEVAL_NEGATIVE_EVAL = DATA_DIR / "golden/retrieval_negative_eval.yaml"
 RETRIEVAL_TYPO_EVAL = DATA_DIR / "golden/retrieval_typo_eval.yaml"
 
-#LLM Configurations
+# LLM Configurations
 LLM_CONFIG = CONFIG_ROOT / "llm_config.yaml"
 
-#Evaluation results
+# Evaluation results
 EVALUATION_RESULTS = PROJECT_ROOT / "evaluation_results"
 E1_RESULTS = EVALUATION_RESULTS / "experiments/E1_judge_context_size"
+E2_RESULTS = EVALUATION_RESULTS / "experiments/E2_rag_evaluation_nan_investigation"
+E2_H9_RESULTS = E2_RESULTS / "E2_H9_ollama_structured_output"
+
+# Prompts
+E2_H9_PROMPT = PROJECT_ROOT / "evaluations/prompts/e2_h9_ollama.yaml"

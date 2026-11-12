@@ -8,7 +8,7 @@ from evaluations import helper
 from src.rag import retriever
 
 
-retrieval_cases = helper.load_retrieval_dataset(RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_yaml(RETRIEVAL_EVAL)["queries"]
 
 @pytest.mark.parametrize("case", retrieval_cases)
 def test_rag_retrieval_latency(job_index, case):

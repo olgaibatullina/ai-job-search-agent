@@ -18,10 +18,10 @@ from ragas.metrics.collections import BaseMetric
 from ragas.metrics.result import MetricResult
 from ragas.embeddings.base import embedding_factory
 
-from config.paths import E1_RESULTS
+from config.paths import E1_RESULTS, E2_RESULTS
 
 
-def load_retrieval_dataset(dataset: Path) -> list[dict]:
+def load_yaml(dataset: Path) -> list[dict]:
     """Load retrieval evaluation queries from a YAML dataset.
 
     Args:
@@ -72,7 +72,7 @@ def prepare_ragas_generator(llm_config_path: Path) -> tuple[ChatOllama, ChatProm
     Returns:
         tuple[ChatOllama, ChatPromptTemplate]: Configured generator LLM and chat prompt template.
     """
-    llm_config = load_retrieval_dataset(llm_config_path)
+    llm_config = load_yaml(llm_config_path)
 
     llm = ChatOllama(
         model=llm_config["generator"]["model"],
@@ -105,7 +105,7 @@ def prepare_ragas_llm_scorer(
     """
     load_dotenv()
 
-    llm_config = load_retrieval_dataset(llm_config_path)
+    llm_config = load_yaml(llm_config_path)
     
     # Ollama exposes an OpenAI-compatible API.
     # Create an async OpenAI client to communicate with the Ollama model server.
@@ -121,25 +121,31 @@ def prepare_ragas_llm_scorer(
     # Create a RAGAS-compatible LLM wrapper using the configured judge model.
     # RAGAS uses this LLM to evaluate the selected metric.
     llm = llm_factory(
+        # model = llm_config["judge"]["model_e1_h7"], 
         model = llm_config["judge"]["model"], 
         provider = "openai", 
         client = client,
         max_tokens = llm_config["judge"]["max_tokens"],
-        # reasoning_effort="none", # Disable thinking mode
+        reasoning_effort="none", # Disable thinking mode
     )
 
     kwargs = {
         "llm": llm,
     }
 
+    # Create a RAGAS-compatible embeddings wrapper using the configured embedding model.
+    # RAGAS uses these embeddings for metrics that require semantic similarity evaluation.
     if embedding:
-        # Create a RAGAS-compatible embeddings wrapper using the configured embedding model.
-        # RAGAS uses these embeddings for metrics that require semantic similarity evaluation.
         embedding = embedding_factory(
             provider="huggingface",
             model="sentence-transformers/all-mpnet-base-v2",
         )
         kwargs["embeddings"] = embedding
+
+    # Configure metric-level retries for ResponseGroundedness to enable controlled 
+    # experiments on the trade-off between evaluation reliability, NaN rate, and LLM call volume.
+    if metric.__name__ == "ResponseGroundedness":
+        kwargs["max_retries"] = llm_config["judge"]["max_retries"]
 
     # Instantiate selected RAGAS metric with the configured LLM judge.
     return metric(**kwargs)
@@ -264,7 +270,7 @@ async def calculate_generation_metric_llm(
 
 def save_evaluation_result(row: dict, run_name: str):
     """Append an evaluation result to CSV, creating the file if needed."""
-    csv_path = (E1_RESULTS / f"{run_name}_{datetime.now():%Y-%m-%d}.csv")
+    csv_path = (E2_RESULTS / f"{run_name}_{datetime.now():%Y-%m-%d}.csv")
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 
