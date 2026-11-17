@@ -2,6 +2,7 @@
 
 import yaml
 import csv
+
 from datetime import datetime
 from pathlib import Path
 
@@ -10,6 +11,8 @@ from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langsmith.wrappers import wrap_openai
 from openai import AsyncOpenAI
+
+import instructor
 
 from ragas import SingleTurnSample
 from ragas.llms import llm_factory
@@ -106,7 +109,7 @@ def prepare_ragas_llm_scorer(
     load_dotenv()
 
     llm_config = load_yaml(llm_config_path)
-    
+
     # Ollama exposes an OpenAI-compatible API.
     # Create an async OpenAI client to communicate with the Ollama model server.
     # wrap_openai() enables LangSmith tracing for LLM calls, using settings from environment variables:
@@ -121,17 +124,16 @@ def prepare_ragas_llm_scorer(
     # Create a RAGAS-compatible LLM wrapper using the configured judge model.
     # RAGAS uses this LLM to evaluate the selected metric.
     llm = llm_factory(
-        # model = llm_config["judge"]["model_e1_h7"], 
-        model = llm_config["judge"]["model"], 
+        model = llm_config["judge"]["model_e1_h7"], 
+        # model = llm_config["judge"]["model"], 
         provider = "openai", 
         client = client,
         max_tokens = llm_config["judge"]["max_tokens"],
-        reasoning_effort="none", # Disable thinking mode
+        reasoning_effort="high", # Change thinking mode
+        mode=instructor.Mode.JSON_SCHEMA,
     )
 
-    kwargs = {
-        "llm": llm,
-    }
+    kwargs = {"llm": llm,}
 
     # Create a RAGAS-compatible embeddings wrapper using the configured embedding model.
     # RAGAS uses these embeddings for metrics that require semantic similarity evaluation.

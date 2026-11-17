@@ -400,3 +400,305 @@ Reducing retrieved context alone cannot address this failure mode.
 - Compare failure rates, token consumption, latency, and evaluation scores.
 - Document overall E1 findings and remaining limitations.
 - Defer judge accuracy validation to a separate investigation using human-labeled ground truth.
+
+
+## EL-014 — E2: RAGAS ResponseGroundedness NaN Investigation (H1, H2, H4)
+
+### Date
+2026-11-04 to 2026-11-06 
+
+### Context / Findings
+- Started E2 investigation into NaN results from RAGAS `ResponseGroundedness`.
+- **H1 — Partially Confirmed:** LangSmith traces revealed empty or malformed LLM judge outputs (`{}` or empty content).
+- **H2 — Partially Confirmed:** Missing or invalid `rating` fields (0, 1, 2) triggered validation errors and retries.
+- **H4 — SUCCESS:** Confirmed that `_average_scores()` returns NaN when both judges exhaust their retries without valid scores.
+
+### Root Cause Analysis
+- Invalid structured judge outputs trigger repeated LLM calls.
+- RAGAS uses two judges, each allowing up to five retry attempts.
+- Observed call counts:
+  - `q001`: 21 calls, score 1.0, latency 152.85s.
+  - `q002`: 40 calls, score NaN, latency 307.25s.
+- Excessive retries increase latency without guaranteeing valid verdicts.
+- Exact distribution between metric-level and Instructor-level retries remains unverified.
+
+### Impact
+- Identified the immediate causes of NaN scores and excessive evaluation latency.
+- Confirmed how failed judge evaluations propagate into NaN results.
+
+### Next Steps
+- Investigate why the judge produces invalid structured outputs.
+- Isolate model behavior from framework and integration effects.
+- Continue with H5 and subsequent reliability experiments.
+
+
+## EL-015 — E2-H5: Structured Output Reliability and Judge Accuracy
+
+### Date
+2026-11-09 16:25
+
+### Context / Findings
+- Investigated whether disabling reasoning in Qwen3:8b eliminates invalid structured outputs.
+- Compared reasoning ON (baseline) and OFF across 75 evaluation cases.
+- Results:
+  - NaN rate: **29.3% → 0%**.
+  - All 75 cases returned valid groundedness scores with reasoning OFF.
+  - Mean latency decreased approximately 10x.
+- LangSmith trace analysis identified several scoring inconsistencies:
+  - `q001`: Potential score inflation (0.5 → 1.0).
+  - `q021`: Potential accuracy degradation (0.75 → 0.5).
+  - `neg011`: Judge disagreement (1.0 → 0.5).
+  - `neg020`: Unsupported geographic claim accepted with reasoning OFF (0.5 → 1.0).
+  - `q016`: Baseline run-to-run variability (0.5 → NaN).
+
+### Root Cause Analysis
+- Disabling reasoning improved structured output reliability and eliminated observed NaN failures.
+- However, some reasoning OFF verdicts contradicted evidence in the retrieved context.
+- Higher structured output reliability did not guarantee groundedness scoring accuracy.
+- The underlying cause of scoring inconsistencies remains unverified.
+
+### Impact
+- **H5 partially supported:** Reliability improved, but the requirement to preserve scoring accuracy was not demonstrated.
+- Reasoning OFF was rejected as the preferred solution due to potential score inflation and accuracy degradation.
+- Reasoning OFF remains a possible fallback with documented limitations.
+
+### Next Steps
+- Investigate alternative structured output fixes in H9.
+- Defer systematic judge accuracy validation to E4 using human-labeled ground truth.
+
+
+
+## EL-016 — E2-H6: Repetition Penalty Impact on Structured Output Reliability
+
+### Date
+2026-11-10 17:30
+
+### Context / Findings
+- Investigated whether increasing `repeat_penalty` from 1.0 to 1.1 improves structured output reliability.
+- Tested `q001` and `q002` using `qwen3-h7` with `repeat_penalty=1.1`.
+- Initial `q002` results:
+  - Groundedness score: NaN → 1.0.
+  - LLM calls: 40 → 21 (−47.5%).
+  - Latency: 358.87s → 177.3s (−50.6%).
+- Full regression across 75 cases revealed increased NaN rates:
+  - `max_retries=5`: 29.3% → 41.3%.
+  - `max_retries=1`: 26.7% → 41.3%.
+- Only 11 failed cases overlapped between the two model configurations at `max_retries=5`.
+
+### Root Cause Analysis
+- The initial improvement on `q002` did not generalize across the evaluation dataset.
+- Repetition penalty did not consistently prevent invalid structured outputs.
+- Failure distribution changed between configurations.
+
+### Impact
+- **H6 — FAIL:** Increasing `repeat_penalty` did not improve overall reliability.
+- The tested configuration increased the NaN rate despite improving the initial failing case.
+
+### Next Steps
+- Continue investigating structured output failures at the model and integration layers.
+
+
+## EL-017 — E2-H8: Retry Reduction Impact on Evaluation Reliability
+
+### Date
+2026-11-12 10:30
+
+### Context / Findings
+- Investigated whether reducing RAGAS `max_retries` from 5 to 1 improves efficiency without increasing NaN failures.
+- Maximum LLM calls decreased from 40 to 8.
+- Full regression across 75 cases showed:
+  - NaN rate: **26.7% → 29.3%**.
+  - With `qwen3-h7`, the NaN rate remained **41.3%** for both configurations.
+
+### Root Cause Analysis
+- Fewer retries reduced unnecessary LLM calls but did not resolve invalid structured outputs.
+- Some evaluations required additional retries to obtain valid scores.
+
+### Impact
+- **H8 — FAIL:** Retry reduction improved efficiency but did not consistently preserve evaluation reliability.
+- Reducing retries alone is insufficient to resolve NaN failures.
+
+### Next Steps
+- Investigate model-level structured output behavior independently of RAGAS.
+
+
+## EL-018 — E2-H9: Reasoning and Structured Output Interaction
+
+### Date
+2026-11-12 12:30
+
+### Context / Findings
+- Investigated whether Qwen3:8b thinking mode interferes with Ollama JSON schema enforcement.
+- Tested native Ollama `/api/chat` directly using identical prompts.
+- Four configurations: Thinking ON/OFF × Schema ON/OFF.
+- Five repetitions per configuration.
+- Results:
+  - **20/20 valid JSON responses**.
+  - No empty `{}` responses.
+  - Thinking ON latency: approximately 7.7s.
+  - Thinking OFF latency: approximately 0.13s.
+
+### Root Cause Analysis
+- Neither thinking mode nor JSON schema enforcement caused invalid outputs in direct Ollama API testing.
+- The original RAGAS NaN issue remains unresolved.
+
+### Impact
+- **H9 — FAIL / Not Supported:** Native Ollama API consistently returned valid structured outputs.
+- Findings suggest further investigation is needed at higher integration layers.
+
+### Next Steps
+- Compare native Ollama API with LangChain `ChatOllama` in H10.
+
+
+
+## EL-019 — E2-H10: Native Ollama API vs LangChain
+
+### Date
+2026-11-12 14:00
+
+### Context / Findings
+- Investigated whether LangChain introduces invalid JSON responses when communicating with Ollama.
+- Compared native Ollama API and `ChatOllama` using identical prompts, model settings, and JSON schemas.
+- Four configurations: Thinking ON/OFF × Schema ON/OFF.
+- Five repetitions per configuration.
+- Results:
+  - Native Ollama: **20/20 valid JSON responses**.
+  - LangChain: **20/20 valid JSON responses**.
+  - Total: **40/40 valid responses**.
+  - All responses returned `rating = 2`.
+  - No empty `{}` responses.
+  - Latency was comparable between interfaces.
+
+### Root Cause Analysis
+- LangChain did not introduce invalid structured outputs under the tested conditions.
+- The failure could not be reproduced outside the RAGAS evaluation pipeline.
+- The exact cause of the original NaN failures remains unidentified.
+
+### Impact
+- **H10 — FAIL / Not Supported:** No evidence that LangChain causes malformed JSON responses.
+- Native Ollama and LangChain behaved consistently in the experiment.
+
+### Next Steps
+- Investigate RAGAS structured output handling, Instructor integration, and response parsing.
+- Reproduce the original failure within the RAGAS evaluation pipeline.
+
+
+## EL-021 — E2-H11: OpenAI-Compatible API Investigation
+
+### Date
+2026-11-13 16:33
+
+### Context / Findings
+- Investigated whether Ollama's OpenAI-compatible API causes malformed structured outputs.
+- Tested direct API calls outside the RAGAS evaluation pipeline.
+- The original empty `{}` response and resulting `NaN` could not be reproduced.
+
+### Root Cause Analysis
+- No evidence that the OpenAI-compatible API independently caused the observed failures.
+- Further investigation of Instructor integration was required.
+
+### Impact
+- **H11 — FAIL / Not Supported:** The original hypothesis was not confirmed.
+
+### Next Steps
+- Investigate Instructor's structured output handling and retry behavior.
+
+---
+
+## EL-022 — E2-H12: Instructor Integration Investigation
+
+### Date
+2026-11-13 18:15
+ 
+### Context / Findings
+- Investigated whether Instructor integration caused malformed structured outputs.
+- Compared JSON Object and JSON Schema response formats.
+- Identified that `Mode.JSON` uses `response_format={"type":"json_object"}`, while `Mode.JSON_SCHEMA` uses schema-constrained output.
+- The original failure was not reproduced during the initial H12 tests.
+
+### Root Cause Analysis
+- JSON Object mode does not enforce the required output fields.
+- This allows responses such as `{}` that cannot be parsed into the expected rating schema.
+- JSON Schema mode provides stronger output constraints.
+
+### Impact
+- **H12 — FAIL / Not Supported:** The original hypothesis was not confirmed by the initial tests.
+- The investigation identified a promising configuration change for H13.
+
+### Next Steps
+- Reproduce an original failing request and validate the JSON Schema fix.
+
+---
+
+## EL-023 — E2-H13: JSON Schema Fix Validation
+
+### Date
+2026-11-16 18:50
+
+### Context / Findings
+- Reproduced the original malformed structured output using a previously failing request.
+- Identified `Mode.JSON` as the configuration associated with empty `{}` responses.
+- Upgraded to RAGAS 0.4.4, which supports `instructor.Mode.JSON_SCHEMA` through `llm_factory()`.
+- Re-ran the full 75-query `ResponseGroundedness` evaluation.
+- Results:
+  - Baseline: **20/75 `NaN`**.
+  - Final: **0/75 `NaN`**.
+  - All 75 evaluations returned numerical scores.
+
+### Root Cause Analysis
+- `Mode.JSON` permitted empty JSON objects that did not satisfy the expected structured output schema.
+- Instructor retries could not consistently recover from these failures.
+- Switching to `Mode.JSON_SCHEMA` resolved the observed malformed-output failures.
+
+### Impact
+- **H13 — PASS / Confirmed:** JSON Schema eliminated the observed `ResponseGroundedness` `NaN` failures in the full regression run.
+- Evaluation completion improved from **55/75 to 75/75**.
+- The fix required no custom RAGAS monkeypatching.
+
+### Decision
+- Adopt RAGAS 0.4.4 with `instructor.Mode.JSON_SCHEMA` for subsequent experiments.
+
+### Next Steps
+- Use the validated structured output configuration in E3 and E4.
+- Investigate remaining metric reliability issues separately from structured output failures.
+
+---
+
+## EL-024 — E2-H14: AnswerAccuracy Error Suppression and Reasoning Loop Mitigation
+
+### Date
+2026-11-17 14:50
+
+### Context / Findings
+- Investigated why `AnswerAccuracy` returned `SUCCESS` with score `0.0` despite repeated LLM failures.
+- LangSmith trace for `neg024` showed:
+  - Judge 1 returned `rating=0`.
+  - Judge 2 entered a reasoning loop and exhausted `max_tokens=4096` across five attempts.
+  - Final result: `score=0.0`, `status=SUCCESS`.
+- Inspected RAGAS 0.4.4 implementations of `AnswerAccuracy` and `Faithfulness`.
+- Tested selected failure cases with `JSON_SCHEMA` and `repetition_penalty=1.1`.
+- All six selected `AnswerAccuracy` cases returned numerical scores without `NaN`.
+- For `neg024`, LLM calls decreased from 6 to 2, and latency from approximately 389s to 10s.
+- Overall metric scores showed improvement, but exact score changes were not documented as part of this experiment. Metric quality and score reliability will be evaluated in E4.
+
+### Root Cause Analysis
+- `AnswerAccuracy` catches LLM exceptions and returns `NaN` after exhausting retries.
+- If one judge fails, the metric silently uses the successful judge's score.
+- If both judges fail, the metric returns `NaN` instead of propagating the original exception.
+- This can produce misleading numerical scores and hide actual evaluation failures.
+- `Faithfulness` does not catch these exceptions within its evaluation pipeline, allowing errors such as `IncompleteOutputException` to propagate.
+
+### Impact
+- **H14 — PASS / Confirmed:** `AnswerAccuracy` suppresses LLM errors and can report incomplete evaluations as successful.
+- `repetition_penalty=1.1` eliminated observed reasoning loops in targeted `Faithfulness` and `AnswerAccuracy` tests.
+- Selected regression cases demonstrated improved generation stability and substantial latency reductions in some cases.
+- The underlying RAGAS error-handling limitation remains unresolved.
+
+### Decision
+- Adopt RAGAS 0.4.4 with `JSON_SCHEMA` and `repetition_penalty=1.1` as the baseline configuration for E3 and E4.
+- No full-dataset regression was performed for the penalty change; conclusions are limited to tested cases.
+
+### Next Steps
+- Document the H14 findings and baseline configuration in the evaluation strategy and decision log.
+- Investigate metric score reliability and evaluation quality in E4.
+- Address `AnswerAccuracy` reference-answer validity separately in E5.

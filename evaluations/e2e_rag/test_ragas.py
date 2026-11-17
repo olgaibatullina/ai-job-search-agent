@@ -88,6 +88,7 @@ def test_ragas_retrieval_metric_non_llm(job_index, all_jobs, case, metric):
 # To run a single dataset/slice independently, comment out other
 # parametrized datasets in eval_cases.
 @pytest.mark.asyncio
+@pytest.mark.integration
 @pytest.mark.parametrize("case", eval_cases)
 @pytest.mark.parametrize("metric", retrieval_metrics_llm)
 async def test_ragas_retrieval_metric_llm(job_index, case, metric):

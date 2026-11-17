@@ -23,7 +23,8 @@ retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL)["queries"]
 
 faithfulness_failed_cases = ["q003", "q028", "neg006", "neg019", "neg020", "neg024", "neg028"]
 relevancy_failed_cases = ["neg009", "neg029"]
-groundedness_failed_cases = ["q002", "q008", "neg009", "typo015"]
+groundedness_failed_cases = ["q002", "neg028", "q006", "q011", "q005"]
+accuracy_failed_cases = ["q005", "q015", "q022", "q027", "typo014", "neg024"]
 
 eval_cases = [
     case
@@ -32,7 +33,7 @@ eval_cases = [
         retrieval_typo_cases,
         retrieval_negative_cases,
     )
-    if case["query_id"] in groundedness_failed_cases
+    if case["query_id"] in accuracy_failed_cases
 ] * 1
 
 all_cases = list(
@@ -45,22 +46,24 @@ all_cases = list(
 
 retrieval_metrics_non_llm = [NonLLMContextPrecisionWithReference, NonLLMContextRecall]
 retrieval_metrics_llm = [ContextPrecision, ContextRecall]
-generation_metrics_llm = [AnswerAccuracy, AnswerRelevancy, Faithfulness, ResponseGroundedness]
+generation_metrics_llm = [AnswerAccuracy, ResponseGroundedness]
 
 
 @pytest.mark.asyncio
+@pytest.mark.integration
 @pytest.mark.parametrize("case", eval_cases)
-async def test_ragas_metric_eval(job_index, case):
+@pytest.mark.parametrize("metric", generation_metrics_llm)
+async def test_ragas_metric_eval(job_index, case, metric):
     """Evaluate RAG generation faithfulness using RAGAS LLM-as-a-Judge."""
     k = 1
-    metric = ResponseGroundedness
-    run_name = "groundedness_e2h9"
 
     metric_name = (
         type(metric).__name__
         if not isinstance(metric, type)
         else metric.__name__
     )
+
+    run_name = f"{metric_name.lower()}_json_object"
 
     # Retrieve jobs and prepare evaluation contexts.
     retrieved_chunks = retriever.retrieve_relevant_jobs(
