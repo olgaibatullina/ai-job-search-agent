@@ -641,7 +641,7 @@ Reducing retrieved context alone cannot address this failure mode.
 - Upgraded to RAGAS 0.4.4, which supports `instructor.Mode.JSON_SCHEMA` through `llm_factory()`.
 - Re-ran the full 75-query `ResponseGroundedness` evaluation.
 - Results:
-  - Baseline: **20/75 `NaN`**.
+  - Baseline: **22/75 `NaN`**.
   - Final: **0/75 `NaN`**.
   - All 75 evaluations returned numerical scores.
 
