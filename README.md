@@ -21,7 +21,7 @@ Each experiment is documented with its hypothesis, configuration, measurements, 
 
 Evaluation results are stored in:
 - Machine-readable CSV results: [evaluation_results/experiments/](https://github.com/olgaibatullina/ai-job-search-agent/tree/main/evaluation_results/experiments)
-- HTML experiment reports: [reports/](https://github.com/olgaibatullina/ai-job-search-agent/tree/main/reports)
+- HTML experiment report: [validation_report.html](https://olgaibatullina.github.io/ai-job-search-agent/reports/validation_report.html)
 
 Engineering decisions and implementation changes are tracked separately in:
 - Implementation changes, findings, validation results, and technical issues: [engineering log](https://github.com/olgaibatullina/ai-job-search-agent/tree/main/project_documentation/engineering_log.md)
