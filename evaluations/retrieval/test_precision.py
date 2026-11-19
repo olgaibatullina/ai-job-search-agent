@@ -46,6 +46,9 @@ def test_precision_retrieval(job_index, all_jobs, case, k):
     start_time = time.perf_counter()
     
     results = retriever.retrieve_relevant_jobs(job_index, case["query"], k)
+
+    latency = time.perf_counter() - start_time
+    
     retrieved_job_ids = list(dict.fromkeys(
         result.metadata["job_id"]
         for result in results
@@ -63,8 +66,6 @@ def test_precision_retrieval(job_index, all_jobs, case, k):
         predictions=predictions, 
         references=references
     )
-
-    latency = time.perf_counter() - start_time
 
     helper.save_retrieval_result(
         {
