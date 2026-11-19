@@ -21,7 +21,7 @@ from ragas.metrics.collections import BaseMetric
 from ragas.metrics.result import MetricResult
 from ragas.embeddings.base import embedding_factory
 
-from config.paths import E1_RESULTS, E2_RESULTS
+from config import paths
 
 
 def load_yaml(dataset: Path) -> list[dict]:
@@ -272,10 +272,12 @@ async def calculate_generation_metric_llm(
 
 def save_evaluation_result(row: dict, run_name: str):
     """Append an evaluation result to CSV, creating the file if needed."""
-    csv_path = (E2_RESULTS / f"{run_name}_{datetime.now():%Y-%m-%d}.csv")
-
+    
+    # Build the output path for the current run name and date.
+    csv_path = (paths.E2_RESULTS / f"{run_name}_{datetime.now():%Y-%m-%d}.csv")
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Define the CSV columns and their order.
     fieldnames = [
         "query_id",
         "query",
@@ -295,12 +297,74 @@ def save_evaluation_result(row: dict, run_name: str):
         "trace_id"
     ]
 
+    # Check whether the CSV already exists and contains data.
     file_exists = csv_path.exists() and csv_path.stat().st_size > 0
 
     with csv_path.open("a", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
+        # Write the header only when creating a new CSV file.
         if not file_exists:
             writer.writeheader()
 
         writer.writerow(row)
+
+def save_retrieval_result(row: dict):
+    """Create or update a retrieval evaluation result by query_id and k."""
+    
+    # Build the output path for the current date.
+    csv_path = paths.E3_RESULTS / f"deterministic_retrieval_{datetime.now():%Y-%m-%d}.csv"
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Define the CSV columns and their order.
+    fieldnames = [
+        "query_id",
+        "query",
+        "k",
+        "precision",
+        "recall",
+        "f1",
+        "accuracy",
+        "retrieved_job_ids",
+        "relevant_job_ids",
+        "latency_s",
+    ]
+
+    # Load existing results so different metric tests can update
+    # the same query + k row.
+    rows = []
+
+    if csv_path.exists() and csv_path.stat().st_size > 0:
+        with csv_path.open("r", newline="", encoding="utf-8") as file:
+            rows = list(csv.DictReader(file))
+
+    # Use query_id + k as the unique key for a retrieval evaluation row.
+    key = (str(row["query_id"]), int(row["k"]))
+
+    # Find an existing row for this query + k, if one exists.
+    existing = next(
+        (
+            item 
+            for item in rows
+            if (item["query_id"], int(item["k"])) == key
+        ),
+        None,
+    )
+
+    # If this query + k has not been saved yet, create a new empty row.
+    if existing is None:
+        existing = {field: "" for field in fieldnames}
+        rows.append(existing)
+
+    # Update only the fields provided by the current metric test.
+    # This allows Precision, Recall, F1 and Accuracy tests
+    # to populate the same query + k row independently.
+    for field, value in row.items():
+        if value is not None:
+            existing[field] = value
+
+    # Rewrite the CSV with the updated results.
+    with csv_path.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)

@@ -24,8 +24,9 @@ retrieval_eval_cases = list(
 
 f1_metric = evaluate.load("f1")
 
+@pytest.mark.parametrize("k", range(1, 6))
 @pytest.mark.parametrize("case", retrieval_eval_cases)
-def test_f1_retrieval(job_index, all_jobs, case):
+def test_f1_retrieval(job_index, all_jobs, case, k):
     """Evaluate retrieval F1 score against the golden dataset.
 
     Args:
@@ -41,17 +42,36 @@ def test_f1_retrieval(job_index, all_jobs, case):
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval F1 score using the golden labels.
     """  
-    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k=5)
-    retrieved_job_ids = list({result.metadata["job_id"] for result in results})
+    results = retriever.retrieve_relevant_jobs(
+            job_index,
+            case["query"],
+            k=k,
+        )
+    
+    retrieved_job_ids = list(dict.fromkeys(
+        result.metadata["job_id"]
+        for result in results
+    ))
 
     all_job_ids = [job["job_id"] for job in all_jobs]
 
     predictions, references = helper.build_retrieval_labels(
-        all_job_ids, 
-        retrieved_job_ids, 
-        case["relevant_job_ids"]
-        )
-    f1_result = f1_metric.compute(predictions=predictions, references=references)
+        all_job_ids,
+        retrieved_job_ids,
+        case["relevant_job_ids"],
+    )
+
+    f1_result = f1_metric.compute(
+        predictions=predictions,
+        references=references,
+    )
+
+    helper.save_retrieval_result({
+        "query_id": case["query_id"],
+        "query": case["query"],
+        "k": k,
+        "f1": f1_result["f1"],
+    })
 
     print(f"Query: {case["query_id"]} . {case["query"]}")   
-    print(f"F1: {f1_result["f1"]}\n")
+    print(f"F1@{k}: {f1_result["f1"]}\n")

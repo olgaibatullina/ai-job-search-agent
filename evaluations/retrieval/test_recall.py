@@ -24,8 +24,9 @@ retrieval_eval_cases = list(
 
 recall_metric = evaluate.load("recall")
 
+@pytest.mark.parametrize("k", range(1, 6))
 @pytest.mark.parametrize("case", retrieval_eval_cases)
-def test_recall_retrieval(job_index, all_jobs, case):
+def test_recall_retrieval(job_index, all_jobs, case, k):
     """Evaluate retrieval recall against the golden dataset.
 
     Args:
@@ -41,17 +42,36 @@ def test_recall_retrieval(job_index, all_jobs, case):
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval recall using the golden labels.
     """    
-    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k=5) 
-    retrieved_job_ids = list({result.metadata["job_id"] for result in results}) 
+    results = retriever.retrieve_relevant_jobs(
+        job_index,
+        case["query"],
+        k=k,
+    )
+
+    retrieved_job_ids = list(dict.fromkeys(
+        result.metadata["job_id"]
+        for result in results
+    ))
 
     all_job_ids = [job["job_id"] for job in all_jobs]
 
     predictions, references = helper.build_retrieval_labels(
-        all_job_ids, 
-        retrieved_job_ids, 
-        case["relevant_job_ids"]
-        )
-    recall_result = recall_metric.compute(predictions=predictions, references=references)
+        all_job_ids,
+        retrieved_job_ids,
+        case["relevant_job_ids"],
+    )
+
+    recall_result = recall_metric.compute(
+        predictions=predictions,
+        references=references,
+    )
+
+    helper.save_retrieval_result({
+        "query_id": case["query_id"],
+        "query": case["query"],
+        "k": k,
+        "recall": recall_result["recall"],
+    })
 
     print(f"Query: {case["query_id"]} . {case["query"]}")   
-    print(f"Recall: {recall_result["recall"]}\n")
+    print(f"Recall@{k}: {recall_result["recall"]}\n")

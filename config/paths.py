@@ -22,7 +22,13 @@ LLM_CONFIG = CONFIG_ROOT / "llm_config.yaml"
 EVALUATION_RESULTS = PROJECT_ROOT / "evaluation_results"
 E1_RESULTS = EVALUATION_RESULTS / "experiments/E1_judge_context_size"
 E2_RESULTS = EVALUATION_RESULTS / "experiments/E2_rag_evaluation_nan_investigation"
+E3_RESULTS = EVALUATION_RESULTS / "experiments/E3_retrieval_metrics_validation"
+
 E2_H9_RESULTS = E2_RESULTS / "E2_H9_ollama_structured_output"
+E2_H10_RESULTS = E2_RESULTS / "E2_H10_ollama_native_vs_langchain"
+E2_H11_RESULTS = E2_RESULTS / "E2_H11_ollama_openai_compatibility"
+E2_H12_RESULTS = E2_RESULTS / "E2_H12_ollama_instructor_integration"
+
 
 # Prompts
 E2_H9_PROMPT = PROJECT_ROOT / "evaluations/prompts/e2_h9_ollama.yaml"

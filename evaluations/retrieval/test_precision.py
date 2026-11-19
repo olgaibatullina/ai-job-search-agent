@@ -2,6 +2,7 @@
 
 import pytest
 import evaluate
+import time
 
 from itertools import chain
 
@@ -24,8 +25,9 @@ retrieval_eval_cases = list(
 
 precision_metric = evaluate.load("precision")
 
+@pytest.mark.parametrize("k", range(1, 6))
 @pytest.mark.parametrize("case", retrieval_eval_cases)
-def test_precision_retrieval(job_index, all_jobs, case):
+def test_precision_retrieval(job_index, all_jobs, case, k):
     """Evaluate retrieval precision against the golden dataset.
 
     Args:
@@ -41,8 +43,13 @@ def test_precision_retrieval(job_index, all_jobs, case):
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval precision using the golden labels.
     """   
-    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k=5)
-    retrieved_job_ids = list({result.metadata["job_id"] for result in results})
+    start_time = time.perf_counter()
+    
+    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k)
+    retrieved_job_ids = list(dict.fromkeys(
+        result.metadata["job_id"]
+        for result in results
+    ))
 
     all_job_ids = [job["job_id"] for job in all_jobs]
 
@@ -50,8 +57,26 @@ def test_precision_retrieval(job_index, all_jobs, case):
         all_job_ids, 
         retrieved_job_ids, 
         case["relevant_job_ids"]
-        )
-    precision_result = precision_metric.compute(predictions=predictions, references=references)
+    )
+
+    precision_result = precision_metric.compute(
+        predictions=predictions, 
+        references=references
+    )
+
+    latency = time.perf_counter() - start_time
+
+    helper.save_retrieval_result(
+        {
+            "query_id": case["query_id"],
+            "query": case["query"],
+            "k": k,
+            "precision": precision_result["precision"],
+            "retrieved_job_ids": retrieved_job_ids,
+            "relevant_job_ids": case["relevant_job_ids"],
+            "latency_s": round(latency, 3),
+        }
+    )
 
     print(f"Query: {case["query_id"]} . {case["query"]}")   
-    print(f"Precision: {precision_result["precision"]}\n")
+    print(f"Precision@{k}: {precision_result["precision"]}\n")
