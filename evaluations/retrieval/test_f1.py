@@ -18,13 +18,12 @@ retrieval_eval_cases = list(
     chain(
         retrieval_cases,
         retrieval_typo_cases,
-        retrieval_negative_cases,
     )
 )
 
 f1_metric = evaluate.load("f1")
 
-@pytest.mark.parametrize("k", range(1, 6))
+@pytest.mark.parametrize("k", [1, 5, 10])
 @pytest.mark.parametrize("case", retrieval_eval_cases)
 def test_f1_retrieval(job_index, all_jobs, case, k):
     """Evaluate retrieval F1 score against the golden dataset.

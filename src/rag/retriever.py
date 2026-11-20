@@ -1,4 +1,4 @@
-"""Document retriever for the RAG pipeline.
+"""RAG pipeline step 4: Document retriever.
 
 This module is part of the AI Job Search Agent RAG pipeline.
 It performs similarity search over the FAISS vector store and returns
@@ -12,6 +12,7 @@ from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
 
 from src.rag import loader, chunker, vector_index
+from config import config
 
 
 def retrieve_from_vector_store(
@@ -81,7 +82,7 @@ def main():
             Path("./data/raw_jobs/raw_jobs.json")
         )
     
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+    embedding_model = HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODELS["mpnet"]["model"])
     vector_store = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
 
     query = "Evaluation engineer"

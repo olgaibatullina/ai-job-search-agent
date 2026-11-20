@@ -388,3 +388,42 @@ This approach helps determine whether token consumption and evaluation failures 
 ### Status
 
 Decision accepted. Context optimization experiment not yet completed.
+
+## D-012 — Separate Negative Query Evaluation from Main Retrieval Metrics
+
+**Date:** 2026-11-19  
+**Status:** Accepted
+
+### Context
+
+The deterministic retrieval evaluation currently combines positive, typo, and negative queries.
+
+Negative queries have no expected relevant jobs (`relevant_job_ids=[]`), while the retriever is designed to return top-K results. As a result, standard retrieval metrics such as Precision@K, Recall@K, and F1@K do not provide a directly comparable quality signal for negative cases.
+
+Including negative queries in the main retrieval evaluation also distorts aggregate metrics and makes comparison with RAGAS Context Precision/Recall harder to interpret.
+
+### Decision
+
+Separate negative queries from the main retrieval evaluation.
+
+- Exclude negative queries from the primary deterministic retrieval metrics.
+- Exclude negative queries from the main comparison of deterministic retrieval metrics, non-LLM RAGAS metrics, and LLM-based RAGAS metrics.
+- Keep positive and typo queries as the primary retrieval evaluation set.
+- Create a separate negative-query experiment to evaluate deterministic and RAGAS behavior specifically for queries where no relevant job is expected.
+- Use the negative-query experiment to investigate the expected behavior of RAGAS Context Precision/Recall, including LLM-based evaluation.
+
+### Rationale
+
+Negative queries represent a different evaluation condition from standard retrieval queries: the expected relevant set is empty, while the current retriever still returns top-K results.
+
+Separating this condition prevents negative cases from confounding the primary retrieval-quality comparison while preserving them as an explicit validation target.
+
+The separate experiment also allows investigation of how LLM-based RAGAS metrics behave when no golden relevant jobs exist and helps establish the expected interpretation of those scores.
+
+### Next Steps
+
+1. Recalculate deterministic retrieval metrics using only positive and typo queries.
+2. Use this subset for the main E3 comparison across the three evaluation approaches.
+3. Define a separate negative-query evaluation.
+4. Compare deterministic, non-LLM RAGAS, and LLM-based RAGAS behavior on negative queries.
+5. Document the expected interpretation and limitations of each metric for negative cases.

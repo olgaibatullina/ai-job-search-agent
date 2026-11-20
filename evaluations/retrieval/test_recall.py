@@ -18,13 +18,12 @@ retrieval_eval_cases = list(
     chain(
         retrieval_cases,
         retrieval_typo_cases,
-        retrieval_negative_cases,
     )
 )
 
 recall_metric = evaluate.load("recall")
 
-@pytest.mark.parametrize("k", range(1, 6))
+@pytest.mark.parametrize("k", [1, 5, 10])
 @pytest.mark.parametrize("case", retrieval_eval_cases)
 def test_recall_retrieval(job_index, all_jobs, case, k):
     """Evaluate retrieval recall against the golden dataset.

@@ -21,7 +21,7 @@ from ragas.metrics.collections import BaseMetric
 from ragas.metrics.result import MetricResult
 from ragas.embeddings.base import embedding_factory
 
-from config import paths
+from config import config, paths
 
 
 def load_yaml(dataset: Path) -> list[dict]:
@@ -138,9 +138,10 @@ def prepare_ragas_llm_scorer(
     # Create a RAGAS-compatible embeddings wrapper using the configured embedding model.
     # RAGAS uses these embeddings for metrics that require semantic similarity evaluation.
     if embedding:
+        embedding_config = config.EMBEDDING_MODELS["mpnet"]
         embedding = embedding_factory(
-            provider="huggingface",
-            model="sentence-transformers/all-mpnet-base-v2",
+            provider=embedding_config["provider"],
+            model=embedding_config["model"],
         )
         kwargs["embeddings"] = embedding
 

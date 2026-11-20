@@ -432,7 +432,7 @@ Reducing retrieved context alone cannot address this failure mode.
 - Continue with H5 and subsequent reliability experiments.
 
 
-## EL-015 — E2-H5: Structured Output Reliability and Judge Accuracy
+## EL-015 — E2/H5: Structured Output Reliability and Judge Accuracy
 
 ### Date
 2026-11-09 16:25
@@ -468,7 +468,7 @@ Reducing retrieved context alone cannot address this failure mode.
 
 
 
-## EL-016 — E2-H6: Repetition Penalty Impact on Structured Output Reliability
+## EL-016 — E2/H6: Repetition Penalty Impact on Structured Output Reliability
 
 ### Date
 2026-11-10 17:30
@@ -498,7 +498,7 @@ Reducing retrieved context alone cannot address this failure mode.
 - Continue investigating structured output failures at the model and integration layers.
 
 
-## EL-017 — E2-H8: Retry Reduction Impact on Evaluation Reliability
+## EL-017 — E2/H8: Retry Reduction Impact on Evaluation Reliability
 
 ### Date
 2026-11-12 10:30
@@ -522,7 +522,7 @@ Reducing retrieved context alone cannot address this failure mode.
 - Investigate model-level structured output behavior independently of RAGAS.
 
 
-## EL-018 — E2-H9: Reasoning and Structured Output Interaction
+## EL-018 — E2/H9: Reasoning and Structured Output Interaction
 
 ### Date
 2026-11-12 12:30
@@ -551,7 +551,7 @@ Reducing retrieved context alone cannot address this failure mode.
 
 
 
-## EL-019 — E2-H10: Native Ollama API vs LangChain
+## EL-019 — E2/H10: Native Ollama API vs LangChain
 
 ### Date
 2026-11-12 14:00
@@ -583,7 +583,7 @@ Reducing retrieved context alone cannot address this failure mode.
 - Reproduce the original failure within the RAGAS evaluation pipeline.
 
 
-## EL-021 — E2-H11: OpenAI-Compatible API Investigation
+## EL-021 — E2/H11: OpenAI-Compatible API Investigation
 
 ### Date
 2026-11-13 16:33
@@ -605,7 +605,7 @@ Reducing retrieved context alone cannot address this failure mode.
 
 ---
 
-## EL-022 — E2-H12: Instructor Integration Investigation
+## EL-022 — E2/H12: Instructor Integration Investigation
 
 ### Date
 2026-11-13 18:15
@@ -630,7 +630,7 @@ Reducing retrieved context alone cannot address this failure mode.
 
 ---
 
-## EL-023 — E2-H13: JSON Schema Fix Validation
+## EL-023 — E2/H13: JSON Schema Fix Validation
 
 ### Date
 2026-11-16 18:50
@@ -664,7 +664,7 @@ Reducing retrieved context alone cannot address this failure mode.
 
 ---
 
-## EL-024 — E2-H14: AnswerAccuracy Error Suppression and Reasoning Loop Mitigation
+## EL-024 — E2/H14: AnswerAccuracy Error Suppression and Reasoning Loop Mitigation
 
 ### Date
 2026-11-17 14:50
@@ -702,3 +702,55 @@ Reducing retrieved context alone cannot address this failure mode.
 - Document the H14 findings and baseline configuration in the evaluation strategy and decision log.
 - Investigate metric score reliability and evaluation quality in E4.
 - Address `AnswerAccuracy` reference-answer validity separately in E5.
+
+
+## EL-025 — E3/H1–H3: Retrieval Configuration Experiments
+
+### Date
+2026-11-19 14:40
+
+### Context / Findings
+
+Investigated the main hypotheses explaining the relatively low retrieval Precision@K.
+
+Three retrieval configuration factors were evaluated:
+
+- **H1 — Golden set size effect:** reducing the number of relevant jobs per query did not explain the observed retrieval behavior. Precision remained relatively stable while Recall increased with K. The hypothesis was **not supported**.
+- **H2 — Negative queries:** standard deterministic Precision/Recall/F1 metrics were not meaningful when `relevant_job_ids=[]`. Negative queries were therefore separated from the main retrieval evaluation, as documented in **D-012**. The hypothesis was **confirmed**.
+- **H3 — Chunk size effect:** chunk sizes of 750, 1000, 1500, and 2000 were compared. Changes produced only minor and inconsistent differences in Precision@K and Recall@K. No stable improvement was observed across K=1, 5, and 10. The hypothesis was **not confirmed**.
+
+Overall, these experiments did not identify golden set size or chunk size as a strong explanation for the low retrieval Precision.
+
+
+## EL-026 — E3/H4: Embedding Model Effect
+
+### Date
+2026-11-19 16:20
+
+### Context / Findings
+
+Three embedding models were compared while keeping the evaluation dataset, chunking, retrieval configuration, and K values unchanged:
+
+| Model | P@1 | P@5 | P@10 | R@1 | R@5 | R@10 |
+|---|---:|---:|---:|---:|---:|---:|
+| MPNet (baseline) | 0.489 | 0.511 | 0.469 | 0.047 | 0.286 | 0.487 |
+| RoBERTa | **0.622** | 0.542 | 0.480 | 0.089 | 0.334 | **0.585** |
+| BGE | 0.578 | **0.560** | 0.458 | 0.060 | **0.420** | 0.558 |
+
+RoBERTa achieved the highest P@1 and R@10, while BGE achieved the highest P@5 and R@5. Both alternative models improved selected retrieval metrics compared with the MPNet baseline, but no model consistently outperformed the others across all K values.
+
+### Impact
+
+Embedding model choice measurably affected retrieval performance, but improvements were moderate and inconsistent across K.
+
+### Decision
+
+H4 is **partially confirmed**. Embedding model choice affects retrieval performance, but the observed improvements are moderate and inconsistent across K. Changing the embedding model alone does not sufficiently explain or resolve the low retrieval Precision.
+
+Further investigation should focus on the quality and representation of the job descriptions used as retrieval context.
+
+### Next Steps
+
+- Prepare a compact, retrieval-focused representation of the raw job descriptions.
+- Evaluate whether reducing noise in job descriptions improves retrieval Precision.
+- Keep the processed dataset fixed during subsequent retrieval experiments to preserve reproducibility.

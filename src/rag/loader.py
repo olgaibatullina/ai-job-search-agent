@@ -1,5 +1,4 @@
-"""
-Job data loader for the RAG pipeline.
+"""RAG pipeline step 1: Job data loader.
 
 This module is part of the AI Job Search Agent RAG pipeline.
 It prepares raw job data for further processing and retrieval.

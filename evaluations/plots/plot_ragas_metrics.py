@@ -1,11 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from config.paths import E2_RESULTS
+from config import paths
 
 files = {
-    "Response Groundedness baseline": E2_RESULTS / "e2_responsegroundedness_baseline.csv",
-    "Response Groundedness final": E2_RESULTS / "e2_responsegroundedness_final.csv",
+    "Response Groundedness baseline": paths.E2_RESULTS / "e2_responsegroundedness_baseline.csv",
+    "Response Groundedness final": paths.E2_RESULTS / "e2_responsegroundedness_final.csv",
 }
 
 series = {}

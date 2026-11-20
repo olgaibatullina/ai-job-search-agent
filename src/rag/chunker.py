@@ -1,5 +1,4 @@
-"""
-Job posting chunker for RAG pipeline.
+"""RAG pipeline step 2: Job posting chunker.
 
 This module is part of the AI Job Search Agent RAG pipeline.
 It splits job posting Documents into smaller chunks for embedding and subsequent vector similarity search.

@@ -1,4 +1,4 @@
-"""Generator for the RAG pipeline.
+"""RAG pipeline step 5: Generator.
 
 This module prepares the retrieved job context and generates answers
 using an LLM via Ollama.
@@ -18,8 +18,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 from src.rag import loader, chunker, retriever, vector_index
 from src.jobs import loader
-from config.paths import RAW_JOBS
-from config.paths import LLM_CONFIG
+from config import config, paths
 
 
 def prepare_context(retrieved_chunks: list[Document]) -> list[Document]:
@@ -71,13 +70,13 @@ def generate_answer(
 
 def main():
     # Prepare vector store from RAW_JOBS.
-    documents = loader.load_documents(RAW_JOBS)
+    documents = loader.load_documents(paths.RAW_JOBS)
     
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+    embedding_model = HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODELS["mpnet"]["model"])
     vector = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
 
     # Load LLM configuration and prepare LLM and prompts.
-    with LLM_CONFIG.open("r", encoding="utf-8") as file:
+    with paths.LLM_CONFIG.open("r", encoding="utf-8") as file:
         llm_config = yaml.safe_load(file)
     
     llm = ChatOllama(
