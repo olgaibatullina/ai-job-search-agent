@@ -6,8 +6,7 @@ import json
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-from config.paths import RAW_JOBS
-from config.paths import FAISS_INDEX
+from config import config, paths
 from src.rag import loader, chunker, vector_index
 
 
@@ -31,16 +30,18 @@ def job_index():
         FAISS: A FAISS index containing the job documents for retrieval tests.
     """
 
-    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+    embedding_model = HuggingFaceEmbeddings(
+        model_name=config.EMBEDDING_MODELS["mpnet"]["model"]
+    )
 
     # Load the existing FAISS index if available; else create and save a new index.     
-    if FAISS_INDEX.exists():       
-        job_index = FAISS.load_local(FAISS_INDEX, embedding_model, allow_dangerous_deserialization=True)
+    if paths.FAISS_INDEX.exists():       
+        job_index = FAISS.load_local(paths.FAISS_INDEX, embedding_model, allow_dangerous_deserialization=True)
         
     else:       
-        documents = loader.load_documents(RAW_JOBS)      
+        documents = loader.load_documents(paths.RAW_JOBS)      
         job_index = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
-        job_index.save_local(FAISS_INDEX)
+        job_index.save_local(paths.FAISS_INDEX)
 
     yield job_index
 
@@ -53,5 +54,5 @@ def all_jobs():
         list[str]: All jobs from the raw jobs dataset.
     """
 
-    with RAW_JOBS.open("r", encoding="utf-8") as file:
+    with paths.RAW_JOBS.open("r", encoding="utf-8") as file:
         yield json.load(file)
