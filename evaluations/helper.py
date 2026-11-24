@@ -45,7 +45,7 @@ def build_retrieval_labels(
     """Build prediction and reference labels for retrieval metrics.
 
     Args:
-        all_job_ids: All job IDs from data/raw_jobs.json.
+        all_job_ids: All job IDs from data/processed_jobs.json.
         retrieved_jobs: Job IDs returned by the retriever.
         relevant_jobs: Job IDs marked as relevant in the golden dataset.
 
@@ -314,7 +314,7 @@ def save_retrieval_result(row: dict):
     """Create or update a retrieval evaluation result by query_id and k."""
     
     # Build the output path for the current date.
-    csv_path = paths.E3_RESULTS / f"deterministic_retrieval_{datetime.now():%Y-%m-%d}.csv"
+    csv_path = paths.E3_RESULTS / f"deterministic_retrieval_processed_jobs_with_title_{datetime.now():%Y-%m-%d}.csv"
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Define the CSV columns and their order.

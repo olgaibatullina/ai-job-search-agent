@@ -427,3 +427,47 @@ The separate experiment also allows investigation of how LLM-based RAGAS metrics
 3. Define a separate negative-query evaluation.
 4. Compare deterministic, non-LLM RAGAS, and LLM-based RAGAS behavior on negative queries.
 5. Document the expected interpretation and limitations of each metric for negative cases.
+
+## D-013 — Keep Job Description Compacting as a Separate V1 Preprocessing Step
+
+**Date:** 2026-11-20  
+**Status:** Accepted
+
+### Context
+
+Evaluation of the current job dataset showed that raw job descriptions may contain information that is irrelevant to query matching and adds noise to the retrieval context.
+
+Manually rewriting the job descriptions into compact, retrieval-focused descriptions would not scale to the full dataset. An LLM can perform this transformation consistently across the corpus while preserving the information relevant for retrieval.
+
+### Decision
+
+Implement job-description compacting as a **separate V1 preprocessing step**, not as part of the current evaluation `conftest` pipeline.
+
+- Generate `processed_jobs` from `raw_jobs` using the same **Qwen3 8B** LLM.
+- Preserve the original `job_id` and required job metadata.
+- Generate a compact `retrieval_description` of approximately 500–1000 characters.
+- Use the compact descriptions as the future retrieval context.
+- Run this preprocessing once for the current `raw_jobs` dataset and use the resulting artifact for retrieval experiments.
+- Keep the current retrieval evaluation dataset and `relevant_job_ids` unchanged.
+- Do not regenerate compact descriptions during every test session.
+- Consider integrating this preprocessing into the production search pipeline once the dynamic job-search/API layer is implemented.
+
+### Rationale
+
+Separating preprocessing from the current evaluation pipeline keeps retrieval experiments reproducible and allows changes in embeddings, chunking, and retrieval configuration to be evaluated independently.
+
+In the future production-like search pipeline, job descriptions will naturally change between search sessions. The compacting step can then become part of the search workflow:
+
+`API search → raw jobs → LLM compacting → FAISS → retrieval`
+
+This dynamic behavior can be evaluated separately as a preprocessing stability/quality experiment.
+
+### Next Steps
+
+1. Implement the V1 LLM preprocessing script.
+2. Generate `processed_jobs` from the current `raw_jobs` dataset.
+3. Build the retrieval index from `retrieval_description`.
+4. Use the resulting fixed artifact for retrieval experiments.
+5. Later integrate compacting into the dynamic search pipeline and evaluate its stability separately.
+
+**Status:** Decision accepted. V1 preprocessing is planned as a separate artifact and is not yet integrated into the evaluation `conftest`.

@@ -37,7 +37,7 @@ requirements.freeze.txt
 
 # Private candidate data and datasets
 data/candidate_profile.md
-data/raw_jobs/raw_jobs.json
+data/raw_jobs/
 
 # Runtime logs and data
 evaluation_results/logs/

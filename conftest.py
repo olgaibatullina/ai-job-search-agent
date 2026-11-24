@@ -39,7 +39,7 @@ def job_index():
         job_index = FAISS.load_local(paths.FAISS_INDEX, embedding_model, allow_dangerous_deserialization=True)
         
     else:       
-        documents = loader.load_documents(paths.RAW_JOBS)      
+        documents = loader.load_documents(paths.PROCESSED_JOBS)      
         job_index = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
         job_index.save_local(paths.FAISS_INDEX)
 
@@ -54,5 +54,5 @@ def all_jobs():
         list[str]: All jobs from the raw jobs dataset.
     """
 
-    with paths.RAW_JOBS.open("r", encoding="utf-8") as file:
+    with paths.PROCESSED_JOBS.open("r", encoding="utf-8") as file:
         yield json.load(file)

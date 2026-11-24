@@ -10,6 +10,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
 from src.rag import loader
+from config import paths
 
 
 def split_text(documents: list[Document]) -> list[Document]:
@@ -31,9 +32,7 @@ def split_text(documents: list[Document]) -> list[Document]:
 
 
 def main():
-    documents = loader.load_documents(
-        Path("./data/raw_jobs/raw_jobs.json")
-    )
+    documents = loader.load_documents(paths.PROCESSED_JOBS)
     
     chunks = split_text(documents)
 

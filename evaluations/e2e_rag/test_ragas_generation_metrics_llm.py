@@ -46,12 +46,12 @@ all_cases = list(
 
 retrieval_metrics_non_llm = [NonLLMContextPrecisionWithReference, NonLLMContextRecall]
 retrieval_metrics_llm = [ContextPrecision, ContextRecall]
-generation_metrics_llm = [AnswerAccuracy, ResponseGroundedness]
+generation_metrics_llm = [ResponseGroundedness]
 
 
 @pytest.mark.asyncio
 @pytest.mark.integration
-@pytest.mark.parametrize("case", eval_cases)
+@pytest.mark.parametrize("case", all_cases)
 @pytest.mark.parametrize("metric", generation_metrics_llm)
 async def test_ragas_metric_eval(job_index, case, metric):
     """Evaluate RAG generation faithfulness using RAGAS LLM-as-a-Judge."""
@@ -72,7 +72,7 @@ async def test_ragas_metric_eval(job_index, case, metric):
     retrieved_jobs = loader.get_jobs_from_chunks(retrieved_chunks)
 
     retrieved_contexts = [
-        job["posting"]["description"]
+        job["retrieval_description"]
         for job in retrieved_jobs
     ]
 

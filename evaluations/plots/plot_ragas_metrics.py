@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 from config import paths
 
+
 files = {
     "Response Groundedness baseline": paths.E2_RESULTS / "e2_responsegroundedness_baseline.csv",
     "Response Groundedness final": paths.E2_RESULTS / "e2_responsegroundedness_final.csv",

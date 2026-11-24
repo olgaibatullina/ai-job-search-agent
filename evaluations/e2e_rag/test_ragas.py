@@ -54,12 +54,12 @@ def test_ragas_retrieval_metric_non_llm(job_index, all_jobs, case, metric):
     retrieved_jobs = loader.get_jobs_from_chunks(retrieved_chunks)
 
     retrieved_contexts = [
-        job["posting"]["description"]
+        job["retrieval_description"]
         for job in retrieved_jobs
     ]
 
     reference_contexts = [
-        job["posting"]["description"]
+        job["retrieval_description"]
         for job in all_jobs
         if job["job_id"] in case["relevant_job_ids"]
     ]
@@ -111,7 +111,7 @@ async def test_ragas_retrieval_metric_llm(job_index, case, metric):
     retrieved_jobs = loader.get_jobs_from_chunks(retrieved_chunks)
 
     retrieved_contexts = [
-        job["posting"]["description"]
+        job["retrieval_description"]
         for job in retrieved_jobs
     ]
 
@@ -169,7 +169,7 @@ async def test_ragas_generation_metric_llm(job_index, case, metric):
     retrieved_jobs = loader.get_jobs_from_chunks(retrieved_chunks)
 
     retrieved_contexts = [
-        job["posting"]["description"]
+        job["retrieval_description"]
         for job in retrieved_jobs
     ]
 

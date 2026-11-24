@@ -10,11 +10,9 @@ csv_path = paths.E3_RESULTS / "deterministic_retrieval_2026-11-19.csv"
 # Load results
 df = pd.read_csv(csv_path)
 
-
 # Exclude negative queries
 df = df[df["relevant_job_ids"].notna()]
 df = df[df["relevant_job_ids"].str.strip() != "[]"]
-
 
 # Calculate mean metric value for each K
 metrics_by_k = (
@@ -24,10 +22,8 @@ metrics_by_k = (
       .sort_values("k")
 )
 
-
 # Print aggregated values
 print(metrics_by_k.to_string(index=False))
-
 
 # Plot
 plt.figure(figsize=(10, 6))
@@ -52,7 +48,6 @@ plt.plot(
     marker="o",
     label="F1@K",
 )
-
 
 plt.xlabel("K")
 plt.ylabel("Score")

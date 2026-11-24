@@ -3,7 +3,7 @@
 import json
 
 from langchain_core.documents import Document
-from config.paths import RAW_JOBS
+from config import paths
 
 
 def get_jobs_from_chunks(retrieved_chunks: list[Document]) -> list[dict]:
@@ -21,7 +21,7 @@ def get_jobs_from_chunks(retrieved_chunks: list[Document]) -> list[dict]:
         for doc in retrieved_chunks
     }
 
-    with RAW_JOBS.open("r", encoding="utf-8") as file:
+    with paths.PROCESSED_JOBS.open("r", encoding="utf-8") as file:
         jobs = json.load(file)
 
     return [
