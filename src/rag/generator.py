@@ -33,7 +33,7 @@ def prepare_context(retrieved_chunks: list[Document]) -> list[Document]:
     jobs = loader.get_jobs_from_chunks(retrieved_chunks=retrieved_chunks)
 
     return [Document(
-        page_content=job["posting"]["description"],
+        page_content=job["retrieval_description"],
         metadata={
             "job_id": job["job_id"],
             "title": job["job"]["title"],
@@ -69,8 +69,8 @@ def generate_answer(
 
 
 def main():
-    # Prepare vector store from RAW_JOBS.
-    documents = loader.load_documents(paths.RAW_JOBS)
+    # Prepare vector store from PROCESSED_JOBS.
+    documents = loader.load_documents(paths.PROCESSED_JOBS)
     
     embedding_model = HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODELS["mpnet"]["model"])
     vector = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)

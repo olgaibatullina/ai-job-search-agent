@@ -134,7 +134,7 @@ def preprocess_job(
 # Load the current job dataset that will be used as input for LLM preprocessing.
 # The original job records are preserved unchanged; preprocessing only adds
 # the generated `retrieval_description` field.
-def load_processed_jobs() -> list[dict]:
+def load_input_jobs() -> list[dict]:
     with paths.PROCESSED_JOBS.open(
         "r",
         encoding="utf-8",
@@ -213,7 +213,7 @@ def save_processed_jobs(
 def main() -> None:
     """Run the preprocessing pipeline."""
 
-    jobs = load_processed_jobs()
+    jobs = load_input_jobs()
 
     print(f"Loaded {len(jobs)} jobs.")
 

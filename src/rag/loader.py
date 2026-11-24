@@ -3,7 +3,7 @@
 This module is part of the AI Job Search Agent RAG pipeline.
 It prepares raw job data for further processing and retrieval.
 
-V1: Reads job postings from raw_jobs.json and converts each
+V1: Reads job postings from processed_jobs.json and converts each
 posting into a LangChain Document with job metadata.
 """
 
@@ -12,7 +12,7 @@ from pathlib import Path
 from langchain_core.documents import Document
 
 
-def load_raw_jobs(path: Path) -> list[dict]:
+def load_processed_jobs(path: Path) -> list[dict]:
     """Load and parse job postings from a JSON file.
 
     Args:
@@ -34,7 +34,7 @@ def job_to_document(job: dict) -> Document:
         A LangChain Document containing the job posting and metadata.
     """   
     return Document(
-        page_content=job["posting"]["description"],
+        page_content=job["retrieval_description"],
         metadata={
             "job_id": job["job_id"],
             "title": job["job"]["title"],
@@ -52,6 +52,6 @@ def load_documents(path: Path) -> list[Document]:
     Returns:
         A list of LangChain Documents.
     """
-    jobs = load_raw_jobs(path)
+    jobs = load_processed_jobs(path)
     
     return [job_to_document(job) for job in jobs]

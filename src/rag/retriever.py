@@ -12,7 +12,7 @@ from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
 
 from src.rag import loader, chunker, vector_index
-from config import config
+from config import config, paths
 
 
 def retrieve_from_vector_store(
@@ -78,9 +78,7 @@ def retrieve_relevant_jobs(
 
 
 def main():
-    documents = loader.load_documents(
-            Path("./data/raw_jobs/raw_jobs.json")
-        )
+    documents = loader.load_documents(paths.PROCESSED_JOBS)
     
     embedding_model = HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODELS["mpnet"]["model"])
     vector_store = vector_index.create_vector_store(chunker.split_text(documents), embedding_model)
