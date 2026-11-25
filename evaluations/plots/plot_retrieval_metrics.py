@@ -5,8 +5,8 @@ from config import paths
 
 
 files = {
-    "Baseline": paths.E3_RESULTS / "deterministic_retrieval_baseline.csv",
-    "Dataset V2": paths.E3_RESULTS / "deterministic_retrieval_processed_jobs_dataset_v2_2026-11-24.csv",
+    "Dataset V2 + Hybrid": paths.E3_RESULTS / "deterministic_retrieval_processed_jobs_dataset_v2_hybrid.csv",
+    "Dataset V2": paths.E3_RESULTS / "deterministic_retrieval_processed_jobs_dataset_v2.csv",
 }
 
 series = {}

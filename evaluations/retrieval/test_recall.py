@@ -35,16 +35,19 @@ def test_recall_retrieval(job_index, all_jobs, case, k):
         case: Evaluation case containing the query and expected relevant job IDs.
 
     Steps:
-        1. Retrieve the top 5 jobs for the test query.
+        1. Retrieve the top 5 ranked jobs for the test query.
         2. Extract unique job IDs from the retrieved results.
         3. Extract all job IDs from the raw jobs dataset.
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval recall using the golden labels.
     """    
-    results = retriever.retrieve_relevant_jobs(
+    keywords = case.get("keywords", [])
+ 
+    results = retriever.retrieve_relevant_jobs_hybrid(
         job_index,
         case["query"],
-        k=k,
+        k,
+        keywords,
     )
 
     retrieved_job_ids = list(dict.fromkeys(

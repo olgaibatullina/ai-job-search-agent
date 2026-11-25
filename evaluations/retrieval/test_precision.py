@@ -36,15 +36,22 @@ def test_precision_retrieval(job_index, all_jobs, case, k):
         case: Evaluation case containing the query and expected relevant job IDs.
 
     Steps:
-        1. Retrieve the top 5 jobs for the test query.
+        1. Retrieve the top 5 ranked jobs for the test query.
         2. Extract unique job IDs from the retrieved results.
         3. Extract all job IDs from the raw jobs dataset.
         4. Convert retrieved and relevant job IDs into binary labels.
         5. Calculate retrieval precision using the golden labels.
     """   
+    keywords = case.get("keywords", [])
+
     start_time = time.perf_counter()
     
-    results = retriever.retrieve_relevant_jobs(job_index, case["query"], k)
+    results = retriever.retrieve_relevant_jobs_hybrid(
+        job_index,
+        case["query"],
+        k,
+        keywords,
+    )
 
     latency = time.perf_counter() - start_time
     
