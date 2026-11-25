@@ -6,13 +6,7 @@ from config import paths
 
 files = {
     "Baseline": paths.E3_RESULTS / "deterministic_retrieval_baseline.csv",
-    # "MiniLM model": paths.E3_RESULTS / "deterministic_retrieval_minilm.csv",
-    # "Roberta model": paths.E3_RESULTS / "deterministic_retrieval_roberta.csv",
-    # "BGE model": paths.E3_RESULTS / "deterministic_retrieval_bge.csv",
-    # "Chunk 1500": paths.E3_RESULTS / "deterministic_retrieval_chunk1500.csv",
-    # "Chunk 750": paths.E3_RESULTS / "deterministic_retrieval_chunk750.csv",
-    # "Chunk 2000": paths.E3_RESULTS / "deterministic_retrieval_chunk2000.csv",
-    "Processed with title": paths.E3_RESULTS / "deterministic_retrieval_processed_jobs_with_title_2026-11-23.csv",
+    "Dataset V2": paths.E3_RESULTS / "deterministic_retrieval_processed_jobs_dataset_v2_2026-11-24.csv",
 }
 
 series = {}
@@ -60,7 +54,7 @@ plt.xticks(
 )
 
 plt.ylabel("Precision@K")
-plt.title("Precision@K — Baseline vs Chunk Size 1500")
+plt.title("Precision@K — Baseline vs Dataset V2")
 
 plt.legend()
 plt.tight_layout()

@@ -10,9 +10,9 @@ from evaluations import helper
 from src.rag import retriever
 
 
-retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL_V2)["queries"]
 retrieval_negative_cases = helper.load_yaml(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
-retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL)["queries"]
+retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL_V2)["queries"]
 
 retrieval_eval_cases = list(
     chain(

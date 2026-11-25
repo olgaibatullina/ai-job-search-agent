@@ -3,12 +3,12 @@
 import pytest
 import time
 
-from config.paths import RETRIEVAL_EVAL
+from config import paths
 from evaluations import helper
 from src.rag import retriever
 
 
-retrieval_cases = helper.load_yaml(RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL_V2)["queries"]
 
 @pytest.mark.parametrize("case", retrieval_cases)
 def test_rag_retrieval_latency(job_index, case):

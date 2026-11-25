@@ -17,9 +17,9 @@ from src.jobs import loader
 from src.rag import retriever, generator
 
 
-retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL_V2)["queries"]
 retrieval_negative_cases = helper.load_yaml(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
-retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL)["queries"]
+retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL_V2)["queries"]
 
 faithfulness_failed_cases = ["q003", "q028", "neg006", "neg019", "neg020", "neg024", "neg028"]
 relevancy_failed_cases = ["neg009", "neg029"]

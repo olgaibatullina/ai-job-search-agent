@@ -14,9 +14,9 @@ from src.jobs import loader
 from src.rag import retriever, generator
 
 
-retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL)["queries"]
+retrieval_cases = helper.load_yaml(paths.RETRIEVAL_EVAL_V2)["queries"]
 retrieval_negative_cases = helper.load_yaml(paths.RETRIEVAL_NEGATIVE_EVAL)["queries"]
-retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL)["queries"]
+retrieval_typo_cases = helper.load_yaml(paths.RETRIEVAL_TYPO_EVAL_V2)["queries"]
 
 eval_cases = list(
     chain(

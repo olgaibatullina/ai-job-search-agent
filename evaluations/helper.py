@@ -314,7 +314,7 @@ def save_retrieval_result(row: dict):
     """Create or update a retrieval evaluation result by query_id and k."""
     
     # Build the output path for the current date.
-    csv_path = paths.E3_RESULTS / f"deterministic_retrieval_processed_jobs_with_title_{datetime.now():%Y-%m-%d}.csv"
+    csv_path = paths.E3_RESULTS / f"deterministic_retrieval_processed_jobs_dataset_v2_{datetime.now():%Y-%m-%d}.csv"
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Define the CSV columns and their order.

@@ -12,9 +12,11 @@ FAISS_INDEX = DATA_DIR / "faiss_index"
 # Datasets
 RAW_JOBS = DATA_DIR / "raw_jobs/raw_jobs.json"
 PROCESSED_JOBS = DATA_DIR / "raw_jobs/processed_jobs.json"
-RETRIEVAL_EVAL = DATA_DIR / "golden/retrieval_eval.yaml"
+RETRIEVAL_EVAL_V1 = DATA_DIR / "golden/retrieval_eval_v1.yaml"
+RETRIEVAL_EVAL_V2 = DATA_DIR / "golden/retrieval_eval_v2.yaml"
 RETRIEVAL_NEGATIVE_EVAL = DATA_DIR / "golden/retrieval_negative_eval.yaml"
-RETRIEVAL_TYPO_EVAL = DATA_DIR / "golden/retrieval_typo_eval.yaml"
+RETRIEVAL_TYPO_EVAL_V1 = DATA_DIR / "golden/retrieval_typo_eval_v1.yaml"
+RETRIEVAL_TYPO_EVAL_V2 = DATA_DIR / "golden/retrieval_typo_eval_v2.yaml"
 
 # LLM Configurations
 LLM_CONFIG = CONFIG_ROOT / "llm_config.yaml"
